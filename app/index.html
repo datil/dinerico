@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>dinerico</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:css styles/vendor.css -->
+    <link href="bower_components/ratchet/dist/css/ratchet.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 9]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <header class="bar bar-nav">
+      <h1 class="title">Sucre</h1>
+    </header>
+
+    <div class="content">
+      <p class="content-padded"></p>
+      <div class="row">
+        <div class="col-left">
+          <div class="" style="margin-left: 10px;">
+            <button class="btn btn-positive btn-block">Depósito</button>
+            <button class="btn btn-primary btn-block">Retiro</button>
+            <button class="btn btn-block">Envío</button>
+          </div>
+        </div>
+        <div class="col-right">
+          <h2>Resumen</h2>
+          <div class="card">
+            <h3>Saldo en efectivo</h3>
+            <div>$1,900.93</div>
+            <h3>Saldo en monedero</h3>
+            <div>$400.20</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- build:js scripts/vendor.js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/ratchet/dist/js/ratchet.js"></script>
+    <script src="bower_components/react/react-with-addons.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/main.js -->
+      <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+
+  </body>
+</html>
