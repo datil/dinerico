@@ -3,11 +3,27 @@
 /*global React */
 'use strict';
 
-var app = require('./app.jsx');
+dinerico.Views = dinerico.Views || {};
 
-React.renderComponent(
-  /* jshint ignore:start */
-  <app />,
-  document.getElementById('app')
-  /* jshint ignore:end */
-);
+var app = require('./app.jsx');
+var deposit = require('./deposit.jsx');
+
+// dinerico.Views.deposit = deposit;
+
+dinerico.Views.app = function() {
+  React.renderComponent(
+    /* jshint ignore:start */
+    <app />,
+    document.getElementById('app')
+    /* jshint ignore:end */
+  );
+}
+
+dinerico.Views.deposit = function() {
+  React.renderComponent(
+    /* jshint ignore:start */
+    <deposit />,
+    document.getElementById('app')
+    /* jshint ignore:end */
+  );
+}

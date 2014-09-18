@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>dinerico</title>
+    <title>Dinérico</title>
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
@@ -17,49 +17,67 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <!-- build:css styles/vendor.css -->
-    <link href="bower_components/ratchet/dist/css/ratchet.css" rel="stylesheet">
-    <!-- endbuild -->
   </head>
   <body>
     <!--[if lt IE 9]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header class="bar bar-nav">
-      <h1 class="title">Sucre</h1>
-    </header>
-
-    <div class="content">
-      <p class="content-padded"></p>
-      <div class="row">
-        <div class="col-left">
-          <div class="" style="margin-left: 10px;">
-            <button class="btn btn-positive btn-block">Depósito</button>
-            <button class="btn btn-primary btn-block">Retiro</button>
-            <button class="btn btn-block">Envío</button>
-          </div>
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dinérico</a>
         </div>
-        <div class="col-right">
-          <h2>Resumen</h2>
-          <div class="card">
-            <h3>Saldo en efectivo</h3>
-            <div>$1,900.93</div>
-            <h3>Saldo en monedero</h3>
-            <div>$400.20</div>
-          </div>
-        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li class="active"><a href="./">Static top</a></li>
+            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
+    </div>
+
+    <div class="container-fluid" id="app">
     </div>
 
     <!-- build:js scripts/vendor.js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/ratchet/dist/js/ratchet.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/react/react-with-addons.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
-      <script src="scripts/main.js"></script>
+    <script src="scripts/setup.js"></script>
+    <script src="scripts/routes/app.js"></script>
+    <script src="scripts/models/transaction.js"></script>
+
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
   </body>
