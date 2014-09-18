@@ -22,23 +22,23 @@ module.exports = React.createClass({
   render: function () {
     return (
       /* jshint ignore:start */
-      <div>
-        <p className="content-padded">          
-        </p>
-        <div className="row">
-          <div className="col-md-3">
-            <div className="transactions">
-              <a href="/#deposito" className="btn btn-info btn-lg btn-block">Depósito</a>
-              <a href="#modal" className="btn btn-primary btn-lg btn-block">Retiro</a>
-              <button className="btn btn-default btn-lg btn-block">Envío</button>
-            </div>
+      <div className="row">
+        <div className="col-md-4 left-menu">
+          <h2 className="welcome">¡Bienvenido!</h2>
+          <hr/>
+          <p>¿Qué <span className="accent">transacción</span> desea realizar?</p>
+          <div className="transactions">
+            <a href="/#deposito" className="btn btn-default btn-lg btn-block">Depósito</a>
+            <a href="#modal" className="btn btn-default btn-lg btn-block">Retiro</a>
+            <a className="btn btn-default btn-lg btn-block">Envío</a>
           </div>
-          <div className="col-md-9">
-            <h2>{this.props.summary}</h2>
-            <div className="well">
-              <h3>Efectivo en Caja</h3>
-              <div>$1,900.93</div>
-            </div>
+        </div>
+        <div className="col-md-8 main-content">
+          <h3 className="title">{this.props.summary}</h3>
+          <div className="well">
+            <div className="amount">$12,000.55</div>
+          </div>
+          <div id="logo-bce">
           </div>
         </div>
       </div>
