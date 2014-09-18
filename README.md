@@ -2,7 +2,7 @@
 
 Dinérico permite a los macroagentes gestionar eficientemente su red de centros transaccionales.
 
-## Características principal
+## Características principales
 
 #### Funciones para el operador del centro transaccional:
 
