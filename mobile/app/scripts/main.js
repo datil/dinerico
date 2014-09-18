@@ -23,23 +23,23 @@ module.exports = React.createClass({displayName: 'exports',
   render: function () {
     return (
       /* jshint ignore:start */
-      React.DOM.div(null, 
-        React.DOM.p({className: "content-padded"}
+      React.DOM.div({className: "row"}, 
+        React.DOM.div({className: "col-md-4 left-menu"}, 
+          React.DOM.h2({className: "welcome"}, "¡Bienvenido!"), 
+          React.DOM.hr(null), 
+          React.DOM.p(null, "¿Qué ", React.DOM.span({className: "accent"}, "transacción"), " desea realizar?"), 
+          React.DOM.div({className: "transactions"}, 
+            React.DOM.a({href: "/#deposito", className: "btn btn-default btn-lg btn-block"}, "Depósito"), 
+            React.DOM.a({href: "#modal", className: "btn btn-default btn-lg btn-block"}, "Retiro"), 
+            React.DOM.a({className: "btn btn-default btn-lg btn-block"}, "Envío")
+          )
         ), 
-        React.DOM.div({className: "row"}, 
-          React.DOM.div({className: "col-md-3"}, 
-            React.DOM.div({className: "transactions"}, 
-              React.DOM.a({href: "/#deposito", className: "btn btn-info btn-lg btn-block"}, "Depósito"), 
-              React.DOM.a({href: "#modal", className: "btn btn-primary btn-lg btn-block"}, "Retiro"), 
-              React.DOM.button({className: "btn btn-default btn-lg btn-block"}, "Envío")
-            )
+        React.DOM.div({className: "col-md-8 main-content"}, 
+          React.DOM.h3({className: "title"}, this.props.summary), 
+          React.DOM.div({className: "well"}, 
+            React.DOM.div({className: "amount"}, "$12,000.55")
           ), 
-          React.DOM.div({className: "col-md-9"}, 
-            React.DOM.h2(null, this.props.summary), 
-            React.DOM.div({className: "well"}, 
-              React.DOM.h3(null, "Efectivo en Caja"), 
-              React.DOM.div(null, "$1,900.93")
-            )
+          React.DOM.div({id: "logo-bce"}
           )
         )
       )
@@ -65,18 +65,24 @@ module.exports = React.createClass({displayName: 'exports',
     return (
       /*jshint ignore:start */
       React.DOM.div({className: "row"}, 
-        React.DOM.form({className: "col-md-8 col-md-offset-2"}, 
-          React.DOM.p({className: "lead"}, "Especifique el monto y el monedero de destinos"), 
+        React.DOM.form({className: "col-md-6 col-md-offset-3"}, 
+          React.DOM.p({className: "instructions"}, "Escriba los datos del destinatario"), 
+          React.DOM.hr(null), 
           React.DOM.div({className: "form-group"}, 
-            React.DOM.input({type: "tel", className: "form-control", placeholder: "Número celular destinatario", name: "recipient"})
+            React.DOM.label({htmlFor: "beneficiary"}, "Número de teléfono celular"), 
+            React.DOM.input({type: "tel", className: "form-control", name: "recipient", id: "beneficiary"})
           ), 
           React.DOM.div({className: "form-group"}, 
-            React.DOM.input({type: "text", placeholder: "Valor", name: "amount", className: "form-control"})
+            React.DOM.label({htmlFor: ""}, "Cédula"), 
+            React.DOM.input({type: "text", name: "id", className: "form-control"})
           ), 
           React.DOM.div({className: "form-group"}, 
-            React.DOM.textarea({className: "form-control", rows: "5", placeholder: "Descripción (opcional)"})
+            React.DOM.label({for: ""}, "Valor"), 
+            React.DOM.input({type: "text", name: "amount", className: "form-control"})
           ), 
-          React.DOM.button({className: "btn btn-primary btn-lg btn-block"}, "Depositar")
+          React.DOM.div({className: "form-buttons centered"}, 
+            React.DOM.button({className: "btn btn-primary btn-lg"}, "Depositar")
+          )
         )
       )
       /*jshint ignore:end */

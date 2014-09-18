@@ -13,18 +13,24 @@ module.exports = React.createClass({
     return (
       /*jshint ignore:start */
       <div className="row">
-        <form className="col-md-8 col-md-offset-2">
-          <p className="lead">Especifique el monto y el monedero de destinos</p>
+        <form className="col-md-6 col-md-offset-3">
+          <p className="instructions">Escriba los datos del destinatario</p>
+          <hr/>
           <div className="form-group">
-            <input type="tel" className="form-control" placeholder="Número celular destinatario" name="recipient"/>
+            <label htmlFor="beneficiary">Número de teléfono celular</label>
+            <input type="tel" className="form-control" name="recipient" id="beneficiary" />
           </div>
           <div className="form-group">
-            <input type="text" placeholder="Valor" name="amount" className="form-control"/>
+            <label htmlFor="">Cédula</label>
+            <input type="text" name="id" className="form-control"/>
           </div>
           <div className="form-group">
-            <textarea className="form-control" rows="5" placeholder="Descripción (opcional)"></textarea>
+            <label for="">Valor</label>
+            <input type="text" name="amount" className="form-control"/>
           </div>
-          <button className="btn btn-primary btn-lg btn-block">Depositar</button>
+          <div className="form-buttons centered">
+            <button className="btn btn-primary btn-lg">Depositar</button>
+          </div>
         </form>
       </div>
       /*jshint ignore:end */
