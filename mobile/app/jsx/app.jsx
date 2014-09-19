@@ -34,11 +34,13 @@ module.exports = React.createClass({
           </div>
         </div>
         <div className="col-md-8 main-content">
-          <h3 className="title">{this.props.summary}</h3>
-          <div className="well">
-            <div className="amount">$12,000.55</div>
-          </div>
-          <div id="logo-bce">
+          <div className="summary">
+            <h3 className="title">{this.props.summary}</h3>
+            <div className="well">
+              <div className="amount">$12,000.55</div>
+            </div>
+            <div id="logo-bce">
+            </div>
           </div>
         </div>
       </div>

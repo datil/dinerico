@@ -35,11 +35,13 @@ module.exports = React.createClass({displayName: 'exports',
           )
         ), 
         React.DOM.div({className: "col-md-8 main-content"}, 
-          React.DOM.h3({className: "title"}, this.props.summary), 
-          React.DOM.div({className: "well"}, 
-            React.DOM.div({className: "amount"}, "$12,000.55")
-          ), 
-          React.DOM.div({id: "logo-bce"}
+          React.DOM.div({className: "summary"}, 
+            React.DOM.h3({className: "title"}, this.props.summary), 
+            React.DOM.div({className: "well"}, 
+              React.DOM.div({className: "amount"}, "$12,000.55")
+            ), 
+            React.DOM.div({id: "logo-bce"}
+            )
           )
         )
       )
@@ -66,7 +68,9 @@ module.exports = React.createClass({displayName: 'exports',
       /*jshint ignore:start */
       React.DOM.div({className: "row"}, 
         React.DOM.form({className: "col-md-6 col-md-offset-3"}, 
-          React.DOM.p({className: "instructions"}, "Escriba los datos del destinatario"), 
+          React.DOM.p({className: "instructions"}, 
+            "Escriba los datos del ", React.DOM.strong(null, "destinatario")
+          ), 
           React.DOM.hr(null), 
           React.DOM.div({className: "form-group"}, 
             React.DOM.label({htmlFor: "beneficiary"}, "Número de teléfono celular"), 
@@ -81,7 +85,7 @@ module.exports = React.createClass({displayName: 'exports',
             React.DOM.input({type: "text", name: "amount", className: "form-control"})
           ), 
           React.DOM.div({className: "form-buttons centered"}, 
-            React.DOM.button({className: "btn btn-primary btn-lg"}, "Depositar")
+            React.DOM.a({href: "/#confirmar-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
           )
         )
       )
