@@ -85,7 +85,7 @@ module.exports = React.createClass({displayName: 'exports',
             React.DOM.input({type: "text", name: "amount", className: "form-control"})
           ), 
           React.DOM.div({className: "form-buttons centered"}, 
-            React.DOM.a({href: "/#confirmar-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
+            React.DOM.a({href: "/#hacer-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
           )
         )
       )
@@ -101,10 +101,65 @@ module.exports = React.createClass({displayName: 'exports',
 /*global React */
 'use strict';
 
+module.exports = React.createClass({displayName: 'exports',
+  getDefaultProps: function () {
+    return {
+    };
+  },
+  render: function () {
+    return (
+      /*jshint ignore:start */
+      React.DOM.div({className: "row"}, 
+        React.DOM.div({className: "col-md-6 col-md-offset-3"}, 
+            React.DOM.p({className: "instructions"}, "Confirme los datos del depósito"), 
+            React.DOM.hr(null), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: "beneficiary"}, "Destinatario:"), 
+              React.DOM.p(null, "Joseph León Cando")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "Número de teléfono celular:"), 
+              React.DOM.p(null, "0939125217")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "Número de cédula:"), 
+              React.DOM.p(null, "0929128423")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "VALOR:"), 
+              React.DOM.p(null, "$350.00")
+            ), 
+            React.DOM.hr(null), 
+            React.DOM.div({className: "form-group", id: "label-pin"}, 
+              React.DOM.label({htmlFor: "pin"}, "Introduzca el PIN:")
+            ), 
+            React.DOM.div({className: "row"}, 
+              React.DOM.div({className: "col-md-6"}, 
+                React.DOM.input({type: "text", className: "form-control", id: "pin"})
+              ), 
+              React.DOM.div({className: "col-md-6"}, 
+                React.DOM.button({className: "btn btn-primary btn-lg", id: "confirm"}, "Confirmar")
+              )
+            )
+        )
+      )
+      /*jshint ignore:end */
+    );
+  }
+});
+
+
+},{}],4:[function(require,module,exports){
+/** @jsx React.DOM */
+/*jshint indent: 2, node: true, nomen: true, browser: true*/
+/*global React */
+'use strict';
+
 dinerico.Views = dinerico.Views || {};
 
 var app = require('./app.jsx');
 var deposit = require('./deposit.jsx');
+var doDeposit = require('./doDeposit.jsx');
 
 // dinerico.Views.deposit = deposit;
 
@@ -125,4 +180,13 @@ dinerico.Views.deposit = function() {
     /* jshint ignore:end */
   );
 }
-},{"./app.jsx":1,"./deposit.jsx":2}]},{},[3]);
+
+dinerico.Views.doDeposit = function() {
+  React.renderComponent(
+    /* jshint ignore:start */
+    doDeposit(null),
+    document.getElementById('app')
+    /* jshint ignore:end */
+  );
+}
+},{"./app.jsx":1,"./deposit.jsx":2,"./doDeposit.jsx":3}]},{},[4]);
