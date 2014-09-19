@@ -63,7 +63,7 @@ body {
 html {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 body {
@@ -76,10 +76,31 @@ body {
 #app {
   height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding-top: 78px;
 
   .row {
     height: 100%;
+    // overflow: scroll;
+    // overflow-scrolling: touch;
+    // -webkit-overflow-scrolling: touch;
   }
+}
+
+strong {
+  font-weight: 500;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+  // right: 0;
 }
 
 .btn {
@@ -99,11 +120,23 @@ body {
   color: #fff;
 }
 
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 /* Navigation */
 
 .nav-dinerico {
   &.navbar {
     margin-bottom: 0;
+    min-height: 77px;
   }
   &.navbar-default {
     background-color: @green-dinerico;
@@ -121,12 +154,29 @@ body {
   }
   &.navbar-default .navbar-brand {
     color: #fff;
+    width: 210px;
+    padding-top: 0;
+    padding-bottom: 0;
+    // margin-left: 10px;
+    height: 77px;
+    display: inline-block;
+    content: '.';
+    background: url(../images/logo-header.png) no-repeat left center;
   }
   .btn {
     text-transform: none;
   }
   .btn-logout {
-    margin: 15px 10px 0 0;
+    margin: 21.5px 25px 0 0;
+  }
+  .account-info {
+    & > div { height: 100% }
+    .info {
+      padding: 15px 5px;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .pic { padding: 16px 5px; }
   }
 }
 
@@ -134,14 +184,17 @@ body {
 
 .main-content {
   background-color: @gray-bg;
-  height: 100%;
-  position: relative;
+  min-height: 100%;
+
+  .summary {
+    padding-top: 1px;
+  }
 
   .title {
     font-size: 18px;
     font-weight: 400;
     text-transform: uppercase;
-    margin-top: 120px;
+    margin-top: 50px;
     margin-bottom: 45px;
   }
   .well {
@@ -150,8 +203,15 @@ body {
     .amount {
       font-size: 75px;
       text-align: right;
-      padding: 60px 28px 60px;
+      padding: 50px 28px 50px;
     }
+  }
+  #logo-bce {
+    background: url(../images/logo-bce.png) no-repeat center;
+    background-size: 15%;
+    content: '.';
+    height: 150px;
+    margin-top: 70px;
   }
 }
 
@@ -178,16 +238,6 @@ body {
   }
 }
 
-#logo-bce {
-  background: url(../images/logo-bce.png) no-repeat center;
-  background-size: 15%;
-  content: '.';
-  height: 200px;
-  width: 100%;
-  position: absolute;
-  bottom: 30px;
-}
-
 /* Forms */
 
 .form-buttons {
@@ -204,6 +254,7 @@ body {
 form .instructions {
   text-align: center;
   margin: 50px 0;
+  font-size: 18.5px;
 }
 
 .form-group label {
@@ -222,3 +273,40 @@ form hr {
   border-top: 1px solid #999;
 }
 
+/* Resposive */
+
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) {
+  .nav-dinerico {
+    &.navbar-default .navbar-brand {
+      background: url(../images/logo-header2x.png) no-repeat left center;
+      background-size: 168px 57px;
+    }
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  .main-content {
+    .well {
+      .amount {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+}
