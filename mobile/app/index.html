@@ -13,6 +13,7 @@
     <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -32,46 +33,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Dinérico</a>
+          <a class="navbar-brand" href="#">
+            <span class="visuallyhidden">Dinérico</span>
+          </a>
         </div>
         <div class="navbar-collapse collapse">
-          <!-- <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul> -->
-          <!-- <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top</a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-          </ul> -->
           <div class="navbar-right">
             <div class="pull-left">
               <a href="#salir" class="btn-logout btn btn-default btn-outline">
                 Cerrar sesión
               </a>
             </div>
-            <div class="pull-right row account-info">
-              <div class="pic col-sm-4">
-                <a href="#" class="thumbnail">
-                  <img src="http://placehold.it/40x40" alt="perfil">
-                </a>
+            <div class="pull-right clearfix account-info">
+              <div class="pic pull-left">
+                <img src="http://placehold.it/45x45" alt="perfil">
               </div>
-              <div class="col-sm-8">
-                <p class="name">Juan Antonio Plaza</p>
-                <p class="mobile">0993838433</p>
+              <div class="pull-right info">
+                <div class="name">Juan Antonio Plaza</div>
+                <div class="mobile">0993838433</div>
               </div>
             </div>
           </div>
@@ -79,7 +58,7 @@
       </div>
     </div>
 
-    <div class="container-fluid" id="app">
+    <div class="container-fluid scrollable" id="app">
     </div>
 
     <!-- build:js scripts/vendor.js -->

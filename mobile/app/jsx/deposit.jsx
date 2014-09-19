@@ -14,7 +14,9 @@ module.exports = React.createClass({
       /*jshint ignore:start */
       <div className="row">
         <form className="col-md-6 col-md-offset-3">
-          <p className="instructions">Escriba los datos del destinatario</p>
+          <p className="instructions">
+            Escriba los datos del <strong>destinatario</strong>
+          </p>
           <hr/>
           <div className="form-group">
             <label htmlFor="beneficiary">Número de teléfono celular</label>
