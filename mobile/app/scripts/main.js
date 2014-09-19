@@ -107,32 +107,38 @@ module.exports = React.createClass({displayName: 'exports',
     return (
       /*jshint ignore:start */
       React.DOM.div({className: "row"}, 
-          React.DOM.p({className: "instructions"}, "Confirme los datos del depósito"), 
-          React.DOM.hr(null), 
-          React.DOM.div({className: "form-group"}, 
-            React.DOM.label({htmlFor: "beneficiary"}, "Destinatario:"), 
-            React.DOM.p(null, "Joseph León Cando")
-          ), 
-          React.DOM.div({className: "form-group"}, 
-            React.DOM.label({htmlFor: ""}, "Número de teléfono celular:"), 
-            React.DOM.p(null, "0939125217")
-          ), 
-          React.DOM.div({className: "form-group"}, 
-            React.DOM.label({htmlFor: ""}, "Número de cédula:"), 
-            React.DOM.p(null, "0929128423")
-          ), 
-          React.DOM.div({className: "form-group"}, 
-            React.DOM.label({htmlFor: ""}, "VALOR:"), 
-            React.DOM.p(null, "USD $350.00")
-          ), 
-          React.DOM.hr(null), 
-          React.DOM.div({className: "form-group"}, 
-            React.DOM.label({htmlFor: "pin"}, "Introduzca el PIN:"), 
-            React.DOM.input({type: "number", className: "form-control", id: "PIN"})
-          ), 
-          React.DOM.div({className: "form-buttons centered"}, 
-            React.DOM.button({className: "btn btn-primary btn-lg"}, "Confirmar")
-          )
+        React.DOM.div({className: "col-md-6 col-md-offset-3"}, 
+            React.DOM.p({className: "instructions"}, "Confirme los datos del depósito"), 
+            React.DOM.hr(null), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: "beneficiary"}, "Destinatario:"), 
+              React.DOM.p(null, "Joseph León Cando")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "Número de teléfono celular:"), 
+              React.DOM.p(null, "0939125217")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "Número de cédula:"), 
+              React.DOM.p(null, "0929128423")
+            ), 
+            React.DOM.div({className: "form-group"}, 
+              React.DOM.label({htmlFor: ""}, "VALOR:"), 
+              React.DOM.p(null, "$350.00")
+            ), 
+            React.DOM.hr(null), 
+            React.DOM.div({className: "form-group", id: "label-pin"}, 
+              React.DOM.label({htmlFor: "pin"}, "Introduzca el PIN:")
+            ), 
+            React.DOM.div({className: "row"}, 
+              React.DOM.div({className: "col-md-6"}, 
+                React.DOM.input({type: "text", className: "form-control", id: "pin"})
+              ), 
+              React.DOM.div({className: "col-md-6"}, 
+                React.DOM.button({className: "btn btn-primary btn-lg", id: "confirm"}, "Confirmar")
+              )
+            )
+        )
       )
       /*jshint ignore:end */
     );
