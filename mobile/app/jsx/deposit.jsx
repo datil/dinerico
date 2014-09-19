@@ -29,7 +29,7 @@ module.exports = React.createClass({
             <input type="text" name="amount" className="form-control"/>
           </div>
           <div className="form-buttons centered">
-            <button className="btn btn-primary btn-lg">Depositar</button>
+            <a href="/#hacer-deposito" className="btn btn-primary btn-lg">Depositar</a>
           </div>
         </form>
       </div>

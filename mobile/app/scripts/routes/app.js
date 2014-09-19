@@ -9,7 +9,8 @@ dinerico.Routers = dinerico.Routers || {};
     routes: {
       "": "index",
       "deposito": "deposit",
-      "retiro": "withdraw"
+      "retiro": "withdraw",
+      "hacer-deposito": "doDeposit"
     },
     index: function() {
       dinerico.Views.app();
@@ -18,6 +19,9 @@ dinerico.Routers = dinerico.Routers || {};
       dinerico.Views.deposit();
     },
     withdraw: function() {
+    },
+    doDeposit: function() {
+      dinerico.Views.doDeposit();
     }
   });
 
