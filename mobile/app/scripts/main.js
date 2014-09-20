@@ -110,7 +110,7 @@ module.exports = React.createClass({displayName: 'exports',
   render: function () {
     return (
       /*jshint ignore:start */
-      React.DOM.div({className: "row"}, 
+      React.DOM.div({className: "row nested"}, 
         React.DOM.div({className: "col-md-6 col-md-offset-3"}, 
             React.DOM.p({className: "instructions"}, "Confirme los datos del depósito"), 
             React.DOM.hr(null), 
@@ -135,13 +135,16 @@ module.exports = React.createClass({displayName: 'exports',
               React.DOM.label({htmlFor: "pin"}, "Introduzca el PIN:")
             ), 
             React.DOM.div({className: "row"}, 
-              React.DOM.div({className: "col-md-6"}, 
-                React.DOM.input({type: "text", className: "form-control", id: "pin"})
+              React.DOM.div({className: "col-md-7 col-sm-12"}, 
+                React.DOM.div({className: "form-group"}, 
+                  React.DOM.input({type: "text", className: "form-control input-lg", id: "pin"})
+                )
               ), 
-              React.DOM.div({className: "col-md-6"}, 
-                React.DOM.a({href: "#resultado", className: "btn btn-primary btn-lg", id: "confirm"}, "Confirmar")
+              React.DOM.div({className: "col-md-5 col-sm-12"}, 
+                React.DOM.a({href: "#resultado", className: "btn btn-primary btn-lg btn-block", id: "confirm"}, "Confirmar")
               )
-            )
+            ), 
+            React.DOM.br(null)
         )
       )
       /*jshint ignore:end */
@@ -330,7 +333,7 @@ module.exports = React.createClass({displayName: 'exports',
               this.props.prompt
             )
           ), 
-          React.DOM.div({className: "row"}, 
+          React.DOM.div({className: "row nested"}, 
             React.DOM.div({className: "col-md-6"}, 
               React.DOM.div({className: "form-group"}, 
                 React.DOM.label(null, "Correo electrónico"), 
@@ -340,7 +343,7 @@ module.exports = React.createClass({displayName: 'exports',
             React.DOM.div({className: "col-md-3 buttons"}, 
               React.DOM.a({href: "#recibo-enviado", 
                  ref: "sendBtn", 
-                 className: "btn btn-primary btn-lg", 
+                 className: "btn btn-primary btn-lg btn-block", 
                  'data-loading-text': "Enviando", 
                  onClick: this.send}, 
                 "Enviar"

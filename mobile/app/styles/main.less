@@ -83,6 +83,7 @@ body {
   top: 0;
   bottom: 0;
   padding-top: 78px;
+  padding-bottom: 40px;
 
   .row {
     height: 100%;
@@ -90,6 +91,10 @@ body {
     // overflow-scrolling: touch;
     // -webkit-overflow-scrolling: touch;
   }
+}
+
+.row.nested {
+  padding: 15px 0;
 }
 
 strong {
@@ -159,6 +164,10 @@ strong {
     background-color: @green-dinerico;
   }
 
+  &.navbar-default .navbar-toggle .icon-bar {
+    background-color: #f4f4f4;
+  }
+
   &.navbar-default .navbar-nav > .active > a,
   &.navbar-default .navbar-nav > .active > a:hover,
   &.navbar-default .navbar-nav > .active > a:focus {
@@ -178,7 +187,7 @@ strong {
     height: 77px;
     display: inline-block;
     content: '.';
-    background: url(../images/logo-header.png) no-repeat left center;
+    background: url(../images/logo-header.png) no-repeat 10px center;
   }
   .btn {
     text-transform: none;
@@ -189,9 +198,9 @@ strong {
   .account-info {
     & > div { height: 100% }
     .info {
-      padding: 15px 5px;
+      padding: 15px 0 15px 5px;
       color: #fff;
-      white-space: nowrap;
+      white-space: normal;
     }
     .pic { padding: 16px 5px; }
   }
@@ -225,7 +234,7 @@ strong {
   }
   #logo-bce {
     background: url(../images/logo-bce.png) no-repeat center;
-    background-size: 15%;
+    background-size: 150px 150px;
     content: '.';
     height: 150px;
     margin-top: 70px;
@@ -336,7 +345,7 @@ form hr {
 (min-resolution: 192dpi) {
   .nav-dinerico {
     &.navbar-default .navbar-brand {
-      background: url(../images/logo-header2x.png) no-repeat left center;
+      background: url(../images/logo-header2x.png) no-repeat 10px center;
       background-size: 168px 57px;
     }
   }
@@ -356,11 +365,62 @@ form hr {
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
+  #app {
+    padding-top: 51px;
+  }
+  #app-nav {
+    left: 10px;
+    top: 56px;
+  }
+  .app-msg {
+    padding-top: 30px;
+
+    .message {
+      padding: 0;
+    }
+    .buttons {
+      padding-top: 0;
+    }
+  }
+  .form-buttons {
+    margin-top: 20px;
+    padding-bottom: 30px;
+  }
+  .instructions {
+    margin: 50px 0 16px;
+  }
+  form hr {
+    margin: 20px 0;
+  }
   .main-content {
     .well {
       .amount {
         font-size: 35px;
+        padding: 25px 10px;
       }
+    }
+    .title {
+      margin: 18px 0;
+    }
+  }
+  .nav-dinerico {
+    &.navbar {
+      min-height: @navbar-height;
+    }
+    .btn-logout {
+      margin-right: 1px;
+    }
+    &.navbar-default .navbar-brand {
+      height: @navbar-height;
+      background-size: 88px 30px;
+    }
+  }
+  .left-menu {
+    text-align: center;
+    padding: 20px;
+
+    .btn-lg {
+      margin: 20px 0;
     }
   }
 }

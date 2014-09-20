@@ -12,7 +12,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       /*jshint ignore:start */
-      <div className="row">
+      <div className="row nested">
         <div className ="col-md-6 col-md-offset-3">
             <p className="instructions">Confirme los datos del depósito</p>
             <hr/>
@@ -37,13 +37,16 @@ module.exports = React.createClass({
               <label htmlFor="pin">Introduzca el PIN:</label>
             </div>
             <div className="row">
-              <div className="col-md-6">
-                <input type="text" className="form-control" id="pin" />
+              <div className="col-md-7 col-sm-12">
+                <div className="form-group">
+                  <input type="text" className="form-control input-lg" id="pin" />
+                </div>
               </div>
-              <div className="col-md-6">
-                <a href="#resultado" className="btn btn-primary btn-lg" id ="confirm">Confirmar</a>
+              <div className="col-md-5 col-sm-12">
+                <a href="#resultado" className="btn btn-primary btn-lg btn-block" id ="confirm">Confirmar</a>
               </div>
             </div>
+            <br/>
         </div>
       </div>
       /*jshint ignore:end */

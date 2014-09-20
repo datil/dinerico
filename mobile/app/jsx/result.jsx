@@ -34,7 +34,7 @@ module.exports = React.createClass({
               {this.props.prompt}
             </p>
           </div>
-          <div className="row">
+          <div className="row nested">
             <div className="col-md-6">
               <div className="form-group">
                 <label>Correo electrónico</label>
@@ -44,7 +44,7 @@ module.exports = React.createClass({
             <div className="col-md-3 buttons">
               <a href="#recibo-enviado"
                  ref="sendBtn"
-                 className="btn btn-primary btn-lg"
+                 className="btn btn-primary btn-lg btn-block"
                  data-loading-text="Enviando"
                  onClick={this.send}>
                 Enviar
