@@ -27,11 +27,11 @@ module.exports = React.createClass({
             <input type="text" name="id" className="form-control"/>
           </div>
           <div className="form-group">
-            <label for="">Valor</label>
+            <label htmlFor="">Valor</label>
             <input type="text" name="amount" className="form-control"/>
           </div>
           <div className="form-buttons centered">
-            <a href="/#hacer-deposito" className="btn btn-primary btn-lg">Depositar</a>
+            <a href="#confirmar-deposito" className="btn btn-primary btn-lg">Depositar</a>
           </div>
         </form>
       </div>

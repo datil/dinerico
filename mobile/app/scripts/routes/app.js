@@ -9,8 +9,10 @@ dinerico.Routers = dinerico.Routers || {};
     routes: {
       "": "index",
       "deposito": "deposit",
+      "resultado": "result",
       "retiro": "withdraw",
-      "hacer-deposito": "doDeposit"
+      "confirmar-deposito": "doDeposit",
+      "recibo-enviado": "receiptSent"
     },
     index: function() {
       dinerico.Views.app();
@@ -22,6 +24,12 @@ dinerico.Routers = dinerico.Routers || {};
     },
     doDeposit: function() {
       dinerico.Views.doDeposit();
+    },
+    result: function() {
+      dinerico.Views.result();
+    },
+    receiptSent: function() {
+      dinerico.Views.message(document.getElementById("app"));
     }
   });
 
