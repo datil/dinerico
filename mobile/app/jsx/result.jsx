@@ -11,10 +11,19 @@ module.exports = React.createClass({
       prompt: "¿Desea generar un comprobante de depósito?"
     }
   },
+  send: function(e) {
+    e.preventDefault();
+    var $btn = $(this.refs.sendBtn.getDOMNode());
+    $btn.button("loading");
+    setTimeout(function() {
+      $btn.button("reset");
+      window.location = $btn.attr("href");
+    }, 2000);
+  },
   render: function () {
     return (
       /*jshint ignore:start */
-      <div className="row result">
+      <div className="row app-msg">
         <div className="col-md-8 col-md-offset-2">
           <div className="message">
             <hr/>
@@ -32,11 +41,16 @@ module.exports = React.createClass({
                 <input className="form-control input-lg" type="email" />
               </div>
             </div>
-            <div className="col-md-2 buttons">
-              <a href="" className="btn btn-primary btn-lg">Enviar</a>&nbsp;&nbsp;&nbsp;
-              
+            <div className="col-md-3 buttons">
+              <a href="#recibo-enviado"
+                 ref="sendBtn"
+                 className="btn btn-primary btn-lg"
+                 data-loading-text="Enviando"
+                 onClick={this.send}>
+                Enviar
+              </a>&nbsp;&nbsp;&nbsp;
             </div>
-            <div className="col-md-4 buttons">
+            <div className="col-md-3 buttons">
               <a href="" className="btn btn-default btn-lg btn-block">¡No gracias!</a>
             </div>
           </div>

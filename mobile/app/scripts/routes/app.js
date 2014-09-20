@@ -11,7 +11,8 @@ dinerico.Routers = dinerico.Routers || {};
       "deposito": "deposit",
       "resultado": "result",
       "retiro": "withdraw",
-      "confirmar-deposito": "doDeposit"
+      "confirmar-deposito": "doDeposit",
+      "recibo-enviado": "receiptSent"
     },
     index: function() {
       dinerico.Views.app();
@@ -26,6 +27,9 @@ dinerico.Routers = dinerico.Routers || {};
     },
     result: function() {
       dinerico.Views.result();
+    },
+    receiptSent: function() {
+      dinerico.Views.message(document.getElementById("app"));
     }
   });
 

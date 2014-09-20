@@ -9,7 +9,8 @@ window.dinerico = {
     dinerico.Routers.app = new dinerico.Routers.App();
     
     Backbone.history.on("all", function (r, router) {
-      navView.setProps({hidden: window.location.hash == ""});
+      navView.setProps({hidden: (window.location.hash == "" ||
+                                 window.location.hash == "#recibo-enviado")});
     });
     Backbone.history.start();
   }

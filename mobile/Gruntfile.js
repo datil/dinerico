@@ -270,6 +270,8 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             'images/**/*.webp',
+            'images/**/*.png',
+            'images/**/*.jpg',
             '**/*.html',
             'styles/fonts/**/*.*',
             'bower_components/bootstrap/**/*.*'

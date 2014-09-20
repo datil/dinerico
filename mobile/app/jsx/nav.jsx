@@ -9,6 +9,10 @@ module.exports = React.createClass({
       hidden: true
     };
   },
+  back: function (e) {
+    e.preventDefault();
+    window.history.back();
+  },
   render: function () {
     var cx = React.addons.classSet;
     var classes = cx({
@@ -18,7 +22,7 @@ module.exports = React.createClass({
     });
     return (
       /*jshint ignore:start */
-      <a href="" className={classes}>
+      <a href="" className={classes} onClick={this.back}>
         <span className="glyphicon glyphicon-arrow-left"></span>
       </a>
       /*jshint ignore:end */

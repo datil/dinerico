@@ -28,8 +28,8 @@ module.exports = React.createClass({
           <hr/>
           <p>¿Qué <span className="accent">transacción</span> desea realizar?</p>
           <div className="transactions">
-            <a href="/#deposito" className="btn btn-default btn-lg btn-block">Depósito</a>
-            <a href="#modal" className="btn btn-default btn-lg btn-block">Retiro</a>
+            <a href="#deposito" className="btn btn-default btn-lg btn-block">Depósito</a>
+            <a href="#" className="btn btn-default btn-lg btn-block">Retiro</a>
             <a className="btn btn-default btn-lg btn-block">Envío</a>
           </div>
         </div>

@@ -41,7 +41,7 @@ module.exports = React.createClass({
                 <input type="text" className="form-control" id="pin" />
               </div>
               <div className="col-md-6">
-                <a href="/#resultado" className="btn btn-primary btn-lg" id ="confirm">Confirmar</a>
+                <a href="#resultado" className="btn btn-primary btn-lg" id ="confirm">Confirmar</a>
               </div>
             </div>
         </div>

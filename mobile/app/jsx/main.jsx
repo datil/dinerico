@@ -9,6 +9,7 @@ var app = require('./app.jsx');
 var deposit = require('./deposit.jsx');
 var appnav = require('./nav.jsx');
 var result = require('./result.jsx');
+var message = require('./message.jsx');
 var doDeposit = require('./doDeposit.jsx');
 
 // dinerico.Views.deposit = deposit;
@@ -45,6 +46,15 @@ dinerico.Views.result = function() {
     /* jshint ignore:start */
     <result />,
     document.getElementById('app')
+    /* jshint ignore:end */
+  );
+}
+
+dinerico.Views.message = function(domNode) {
+  return React.renderComponent(
+    /* jshint ignore:start */
+    <message />,
+    domNode
     /* jshint ignore:end */
   );
 }

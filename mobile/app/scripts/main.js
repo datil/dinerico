@@ -29,8 +29,8 @@ module.exports = React.createClass({displayName: 'exports',
           React.DOM.hr(null), 
           React.DOM.p(null, "¿Qué ", React.DOM.span({className: "accent"}, "transacción"), " desea realizar?"), 
           React.DOM.div({className: "transactions"}, 
-            React.DOM.a({href: "/#deposito", className: "btn btn-default btn-lg btn-block"}, "Depósito"), 
-            React.DOM.a({href: "#modal", className: "btn btn-default btn-lg btn-block"}, "Retiro"), 
+            React.DOM.a({href: "#deposito", className: "btn btn-default btn-lg btn-block"}, "Depósito"), 
+            React.DOM.a({href: "#", className: "btn btn-default btn-lg btn-block"}, "Retiro"), 
             React.DOM.a({className: "btn btn-default btn-lg btn-block"}, "Envío")
           )
         ), 
@@ -85,7 +85,7 @@ module.exports = React.createClass({displayName: 'exports',
             React.DOM.input({type: "text", name: "amount", className: "form-control"})
           ), 
           React.DOM.div({className: "form-buttons centered"}, 
-            React.DOM.a({href: "/#confirmar-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
+            React.DOM.a({href: "#confirmar-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
           )
         )
       )
@@ -139,7 +139,7 @@ module.exports = React.createClass({displayName: 'exports',
                 React.DOM.input({type: "text", className: "form-control", id: "pin"})
               ), 
               React.DOM.div({className: "col-md-6"}, 
-                React.DOM.a({href: "/#resultado", className: "btn btn-primary btn-lg", id: "confirm"}, "Confirmar")
+                React.DOM.a({href: "#resultado", className: "btn btn-primary btn-lg", id: "confirm"}, "Confirmar")
               )
             )
         )
@@ -162,6 +162,7 @@ var app = require('./app.jsx');
 var deposit = require('./deposit.jsx');
 var appnav = require('./nav.jsx');
 var result = require('./result.jsx');
+var message = require('./message.jsx');
 var doDeposit = require('./doDeposit.jsx');
 
 // dinerico.Views.deposit = deposit;
@@ -202,6 +203,15 @@ dinerico.Views.result = function() {
   );
 }
 
+dinerico.Views.message = function(domNode) {
+  return React.renderComponent(
+    /* jshint ignore:start */
+    message(null),
+    domNode
+    /* jshint ignore:end */
+  );
+}
+
 dinerico.Views.doDeposit = function() {
   React.renderComponent(
     /* jshint ignore:start */
@@ -210,29 +220,38 @@ dinerico.Views.doDeposit = function() {
     /* jshint ignore:end */
   );
 }
-},{"./app.jsx":1,"./deposit.jsx":2,"./doDeposit.jsx":3,"./nav.jsx":5,"./result.jsx":6}],5:[function(require,module,exports){
+},{"./app.jsx":1,"./deposit.jsx":2,"./doDeposit.jsx":3,"./message.jsx":5,"./nav.jsx":6,"./result.jsx":7}],5:[function(require,module,exports){
 /** @jsx React.DOM */
 /*jshint indent: 2, node: true, nomen: true, browser: true*/
 /*global React */
 
 'use strict';
 module.exports = React.createClass({displayName: 'exports',
-  getDefaultProps: function () {
+  getDefaultProps: function() {
     return {
-      hidden: true
-    };
+      title: "Correo enviado",
+      icon: "icon-email-sent",
+      message: "¡Que tenga un buen día!"
+    }
   },
   render: function () {
-    var cx = React.addons.classSet;
-    var classes = cx({
-      'btn': true,
-      'btn-default': true,
-      'hidden': this.props.hidden
-    });
     return (
       /*jshint ignore:start */
-      React.DOM.a({href: "", className: classes}, 
-        React.DOM.span({className: "glyphicon glyphicon-arrow-left"})
+      React.DOM.div({className: "row app-msg"}, 
+        React.DOM.div({className: "col-md-8 col-md-offset-2"}, 
+          React.DOM.div({className: "message"}, 
+            React.DOM.hr(null), 
+            React.DOM.div({className: this.props.icon}, " "), 
+            React.DOM.h1({className: "title"}, this.props.title), 
+            React.DOM.hr(null), 
+            React.DOM.p({className: "submessage"}, 
+              this.props.message
+            )
+          ), 
+          React.DOM.div({className: "buttons", style: {textAlign: "center"}}, 
+            React.DOM.a({href: "#", className: "btn btn-default btn-lg"}, "Inicio")
+          )
+        )
       )
       /*jshint ignore:end */
     );
@@ -247,6 +266,40 @@ module.exports = React.createClass({displayName: 'exports',
 
 'use strict';
 module.exports = React.createClass({displayName: 'exports',
+  getDefaultProps: function () {
+    return {
+      hidden: true
+    };
+  },
+  back: function (e) {
+    e.preventDefault();
+    window.history.back();
+  },
+  render: function () {
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'btn': true,
+      'btn-default': true,
+      'hidden': this.props.hidden
+    });
+    return (
+      /*jshint ignore:start */
+      React.DOM.a({href: "", className: classes, onClick: this.back}, 
+        React.DOM.span({className: "glyphicon glyphicon-arrow-left"})
+      )
+      /*jshint ignore:end */
+    );
+  }
+});
+
+
+},{}],7:[function(require,module,exports){
+/** @jsx React.DOM */
+/*jshint indent: 2, node: true, nomen: true, browser: true*/
+/*global React */
+
+'use strict';
+module.exports = React.createClass({displayName: 'exports',
   getDefaultProps: function() {
     return {
       title: "¡Transacción exitosa!",
@@ -254,10 +307,19 @@ module.exports = React.createClass({displayName: 'exports',
       prompt: "¿Desea generar un comprobante de depósito?"
     }
   },
+  send: function(e) {
+    e.preventDefault();
+    var $btn = $(this.refs.sendBtn.getDOMNode());
+    $btn.button("loading");
+    setTimeout(function() {
+      $btn.button("reset");
+      window.location = $btn.attr("href");
+    }, 2000);
+  },
   render: function () {
     return (
       /*jshint ignore:start */
-      React.DOM.div({className: "row result"}, 
+      React.DOM.div({className: "row app-msg"}, 
         React.DOM.div({className: "col-md-8 col-md-offset-2"}, 
           React.DOM.div({className: "message"}, 
             React.DOM.hr(null), 
@@ -275,11 +337,16 @@ module.exports = React.createClass({displayName: 'exports',
                 React.DOM.input({className: "form-control input-lg", type: "email"})
               )
             ), 
-            React.DOM.div({className: "col-md-2 buttons"}, 
-              React.DOM.a({href: "", className: "btn btn-primary btn-lg"}, "Enviar"), "   "
-              
+            React.DOM.div({className: "col-md-3 buttons"}, 
+              React.DOM.a({href: "#recibo-enviado", 
+                 ref: "sendBtn", 
+                 className: "btn btn-primary btn-lg", 
+                 'data-loading-text': "Enviando", 
+                 onClick: this.send}, 
+                "Enviar"
+              ), "   "
             ), 
-            React.DOM.div({className: "col-md-4 buttons"}, 
+            React.DOM.div({className: "col-md-3 buttons"}, 
               React.DOM.a({href: "", className: "btn btn-default btn-lg btn-block"}, "¡No gracias!")
             )
           )
