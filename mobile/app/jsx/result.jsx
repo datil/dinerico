@@ -29,12 +29,15 @@ module.exports = React.createClass({
             <div className="col-md-6">
               <div className="form-group">
                 <label>Correo electrónico</label>
-                <input className="form-control input-lg" placeholder="Escriba el correo" />
+                <input className="form-control input-lg" type="email" />
               </div>
             </div>
-            <div className="col-md-6 buttons">
+            <div className="col-md-2 buttons">
               <a href="" className="btn btn-primary btn-lg">Enviar</a>&nbsp;&nbsp;&nbsp;
-              <a href="" className="btn btn-default btn-lg">¡No gracias!</a>
+              
+            </div>
+            <div className="col-md-4 buttons">
+              <a href="" className="btn btn-default btn-lg btn-block">¡No gracias!</a>
             </div>
           </div>
         </div>

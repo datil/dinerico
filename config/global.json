@@ -1,11 +1,11 @@
 {
     "applications": {
-        "Din\u00e9rico API": {
+        "dinerico": {
             "applicationId": "7KyKS1qISRLaIkZhdsf8zwSlhKNVWE9itWJoDsLu", 
             "masterKey": "KDfJIedKe8bqeQxiicl3R04A8wFAdwEcfkO0aHR5"
         }, 
         "_default": {
-            "link": "Din\u00e9rico API"
+            "link": "dinerico"
         }
     }, 
     "global": {
