@@ -52,6 +52,10 @@ module.exports = function (grunt) {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
+      less: {
+        files: ['<%= config.app %>/styles/**/*.less'],
+        tasks: ['less:compile', 'autoprefixer']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -160,6 +164,8 @@ module.exports = function (grunt) {
       }
     },
 
+
+
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
@@ -180,6 +186,31 @@ module.exports = function (grunt) {
             '<%= config.dist %>/styles/fonts/{,*/}*.*',
             '<%= config.dist %>/*.{ico,png}'
           ]
+        }
+      }
+    },
+
+    // Less compiler
+    less: {
+      compile: {
+        options: {
+          strictMath: true,
+          sourceMap: true,
+          outputSourceFiles: true,
+          sourceMapURL: 'main.css.map',
+          sourceMapFilename: '.tmp/styles/main.css.map'
+        },
+        files: {
+          '.tmp/styles/main.css': '<%= config.app %>/styles/main.less'
+        }
+      },
+      minify: {
+        options: {
+          cleancss: true,
+          report: 'min'
+        },
+        files: {
+          '<%= config.dist %>/styles/main.min.css': '.tmp/styles/main.css',
         }
       }
     },
@@ -311,12 +342,15 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
+        'less:compile',
         'copy:styles'
       ],
       test: [
+        'less:compile',
         'copy:styles'
       ],
       dist: [
+        'less:compile',
         'copy:styles',
         'imagemin',
         'svgmin'

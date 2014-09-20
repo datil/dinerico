@@ -99,6 +99,7 @@ module.exports = React.createClass({displayName: 'exports',
 /** @jsx React.DOM */
 /*jshint indent: 2, node: true, nomen: true, browser: true*/
 /*global React */
+
 'use strict';
 
 module.exports = React.createClass({displayName: 'exports',
