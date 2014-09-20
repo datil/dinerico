@@ -104,7 +104,8 @@ strong {
 }
 
 .btn {
-  text-transform: uppercase;
+  // text-transform: uppercase;
+  font-weight: 500;
 }
 .btn-default {
   color: #999;
@@ -131,7 +132,20 @@ strong {
   width: 1px;
 }
 
+.right {
+  text-align: right;
+}
+
 /* Navigation */
+
+#app-nav {
+  position: absolute;
+  top: 120px;
+  left: 40px;
+  width: 50px;
+  height: 50px;
+  z-index: 100;
+}
 
 .nav-dinerico {
   &.navbar {
@@ -273,6 +287,41 @@ form hr {
   border-top: 1px solid #999;
 }
 
+.input-lg, .form-horizontal .form-group-lg .form-control {
+  height: 55px;
+}
+
+/* Result page */
+
+.result {
+  padding-top: 80px;
+
+  .message {
+    padding: 0 70px;
+  }
+  .buttons {
+    padding-top: 32px;
+  }
+  .title {
+    color: @green-dinerico;
+    font-weight: 300;
+    font-size: 31px;
+    text-align: center;
+  }
+  hr {
+    margin: 30px 0;
+  }
+  .icon-success {
+    height: 90px;
+    background: url(../images/icon-ok.png) no-repeat center center;
+  }
+  .prompt {
+    font-size: 18.5px;
+    margin: 70px 0 35px;
+    text-align: center;
+  }
+}
+
 /* Resposive */
 
 @media 
@@ -282,6 +331,12 @@ form hr {
     &.navbar-default .navbar-brand {
       background: url(../images/logo-header2x.png) no-repeat left center;
       background-size: 168px 57px;
+    }
+  }
+  .result {
+    .icon-success {
+      background: url(../images/icon-ok2x.png) no-repeat center center;
+      background-size: 90px;
     }
   }
 }

@@ -81,11 +81,11 @@ module.exports = React.createClass({displayName: 'exports',
             React.DOM.input({type: "text", name: "id", className: "form-control"})
           ), 
           React.DOM.div({className: "form-group"}, 
-            React.DOM.label({for: ""}, "Valor"), 
+            React.DOM.label({htmlFor: ""}, "Valor"), 
             React.DOM.input({type: "text", name: "amount", className: "form-control"})
           ), 
           React.DOM.div({className: "form-buttons centered"}, 
-            React.DOM.a({href: "/#confirmar-deposito", className: "btn btn-primary btn-lg"}, "Depositar")
+            React.DOM.a({href: "/#resultado", className: "btn btn-primary btn-lg"}, "Depositar")
           )
         )
       )
@@ -105,8 +105,19 @@ dinerico.Views = dinerico.Views || {};
 
 var app = require('./app.jsx');
 var deposit = require('./deposit.jsx');
+var appnav = require('./nav.jsx');
+var result = require('./result.jsx');
 
 // dinerico.Views.deposit = deposit;
+
+dinerico.Views.nav = function() {
+  return React.renderComponent(
+    /* jshint ignore:start */
+    appnav(null),
+    document.getElementById('app-nav')
+    /* jshint ignore:end */
+  );
+}
 
 dinerico.Views.app = function() {
   React.renderComponent(
@@ -125,4 +136,91 @@ dinerico.Views.deposit = function() {
     /* jshint ignore:end */
   );
 }
-},{"./app.jsx":1,"./deposit.jsx":2}]},{},[3]);
+
+dinerico.Views.result = function() {
+  return React.renderComponent(
+    /* jshint ignore:start */
+    result(null),
+    document.getElementById('app')
+    /* jshint ignore:end */
+  );
+}
+},{"./app.jsx":1,"./deposit.jsx":2,"./nav.jsx":4,"./result.jsx":5}],4:[function(require,module,exports){
+/** @jsx React.DOM */
+/*jshint indent: 2, node: true, nomen: true, browser: true*/
+/*global React */
+
+'use strict';
+module.exports = React.createClass({displayName: 'exports',
+  getDefaultProps: function () {
+    return {
+      hidden: true
+    };
+  },
+  render: function () {
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'btn': true,
+      'btn-default': true,
+      'hidden': this.props.hidden
+    });
+    return (
+      /*jshint ignore:start */
+      React.DOM.a({href: "", className: classes}, 
+        React.DOM.span({className: "glyphicon glyphicon-arrow-left"})
+      )
+      /*jshint ignore:end */
+    );
+  }
+});
+
+
+},{}],5:[function(require,module,exports){
+/** @jsx React.DOM */
+/*jshint indent: 2, node: true, nomen: true, browser: true*/
+/*global React */
+
+'use strict';
+module.exports = React.createClass({displayName: 'exports',
+  getDefaultProps: function() {
+    return {
+      title: "¡Transacción exitosa!",
+      resultIcon: "icon-success",
+      prompt: "¿Desea generar un comprobante de depósito?"
+    }
+  },
+  render: function () {
+    return (
+      /*jshint ignore:start */
+      React.DOM.div({className: "row result"}, 
+        React.DOM.div({className: "col-md-8 col-md-offset-2"}, 
+          React.DOM.div({className: "message"}, 
+            React.DOM.hr(null), 
+            React.DOM.div({className: this.props.resultIcon}, " "), 
+            React.DOM.h1({className: "title"}, this.props.title), 
+            React.DOM.hr(null), 
+            React.DOM.p({className: "prompt"}, 
+              this.props.prompt
+            )
+          ), 
+          React.DOM.div({className: "row"}, 
+            React.DOM.div({className: "col-md-6"}, 
+              React.DOM.div({className: "form-group"}, 
+                React.DOM.label(null, "Correo electrónico"), 
+                React.DOM.input({className: "form-control input-lg", placeholder: "Escriba el correo"})
+              )
+            ), 
+            React.DOM.div({className: "col-md-6 buttons"}, 
+              React.DOM.a({href: "", className: "btn btn-primary btn-lg"}, "Enviar"), "   ", 
+              React.DOM.a({href: "", className: "btn btn-default btn-lg"}, "¡No gracias!")
+            )
+          )
+        )
+      )
+      /*jshint ignore:end */
+    );
+  }
+});
+
+
+},{}]},{},[3]);

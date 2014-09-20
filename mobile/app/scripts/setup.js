@@ -5,7 +5,12 @@ window.dinerico = {
   Routers: {},
   Views: {},
   init: function() {
+    var navView = dinerico.Views.nav();
     dinerico.Routers.app = new dinerico.Routers.App();
+    
+    Backbone.history.on("all", function (r, router) {
+      navView.setProps({hidden: window.location.hash == ""});
+    });
     Backbone.history.start();
   }
 }
