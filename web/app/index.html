@@ -1,12 +1,18 @@
 <!doctype html>
-<html class="no-js">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <title>web</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Din&eacue;rico permite a los macroagentes gestionar eficientemente su red de centros transaccionales">
+    <meta name="author" content="Datilmedia">
+    <link rel="icon" href="/favicon.ico">
+
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" sizes="128x128" href="favicon.png">
+
+    <title>Din&eacute;rico - Gestiona dinero electr&oacute;nico para Macroagentes</title>
+
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -15,48 +21,127 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
+
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">web</h3>
+    <div class="navbar navbar-default navbar-fixed-top nav-dinerico" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img class="logo" src="images/logo.png" alt="dinerico">
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a class="text-uppercase" href="#">Macro Agente</a></li>
+            <li><a class="text-uppercase" href="#">Persona Natural</a></li>
+          </ul>
+          
+        </div><!--/.navbar-collapse -->
       </div>
+    </div>
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+           <div class="col-md-6">
+            <img class="img-responsive center-block" src="images/tablet-dinerico.png" alt="">
+           </div>
+           <div class="col-md-6">
+              <h2>Somos parte de la</h2>
+              <h1 class="text-uppercase">Econom&iacute;a Digital</h1>
+              <p>La nueva herramienta de gestión transaccional que integra a los MACRO AGENTES y PERSONAS
+                NATURALES en una red de <strong>centros  de transacción de dinero electrónico.</strong></p>
+              <div class="row">
+                <div class="app-go col-md-5"><a class="btn btn-primary btn-lg text-uppercase" role="button" href="/app">Ir a la Aplicaci&oacute;n</a></div>
+                
+                <div class="social col-md-7 text-right">
+                  <a class="text-right" href="http://twitter.com/DinericoEC"><img src="images/tw.png"></a>
+                  <a class="text-right" href="http://facebook.com/DinericoEC"><img src="images/fb.png"></a>
+                </div>
+              </div>
+           </div>
+        </div>
+        
       </div>
+    </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+    <div class="container text-center flujo">
+      <h2>El siguiente paso para una sociedad</h2>
+      <h2>con cultura de transacciones electrónicas</h2>
+      <img class="flujo-img img-responsive center-block" src="images/flujo-dinerico.png" alt="">
+      <div class="flujo-info center-block text-justify">
+        <p>Din&eacute;rico facilita la integraci&oacute;n a la red de dinero electr&oacute;nico para usuarios MACRO AGENTES y PERSONAS NATURALES.</p>
+        <p>La herramienta consiste en una aplicaci&oacute;n m&oacute;vil y con soporte web, de f&aacute;cil uso, que permite realizar <strong>diversos tipos de transacciones de manera &aacute;gil y segura.</strong></p>
+        <p>Todos los movimientos de dinero cuentan con las seguridades necesarias gracias al respaldo del <strong>Banco Central del Ecuador.</strong></p>
+      </div>
+    </div>
 
+    <div class="jumbotron text-center bce-info">
+      <img class="img-responsive center-block" src="images/logo-bce-2.png" alt="">
+      <div class="bce-info-txt center-block text-justify">
+        <p>Con la ayuda de Din&eacute;rico, el BCE busca <strong>aumentar las oportunidades para redes de negocios</strong> con intereses de operar como MACRO AGENTES, integr&aacute;ndolos de manera controlada y sustentable.</p>
+        <h5 class="text-uppercase">Impacto Positivo</h5>
+        <ul>
+          <li>Se generan actividades comerciales personalizadas entre MACRO AGENTES, <strong>promoviendo el comercio electr&oacute;nico.</strong></li>
+          <li>Aumento de la oferta de servicios transaccionales de valor agregado como <strong>facturaci&oacute;n electr&oacute;nica, pago de servicios y bot&oacute;n de pago.</strong></li>
+        </ul> 
+      </div>
+    </div>
 
-
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-
+    <div class="container text-center macroagente">
+      <h1 class="text-uppercase">Macro Agente</h1>
+      <h2>Ahora tus centros transaccionales cuentan con funciones pr&aacute;cticas</h2>
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <img src="images/depositos.png" alt="">
+          <h2 class="text-uppercase">Dep&oacute;sitos</h2>
+          <p>Maneja depósitos de dinero en efectivo de clientes y transfiere como dinero electrónico a otras cuentas de usuario.</p>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <img src="images/retiros.png" alt="">
+          <h2 class="text-uppercase">Retiros</h2>
+          <p>Gestiona retiros de dinero en efectivo de clientes y recibe depósitos de dinero electrónico de otras cuentas de usuarios que manejan el servicio.</p>
+       </div>
+        <div class="col-md-3 col-sm-6">
+          <img src="images/envios.png" alt="">
+          <h2 class="text-uppercase">Env&iacute;os</h2>
+          <p>Gestiona retiros de dinero en efectivo de clientes y recibe depósitos de dinero electrónico de otras cuentas de usuarios que manejan el servicio.</p>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <img src="images/estadisticas.png" alt="">
+          <h2 class="text-uppercase">Estad&iacute;sticas</h2>
+          <p>Maneja depósitos de dinero en efectivo de clientes y transfiere como dinero electrónico a otras cuentas de usuario.</p>
         </div>
       </div>
+    </div> <!-- /container -->
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-
+    <div class="jumbotron como-macroagente">
+      <img class="img-responsive" src="images/como-macroagente.png" alt="">
     </div>
+
+    <footer>
+      <img class="img-responsive center-block" src="images/logo-bce-footer.png">
+    </footer>
 
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -93,5 +178,9 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
-</body>
-</html>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  
+
+</body></html>
