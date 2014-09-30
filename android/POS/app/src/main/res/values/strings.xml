@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Global-->
+    <string name="app_name">Dinerico</string>
+
+    <!--Sign up-->
+    <string name="sign_up">Registrar</string>
+    <string name="sign_up_des">Registro</string>
+    <string name="ruc">RUC</string>
+    <string name="mobilePhone">Teléfono celular</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="no_valid_ruc">El RUC ingresado no es válido</string>
+    <string name="no_valid_email">El email ingresado no es válido</string>
+    <string name="no_valid_mobile_phone">El número de celular ingresado no es
+        válido</string>
+    <string name="no_valid_password">La contraseña ingresada no es
+        válida</string>
+
+</resources>

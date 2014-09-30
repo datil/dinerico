@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        style="@style/MainContainer">
+
+        <TextView
+            android:text="@string/sign_up_des"
+            style="@style/HeaderTittle"/>
+
+        <EditText
+            android:id="@+id/ruc"
+            android:hint="@string/ruc"
+            android:text="0939182738001"
+            style="@style/EditTextForm"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:text="pedro@gmail.com"
+            style="@style/EditTextForm"/>
+
+        <EditText
+            android:id="@+id/mobilePhone"
+            android:hint="@string/mobilePhone"
+            android:inputType="number"
+            android:text="0942892761"
+            style="@style/EditTextForm"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:ellipsize="end"
+            android:text="jsjskdksadjjkansd"
+            style="@style/EditTextForm"/>
+
+    </LinearLayout>
+
+</ScrollView>
