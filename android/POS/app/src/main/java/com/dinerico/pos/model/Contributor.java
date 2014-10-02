@@ -1,11 +1,12 @@
 package com.dinerico.pos.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by josephleon on 9/30/14.
  */
-public class Contributor {
+public class Contributor implements Serializable {
 
   private String actividadPrincipal;
   private boolean obligadoContabilidad;

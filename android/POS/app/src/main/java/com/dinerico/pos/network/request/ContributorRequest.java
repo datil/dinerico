@@ -10,11 +10,11 @@ import roboguice.util.temp.Ln;
  * Created by josephleon on 9/30/14.
  */
 
-public class DetailAccountRequest extends RetrofitSpiceRequest<Contributor, Router> {
+public class ContributorRequest extends RetrofitSpiceRequest<Contributor, Router> {
 
   private String RUC;
 
-  public DetailAccountRequest(String RUC) {
+  public ContributorRequest(String RUC) {
     super(Contributor.class, Router.class);
     this.RUC = RUC;
   }

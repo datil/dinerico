@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--Global-->
-    <string name="app_name">Dinerico</string>
+    <!-- Global -->
+    <string name="app_name">Dinérico</string>
+    <string name="continues">Continuar</string>
 
-    <!--Sign up-->
+    <!-- Sign up -->
     <string name="sign_up">Registrar</string>
     <string name="sign_up_des">Registro</string>
     <string name="ruc">RUC</string>
@@ -17,5 +18,25 @@
         válido</string>
     <string name="no_valid_password">La contraseña ingresada no es
         válida</string>
+
+    <!-- Catalog -->
+    <string name="search">Buscar</string>
+    <string name="actualSale">Venta Actual</string>
+    <string name="addDess">Añade productos a tu catálogo en \'Editar\'</string>
+
+    <!-- Contributor -->
+    <string name="contributorDes">Tu información como Contribuyente</string>
+    <string name="businessName">Razón Social:</string>
+    <string name="commercialName">Nombre Comercial:</string>
+    <string name="economicActivity">Actividad Económica Principal:</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Store-->
+    <string name="storeDes">Elige el local que deseas operar con la
+        Aplicación</string>
+    <string name="storeList">Tus Locales Registrados</string>
+    <string name="address">Dirección:</string>
+    <string name="local">Local:</string>
 
 </resources>

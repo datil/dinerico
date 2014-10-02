@@ -2,6 +2,7 @@ package com.dinerico.pos.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,14 +12,8 @@ import android.widget.EditText;
 import com.dinerico.pos.R;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
-import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.network.config.ActivityBase;
-import com.dinerico.pos.viewmodel.SignUpViewModel;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseUser;
+import com.dinerico.pos.viewmodel.AccountViewModel;
 
 import java.util.HashMap;
 
@@ -26,24 +21,28 @@ import rx.android.Events;
 import rx.functions.Action1;
 
 
-public class SignUpActivity extends ActivityBase {
+public class AccountActivity extends ActivityBase {
 
-  private SignUpViewModel viewModel;
+  private AccountViewModel viewModel;
   private ViewHolder viewHolder;
-
-  private static final String APPLICATION_ID =
-          "7KyKS1qISRLaIkZhdsf8zwSlhKNVWE9itWJoDsLu";
-  private static final String CLIENT_KEY =
-          "vnBFzyguL6HVBdLanSHl7HGowXNiFTkoYQxaUoET";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sign_up);
+    setContentView(R.layout.activity_account);
 
-    initializeParse();
-    viewModel = new SignUpViewModel(new Account(),getSpiceManager(),getIntent());
+    viewModel = new AccountViewModel(Account.getInstance(),getSpiceManager());
     viewHolder = new ViewHolder();
+
+//    LayoutInflater inflater = LayoutInflater.from(AccountActivity.this);
+//    View customBar = inflater.inflate(R.layout.action_bar,null);
+//    TextView tittle = (TextView)customBar.findViewById(R.id.titleText);
+//    tittle.setText("Mi negocio propio");
+//
+//    getActionBar().setDisplayShowHomeEnabled(false);
+//    getActionBar().setDisplayShowTitleEnabled(false);
+//    getActionBar().setDisplayShowCustomEnabled(true);
+//    getActionBar().setCustomView(customBar);
 
   }
 
@@ -51,7 +50,7 @@ public class SignUpActivity extends ActivityBase {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.sign_up, menu);
+    getMenuInflater().inflate(R.menu.account, menu);
     return true;
   }
 
@@ -59,53 +58,23 @@ public class SignUpActivity extends ActivityBase {
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
-      case R.id.sign_up:
-        signIn();
-        return true;
-      case android.R.id.home:
-        finish();
+      case R.id.account:
+        startContributorInfoActivity();
         return true;
       default:
         return super.onOptionsItemSelected(item);
     }
   }
 
-  private void signIn() {
+  private void startContributorInfoActivity() {
     try {
-      showProgressDialog();
-      viewModel.getDetailInfoAccount(new RequestListener<Contributor>() {
-        @Override
-        public void onRequestFailure(SpiceException spiceException) {
-          dismissProgressDialog();
-          showMessage(spiceException.getMessage());
-        }
-
-        @Override
-        public void onRequestSuccess(Contributor contributor) {
-//          viewModel.createAccount(contributor);
-          dismissProgressDialog();
-          showMessage("Request exitoso");
-          Log.d(SignUpActivity.class.getSimpleName(),contributor.toString());
-        }
-      });
+      viewModel.getModel().validate();
+      Intent intent = new Intent(AccountActivity.this, ContributorActivity.class);
+      startActivity(intent);
     } catch (ValidationError e) {
-      Log.d(SignUpActivity.class.getSimpleName(),e.getMessage());
       showExceptionError(e);
     }
-  }
 
-  private void initializeParse(){
-
-    // Add your initialization code here
-    Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
-
-    ParseUser.enableAutomaticUser();
-    ParseACL defaultACL = new ParseACL();
-
-    // If you would like all objects to be private by default, remove this line.
-    defaultACL.setPublicReadAccess(true);
-
-    ParseACL.setDefaultACL(defaultACL, true);
   }
 
   public void showMessage(String message) {
@@ -124,7 +93,7 @@ public class SignUpActivity extends ActivityBase {
   }
 
   private void showExceptionError(ValidationError e) {
-    Log.e(SignUpActivity.class.getSimpleName(), e.getMessage());
+    Log.e(AccountActivity.class.getSimpleName(), e.getMessage());
     HashMap<String, Integer> errorData = e.getMapMessage();
     showMessage(getResources().getString(errorData.get("userMessage")));
   }
@@ -178,6 +147,7 @@ public class SignUpActivity extends ActivityBase {
       });
 
     }
+
   }
 
 }

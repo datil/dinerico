@@ -10,14 +10,35 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <service
+            android:name=".network.config.ApiService"
+            android:exported="false" />
+
         <activity
-            android:name=".view.SignUpActivity"
+            android:name=".view.AccountActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ContributorActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".view.AccountActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.SignUpActivity" />
+        </activity>
+        <activity
+            android:name=".view.StoreActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".view.ContributorActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.ContributorActivity" />
         </activity>
     </application>
 

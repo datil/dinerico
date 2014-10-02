@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+    <TextView
+        android:id="@+id/storeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MegaSoft Quito"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:layout_below="@id/storeName"
+        android:layout_marginTop="6dp"
+        android:id="@+id/textView2"/>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valle de los chillos"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/local"
+        android:layout_below="@id/textView2"/>
+
+    <TextView
+        android:id="@+id/local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="001"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"/>
+
+
+</RelativeLayout>

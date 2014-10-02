@@ -3,23 +3,34 @@ package com.dinerico.pos.model;
 import com.dinerico.pos.R;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.util.Utils;
+import com.j256.ormlite.field.DatabaseField;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by josephleon on 9/30/14.
  */
 
-public class Account {
+public class Account implements Serializable{
 
+  @DatabaseField
   private String id;
+  @DatabaseField
   private String businessName;
+  @DatabaseField
   private String email;
+  @DatabaseField
   private String RUC;
+  @DatabaseField
   private String address;
+  @DatabaseField
   private String mobilePhone;
+  @DatabaseField
   private String password;
+  @DatabaseField
   private String specialContributor;
+  @DatabaseField
   private boolean forcedAccounting;
 
   public static Account account;
@@ -31,11 +42,6 @@ public class Account {
     if (account == null)
       account = new Account();
     return account;
-  }
-
-
-  public void setAccount(Account account) {
-    this.account = account;
   }
 
   public void reset() {
@@ -155,5 +161,21 @@ public class Account {
 
   public void setForcedAccounting(boolean forcedAccounting) {
     this.forcedAccounting = forcedAccounting;
+  }
+
+
+  @Override
+  public String toString() {
+    return "Account{ \n" +
+            "id='" + id + "'\n" +
+            "businessName='" + businessName + "'\n" +
+            "email='" + email + "'\n" +
+            "RUC='" + RUC + "'\n" +
+            "address='" + address + "'\n" +
+            "mobilePhone='" + mobilePhone + "'\n" +
+            "password='" + password + "'\n" +
+            "specialContributor='" + specialContributor + "'\n" +
+            "forcedAccounting=" + forcedAccounting +
+            '}';
   }
 }

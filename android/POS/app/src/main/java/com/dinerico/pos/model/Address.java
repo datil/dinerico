@@ -1,9 +1,11 @@
 package com.dinerico.pos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by josephleon on 9/30/14.
  */
-public class Address {
+public class Address implements Serializable{
 
   private String calle;
   private String canton;

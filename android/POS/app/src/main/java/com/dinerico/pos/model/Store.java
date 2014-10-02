@@ -1,9 +1,11 @@
 package com.dinerico.pos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by josephleon on 9/30/14.
  */
-public class Store {
+public class Store implements Serializable{
   private String codigo;
   private String nombreComercial;
   private Address direccion;
