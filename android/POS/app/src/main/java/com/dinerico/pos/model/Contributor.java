@@ -1,7 +1,12 @@
 package com.dinerico.pos.model;
 
+import com.dinerico.pos.R;
+import com.dinerico.pos.exception.ValidationError;
+import com.dinerico.pos.util.Utils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by josephleon on 9/30/14.
@@ -16,6 +21,19 @@ public class Contributor implements Serializable {
   private String nombreComercial;
   private String razonSocial;
   private ArrayList<Store> establecimientos;
+
+  public boolean isValidNombreComercial() throws ValidationError {
+    if (!Utils.isValidString(nombreComercial)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidCommercialName);
+      throw new ValidationError("Commercial name null or blank", errorData);
+    }
+    return true;
+  }
+
+  public boolean validate() throws ValidationError {
+    return isValidNombreComercial();
+  }
 
   public String getActividadPrincipal() {
     return actividadPrincipal;

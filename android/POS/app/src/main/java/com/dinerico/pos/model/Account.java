@@ -1,12 +1,18 @@
 package com.dinerico.pos.model;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.util.Utils;
+import com.dinerico.pos.view.HomeActivity;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by josephleon on 9/30/14.
@@ -32,6 +38,8 @@ public class Account implements Serializable{
   private String specialContributor;
   @DatabaseField
   private boolean forcedAccounting;
+  @DatabaseField
+  private String commercialName;
 
   public static Account account;
 
@@ -44,8 +52,23 @@ public class Account implements Serializable{
     return account;
   }
 
-  public void reset() {
+  public static void reset() {
     account = null;
+  }
+
+  public static boolean logout(Activity activity) {
+    SessionDB sessionDB = new SessionDB(activity);
+    List<Session> sessions = sessionDB.getAll();
+    for(Session session: sessions){
+      sessionDB.delete(session.getRowId().intValue());
+    }
+    Intent intent = new Intent(activity, HomeActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent
+            .FLAG_ACTIVITY_CLEAR_TASK);
+    activity.startActivity(intent);
+    activity.finish();
+    reset();
+    return true;
   }
 
   public boolean validate() throws ValidationError {
@@ -57,7 +80,7 @@ public class Account implements Serializable{
   public boolean isValidEmail() throws ValidationError{
     if (!Utils.isValidString(email) || !Utils.isValidEmail(email)){
       HashMap<String,Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.no_valid_email);
+      errorData.put("userMessage", R.string.noValidEmail);
       throw new ValidationError("Email null or blank", errorData);
     }
     return true;
@@ -66,7 +89,7 @@ public class Account implements Serializable{
   public boolean isValidRUC() throws ValidationError{
     if (!Utils.isValidString(RUC)){
       HashMap<String,Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.no_valid_ruc);
+      errorData.put("userMessage", R.string.noValidRUC);
       throw new ValidationError("RUC null or blank", errorData);
     }
     return true;
@@ -75,7 +98,7 @@ public class Account implements Serializable{
   public Boolean isValidPassword() throws ValidationError{
     if (!Utils.isValidString(password)){
       HashMap<String,Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.no_valid_password);
+      errorData.put("userMessage", R.string.noValidPassword);
       throw new ValidationError("Password null or blank", errorData);
     }
     return true;
@@ -84,11 +107,19 @@ public class Account implements Serializable{
   public boolean isValidMobilePhone() throws ValidationError{
     if (!Utils.isValidString(mobilePhone) || mobilePhone.length() < 10){
       HashMap<String,Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.no_valid_mobile_phone);
+      errorData.put("userMessage", R.string.noValidMobilePhone);
       throw new ValidationError("Mobile phone length lower 10, blank or null",
               errorData);
     }
     return true;
+  }
+
+  public String getCommercialName() {
+    return commercialName;
+  }
+
+  public void setCommercialName(String commercialName) {
+    this.commercialName = commercialName;
   }
 
   public String getId() {
@@ -175,7 +206,8 @@ public class Account implements Serializable{
             "mobilePhone='" + mobilePhone + "'\n" +
             "password='" + password + "'\n" +
             "specialContributor='" + specialContributor + "'\n" +
-            "forcedAccounting=" + forcedAccounting +
+            "forcedAccounting=" + forcedAccounting + "'\n" +
+            "commercialName='" + commercialName + "'\n" +
             '}';
   }
 }

@@ -21,7 +21,7 @@ import retrofit.converter.GsonConverter;
 
 public class ApiService extends RetrofitGsonSpiceService {
 
-  public static final String BASE_URL = "https://datiltoken.apiary-mock.com";
+  public static final String BASE_URL = "http://www.datil.ec/datum";
   public static final int CACHE_TIME = 5000;
 
   @Override

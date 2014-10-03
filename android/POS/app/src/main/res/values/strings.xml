@@ -2,21 +2,30 @@
 <resources>
 
     <!-- Global -->
-    <string name="app_name">Dinérico</string>
+    <string name="appName">Dinérico</string>
     <string name="continues">Continuar</string>
 
+    <!-- Home -->
+    <string name="createAccount">Crear cuenta</string>
+    <string name="login">Iniciar sesión</string>
+
+    <!-- Login -->
+    <string name="loginDes">Inicia sesión</string>
+    <string name="emailAddress">Dirección correo electrónico</string>
+    <string name="logout">Cerrar sesión</string>
+
     <!-- Sign up -->
-    <string name="sign_up">Registrar</string>
-    <string name="sign_up_des">Registro</string>
+    <string name="signUp">Registrar</string>
+    <string name="signUpDes">Regístrate y <b>crea tu cuenta</b></string>
     <string name="ruc">RUC</string>
     <string name="mobilePhone">Teléfono celular</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
-    <string name="no_valid_ruc">El RUC ingresado no es válido</string>
-    <string name="no_valid_email">El email ingresado no es válido</string>
-    <string name="no_valid_mobile_phone">El número de celular ingresado no es
+    <string name="noValidRUC">El RUC ingresado no es válido</string>
+    <string name="noValidEmail">El email ingresado no es válido</string>
+    <string name="noValidMobilePhone">El número de celular ingresado no es
         válido</string>
-    <string name="no_valid_password">La contraseña ingresada no es
+    <string name="noValidPassword">La contraseña ingresada no es
         válida</string>
 
     <!-- Catalog -->
@@ -29,14 +38,17 @@
     <string name="businessName">Razón Social:</string>
     <string name="commercialName">Nombre Comercial:</string>
     <string name="economicActivity">Actividad Económica Principal:</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="noValidCommercialName">El nombre comercial ingresado
+        no es válido</string>
 
-    <!--Store-->
+    <!-- Store -->
     <string name="storeDes">Elige el local que deseas operar con la
         Aplicación</string>
     <string name="storeList">Tus Locales Registrados</string>
     <string name="address">Dirección:</string>
     <string name="local">Local:</string>
+
+    <!-- Tittle -->
+    <string name="validationErrorTittle">Datos incorrectos</string>
 
 </resources>

@@ -3,32 +3,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/grayBackgroud">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/search"
-        android:hint="@string/search"
-        android:textColorHint="@color/grayText"
-        android:drawableLeft="@drawable/search"
-        android:drawablePadding="15dp"
-        android:layout_alignRight="@+id/actualSalesButton"
-        android:layout_alignEnd="@+id/actualSalesButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:background="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/search"
+            android:hint="@string/search"
+            android:textColorHint="@color/grayText"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="15dp"
+            android:layout_alignRight="@+id/actualSalesButton"
+            android:layout_alignEnd="@+id/actualSalesButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:background="@color/white"/>
+        </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_height="36dp"
         android:id="@+id/actualSalesButton"
         android:background="@color/blueButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -45,8 +55,7 @@
             android:layout_height="wrap_content"
             android:text="@string/actualSale"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:id="@+id/businessName"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
@@ -54,11 +63,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="(0)"
             android:id="@+id/textView4"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_alignTop="@+id/businessName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -73,7 +81,6 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/search"
         android:layout_above="@+id/actualSalesButton"
-        android:background="@color/grayBackgroud"
         android:id="@+id/linearlayout"
         android:gravity="center">
 

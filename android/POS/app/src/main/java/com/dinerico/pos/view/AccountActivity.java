@@ -12,8 +12,12 @@ import android.widget.EditText;
 import com.dinerico.pos.R;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
+import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.network.service.ContributorService;
 import com.dinerico.pos.viewmodel.AccountViewModel;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.HashMap;
 
@@ -26,30 +30,51 @@ public class AccountActivity extends ActivityBase {
   private AccountViewModel viewModel;
   private ViewHolder viewHolder;
 
+  private final static String LOG_TAG = AccountActivity.class
+          .getSimpleName();
+  public final static String CONTRIBUTOR = "contributor";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_account);
 
-    viewModel = new AccountViewModel(Account.getInstance(),getSpiceManager());
+    viewModel = new AccountViewModel(Account.getInstance(),
+            new ContributorService(getSpiceManager()));
     viewHolder = new ViewHolder();
-
-//    LayoutInflater inflater = LayoutInflater.from(AccountActivity.this);
-//    View customBar = inflater.inflate(R.layout.action_bar,null);
-//    TextView tittle = (TextView)customBar.findViewById(R.id.titleText);
-//    tittle.setText("Mi negocio propio");
-//
-//    getActionBar().setDisplayShowHomeEnabled(false);
-//    getActionBar().setDisplayShowTitleEnabled(false);
-//    getActionBar().setDisplayShowCustomEnabled(true);
-//    getActionBar().setCustomView(customBar);
-
   }
 
+  private void getContributorInfo() {
+    showProgressDialog();
+    viewModel.getDetailInfoAccount(Account.getInstance().getRUC(),
+            new RequestListener<Contributor>() {
+              @Override
+              public void onRequestFailure(SpiceException spiceException) {
+                dismissProgressDialog();
+                showMessage(spiceException.getMessage());
+              }
+
+              @Override
+              public void onRequestSuccess(Contributor contributor) {
+                dismissProgressDialog();
+                Account.getInstance().setSpecialContributor(contributor
+                        .getClase());
+                Account.getInstance().setForcedAccounting(contributor
+                        .isObligadoContabilidad());
+                startContributorActivity(contributor);
+                Log.d(LOG_TAG, contributor.toString());
+              }
+            });
+  }
+
+  private void startContributorActivity(Contributor contributor){
+    Intent intent = new Intent(this, ContributorActivity.class);
+    intent.putExtra(CONTRIBUTOR,contributor);
+    startActivity(intent);
+  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.account, menu);
     return true;
   }
@@ -69,8 +94,7 @@ public class AccountActivity extends ActivityBase {
   private void startContributorInfoActivity() {
     try {
       viewModel.getModel().validate();
-      Intent intent = new Intent(AccountActivity.this, ContributorActivity.class);
-      startActivity(intent);
+      getContributorInfo();
     } catch (ValidationError e) {
       showExceptionError(e);
     }
@@ -79,7 +103,7 @@ public class AccountActivity extends ActivityBase {
 
   public void showMessage(String message) {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle(this.getResources().getString(R.string.sign_up_des));
+    builder.setTitle(this.getResources().getString(R.string.signUpDes));
     builder.setMessage(message);
     builder.setCancelable(true);
     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

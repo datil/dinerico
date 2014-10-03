@@ -1,7 +1,9 @@
 package com.dinerico.pos.viewmodel;
 
 import com.dinerico.pos.model.Account;
-import com.octo.android.robospice.SpiceManager;
+import com.dinerico.pos.model.Contributor;
+import com.dinerico.pos.network.service.ContributorService;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * Created by josephleon on 9/30/14.
@@ -9,18 +11,20 @@ import com.octo.android.robospice.SpiceManager;
 public class AccountViewModel {
 
   private Account model;
-  private SpiceManager spiceManager;
+  private ContributorService service;
 
   private String ruc;
   private String mobilePhone;
   private String email;
   private String password;
 
-  public static AccountViewModel viewModel;
-
-  public AccountViewModel(Account model, SpiceManager spiceManager) {
-    this.spiceManager = spiceManager;
+  public AccountViewModel(Account model, ContributorService service) {
     this.model = model;
+    this.service = service;
+  }
+
+  public void getDetailInfoAccount(String ruc,RequestListener<Contributor> listener) {
+    service.getInfo(ruc, listener);
   }
 
   public void setRuc(String ruc) {

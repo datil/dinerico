@@ -1,91 +1,57 @@
 package com.dinerico.pos.view;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
-import com.dinerico.pos.model.Address;
 import com.dinerico.pos.model.Contributor;
-import com.dinerico.pos.model.Store;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.ContributorViewModel;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
-import java.util.ArrayList;
+import rx.android.Events;
+import rx.functions.Action1;
 
 public class ContributorActivity extends ActivityBase {
   private ViewHolder view;
   private ContributorViewModel viewModel;
 
-  private final static String LOG_TAG = ContributorActivity.class
-          .getSimpleName();
   public final static String CONTRIBUTOR = "contributor";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contributor);
-
-    viewModel = new ContributorViewModel(getSpiceManager());
+    Contributor contributor = getContributor(getIntent());
+    viewModel = new ContributorViewModel(new Contributor());
     view = new ViewHolder();
-
-    viewModel.setModel(getContributor());
-    Account.getInstance().setSpecialContributor(getContributor().getClase());
-    Account.getInstance().setForcedAccounting(getContributor().isObligadoContabilidad());
-    showContributorInfo(getContributor());
-
+    viewModel.setModel(contributor);
+    showContributorInfo(contributor);
   }
 
-  private void getContributorInfo() {
-    showProgressDialog();
-    viewModel.getDetailInfoAccount(Account.getInstance().getRUC(),
-            new RequestListener<Contributor>() {
-              @Override
-              public void onRequestFailure(SpiceException spiceException) {
-                dismissProgressDialog();
-                showMessage(spiceException.getMessage());
-              }
-
-              @Override
-              public void onRequestSuccess(Contributor contributor) {
-                dismissProgressDialog();
-                viewModel.setModel(contributor);
-                Account.getInstance().setSpecialContributor(contributor.getClase());
-                Account.getInstance().setForcedAccounting(contributor.isObligadoContabilidad());
-                showContributorInfo(contributor);
-                Log.d(LOG_TAG, contributor.toString());
-              }
-            });
-  }
-
-
-  public void showMessage(String message) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle(this.getResources().getString(R.string.sign_up_des));
-    builder.setMessage(message);
-    builder.setCancelable(true);
-    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    });
-
-    AlertDialog alert = builder.create();
-    alert.show();
+  public Contributor getContributor(Intent intent){
+    return (Contributor)intent.getSerializableExtra(AccountActivity.CONTRIBUTOR);
   }
 
   private void confirmContributorInfo() {
-    Intent intent = new Intent(ContributorActivity.this, StoreActivity.class);
-    intent.putExtra(CONTRIBUTOR,viewModel.getModel());
-    startActivity(intent);
+    try {
+      viewModel.getModel().validate();
+      Intent intent = new Intent(ContributorActivity.this, StoreActivity.class);
+      intent.putExtra(CONTRIBUTOR, viewModel.getModel());
+      startActivity(intent);
+    } catch (ValidationError e) {
+      showErrorValidation(e,this);
+    }
+
   }
 
   private void showContributorInfo(Contributor contributor) {
@@ -112,48 +78,43 @@ public class ContributorActivity extends ActivityBase {
     }
   }
 
-  private Contributor getContributor() {
-    Contributor contributorFake = new Contributor();
-    contributorFake.setNombreComercial("DATILMEDIA S.A.");
-    contributorFake.setObligadoContabilidad(true);
-    contributorFake.setRazonSocial("DATILMEDIA S.A.");
-    contributorFake.setClase("Especial");
-    contributorFake.setActividadPrincipal("Desarrollo de software social");
-    Store store1 = new Store();
-    Address addressFake = new Address();
-    addressFake.setCalle("Victor Emilio Estrada Solar 112 Y Av.Circunvalación Norte");
-    store1.setDireccion(addressFake);
-    store1.setNombreComercial("SuperDatile's");
-    store1.setCodigo("001");
-    Store store2 = new Store();
-    store2.setDireccion(addressFake);
-    store2.setNombreComercial("HyperDatil's");
-    store2.setCodigo("002");
-    Store store3 = new Store();
-    store3.setDireccion(addressFake);
-    store3.setNombreComercial("MegaDatil's");
-    store3.setCodigo("003");
-    ArrayList<Store> listStoreFake = new ArrayList<Store>();
-    listStoreFake.add(store1);
-    listStoreFake.add(store2);
-    listStoreFake.add(store3);
-    contributorFake.setEstablecimientos(listStoreFake);
-    return contributorFake;
-  }
-
-  private class ViewHolder {
+  private class ViewHolder implements View.OnClickListener{
     public TextView businessName;
-    public TextView commercialName;
+    public EditText commercialName;
     public TextView economicActivity;
+    public Button editBusinessName;
 
-    public ViewHolder() {
+    public ViewHolder(){
       findViews();
+      subscribeViewsToViewModel();
+    }
+
+    private void subscribeViewsToViewModel(){
+      Events.text(commercialName).subscribe(new Action1<String>() {
+        @Override
+        public void call(String string) {
+          viewModel.setCommercialName(string);
+          Account.getInstance().setCommercialName(string);
+        }
+      });
     }
 
     private void findViews() {
       businessName = (TextView) findViewById(R.id.businessName);
-      commercialName = (TextView) findViewById(R.id.commercialName);
+      commercialName = (EditText) findViewById(R.id.commercialName);
       economicActivity = (TextView) findViewById(R.id.economicActivity);
+      editBusinessName = (Button) findViewById(R.id.editBusinessName);
+      editBusinessName.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+      commercialName.setEnabled(true);
+      int pos = commercialName.getText().length();
+      commercialName.setSelection(pos);
+      InputMethodManager imm = (InputMethodManager)getSystemService(Service
+              .INPUT_METHOD_SERVICE);
+      imm.showSoftInput(commercialName, 0);
     }
   }
 

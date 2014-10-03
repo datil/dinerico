@@ -9,13 +9,15 @@
         style="@style/MainContainer">
 
         <TextView
-            android:text="@string/sign_up_des"
+            android:text="@string/signUpDes"
             style="@style/HeaderTittle"/>
 
         <EditText
             android:id="@+id/ruc"
             android:hint="@string/ruc"
-            android:text="0939182738001"
+            android:text="0992712554001"
+            android:inputType="number"
+            android:maxLength="13"
             style="@style/EditTextForm"/>
 
         <EditText

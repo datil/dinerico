@@ -1,49 +1,58 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dinerico.pos.view.StoreActivity"
-    android:background="@color/grayBackgroud">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView">
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:gravity="center"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        tools:context="com.dinerico.pos.view.StoreActivity"
+        android:background="@color/grayBackgroud">
 
-        <TextView
-            android:text="@string/storeDes"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:layout_alignParentTop="true"
-            android:textSize="20sp"
-            android:textColor="@color/greenApp"
-            android:gravity="center_horizontal"
-            android:layout_alignParentLeft="true"/>
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:background="@color/white">
+
+            <TextView
+                android:text="@string/storeDes"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:textColor="@color/greenApp"
+                android:gravity="center_horizontal"
+                android:layout_alignParentLeft="true"/>
 
         </LinearLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="@string/storeList"
-        android:textColor="@color/white"
-        android:id="@+id/textView"
-        android:layout_below="@+id/linearlayout"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:background="@color/gray"
-        android:gravity="center_vertical"
-        android:layout_alignParentLeft="true"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/storeList"
+            android:textColor="@color/white"
+            android:id="@+id/textView"
+            android:layout_below="@+id/linearlayout"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:background="@color/gray"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"/>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@+id/textView"
-        android:divider="@null"/>
+        <LinearLayout
+            android:id="@+id/list"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView">
+        </LinearLayout>
 
-</RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

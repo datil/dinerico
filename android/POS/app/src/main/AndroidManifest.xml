@@ -8,16 +8,15 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/appName"
         android:theme="@style/AppTheme" >
-
         <service
             android:name=".network.config.ApiService"
             android:exported="false" />
 
         <activity
-            android:name=".view.AccountActivity"
-            android:label="@string/app_name" >
+            android:name=".view.HomeActivity"
+            android:label="@string/appName" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +24,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.AccountActivity"
+            android:label="@string/appName"
+            android:parentActivityName=".view.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.HomeActivity" />
+        </activity>
+        <activity
             android:name=".view.ContributorActivity"
-            android:label="@string/app_name"
+            android:label="@string/appName"
             android:parentActivityName=".view.AccountActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,11 +41,23 @@
         </activity>
         <activity
             android:name=".view.StoreActivity"
-            android:label="@string/app_name"
+            android:label="@string/appName"
             android:parentActivityName=".view.ContributorActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.ContributorActivity" />
+        </activity>
+        <activity
+            android:name=".view.LoginActivity"
+            android:label="@string/appName"
+            android:parentActivityName=".view.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".view.WelcomeActivity"
+            android:label="@string/appName" >
         </activity>
     </application>
 

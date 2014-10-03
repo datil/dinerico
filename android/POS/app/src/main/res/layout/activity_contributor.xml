@@ -36,12 +36,26 @@
         android:id="@+id/textView4"
         android:layout_marginTop="10dp"/>
 
-    <TextView
+    <EditText
         android:id="@+id/commercialName"
+        android:textSize="14sp"
+        android:enabled="false"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MegaSoft"
+        android:background="@color/white"
         android:layout_below="@id/textView4"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/editBusinessName"
+        android:layout_toEndOf="@+id/commercialName"
+        android:text="Editar"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toRightOf="@+id/commercialName"
+        android:layout_marginLeft="80dp"/>
 
     <TextView
         android:layout_width="wrap_content"
