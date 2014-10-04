@@ -25,24 +25,29 @@ public class SessionDB {
 
   public Session create(Session session) {
     try {
-      dbHelperORMLite.getDaoSession().create(session);
+      dbHelperORMLite.getDaoSession().createOrUpdate(session);
       List<Session> list = dbHelperORMLite.getDaoSession().queryForAll();
       Session sessionSaved = list.get(list.size() - 1);
       Log.d(LOG_TAG, "Created session: " + sessionSaved);
+      dbHelperORMLite.close();
       return sessionSaved;
     } catch (java.sql.SQLException e) {
       e.printStackTrace();
       Log.e(LOG_TAG, "Error on create session");
+      dbHelperORMLite.close();
       return null;
     }
+
   }
 
   public void delete(int id) {
     try {
       dbHelperORMLite.getDaoSession().deleteById(id);
       Log.d(LOG_TAG, "Deleted session id: " + id);
+      dbHelperORMLite.close();
     } catch (java.sql.SQLException e) {
       e.printStackTrace();
+      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on delete session");
     }
   }
@@ -51,10 +56,12 @@ public class SessionDB {
     try {
       List<Session> list = dbHelperORMLite.getDaoSession().queryForAll();
       Log.d(LOG_TAG, "Session list: \n" + list);
+      dbHelperORMLite.close();
       return list;
     } catch (java.sql.SQLException e) {
       e.printStackTrace();
       Log.e(LOG_TAG, "Error on get all session");
+      dbHelperORMLite.close();
       return Collections.EMPTY_LIST;
     }
   }

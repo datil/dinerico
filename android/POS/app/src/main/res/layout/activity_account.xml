@@ -14,7 +14,7 @@
 
         <EditText
             android:id="@+id/ruc"
-            android:hint="@string/ruc"
+            android:hint="@string/name"
             android:text="0992712554001"
             android:inputType="number"
             android:maxLength="13"
@@ -22,21 +22,21 @@
 
         <EditText
             android:id="@+id/email"
-            android:hint="@string/email"
+            android:hint="@string/image"
             android:inputType="textEmailAddress"
             android:text="pedro@gmail.com"
             style="@style/EditTextForm"/>
 
         <EditText
             android:id="@+id/mobilePhone"
-            android:hint="@string/mobilePhone"
+            android:hint="@string/price"
             android:inputType="number"
             android:text="0942892761"
             style="@style/EditTextForm"/>
 
         <EditText
             android:id="@+id/password"
-            android:hint="@string/password"
+            android:hint="@string/initials"
             android:inputType="textPassword"
             android:ellipsize="end"
             android:text="jsjskdksadjjkansd"

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.model.Account;
+import com.dinerico.pos.model.Product;
 import com.dinerico.pos.model.Session;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -21,10 +22,12 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 4;
+  private static final int DATABASE_VERSION = 5;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
+  private Dao<Product, Integer> productDAO = null;
+
 
   public DataBaseHelper(Activity context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION,
@@ -37,6 +40,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       Log.i(DataBaseHelper.class.getSimpleName(), "onCreate");
       TableUtils.createTable(connectionSource, Session.class);
       TableUtils.createTable(connectionSource, Account.class);
+      TableUtils.createTable(connectionSource, Product.class);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getSimpleName(), "Can't create database", e);
       e.printStackTrace();
@@ -72,11 +76,19 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     return accountDAO;
   }
 
+  public Dao<Product, Integer> getDaoProduct() throws SQLException {
+    if (productDAO == null) {
+      productDAO = getDao(Product.class);
+    }
+    return productDAO;
+  }
+
   @Override
   public void close() {
     super.close();
     sessionDAO = null;
     accountDAO = null;
+    productDAO = null;
   }
 
 }

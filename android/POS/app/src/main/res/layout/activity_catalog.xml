@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:id="@+id/linearLayout">
 
         <EditText
             android:layout_width="match_parent"
@@ -26,63 +27,18 @@
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:background="@color/white"/>
-        </LinearLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:id="@+id/actualSalesButton"
-        android:background="@color/blueButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/canasta"
-            android:layout_alignBottom="@+id/businessName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="23dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/actualSale"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:id="@+id/businessName"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"
-            android:text="(0)"
-            android:id="@+id/textView4"
-            android:textSize="16sp"
-            android:layout_alignTop="@+id/businessName"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="23dp"/>
-
-
-    </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/search"
         android:layout_above="@+id/actualSalesButton"
-        android:id="@+id/linearlayout"
-        android:gravity="center">
+        android:id="@+id/addImage"
+        android:gravity="center"
+        android:layout_below="@+id/linearLayout"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -101,15 +57,23 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:text="@string/addDess"
-                android:id="@+id/textView2"
+                android:id="@+id/initials"
                 android:gravity="center"
                 android:textColor="@color/grayText"
                 android:layout_gravity="center_horizontal"/>
 
 
-            </LinearLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:visibility="gone"
+        android:layout_below="@+id/linearLayout"
+        android:layout_above="@+id/actualSalesButton"/>
 
 </RelativeLayout>

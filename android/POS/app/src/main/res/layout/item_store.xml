@@ -18,31 +18,31 @@
         android:text="@string/address"
         android:layout_below="@id/storeName"
         android:layout_marginTop="6dp"
-        android:id="@+id/textView2"/>
+        android:id="@+id/initials"/>
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Valle de los chillos"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"/>
+        android:layout_alignTop="@+id/initials"
+        android:layout_toRightOf="@+id/initials"/>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/local"
-        android:layout_below="@id/textView2"/>
+        android:layout_below="@id/initials"/>
 
     <TextView
         android:id="@+id/local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"/>
+        android:layout_alignTop="@+id/price"
+        android:layout_toRightOf="@+id/price"/>
 
 
 </RelativeLayout>

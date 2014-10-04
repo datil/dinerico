@@ -59,6 +59,34 @@
             android:name=".view.WelcomeActivity"
             android:label="@string/appName" >
         </activity>
+        <activity
+            android:name=".view.ShopActivity"
+            android:label="@string/title_activity_catalog" >
+        </activity>
+        <activity
+            android:name=".view.CatalogActivity"
+            android:label="@string/title_activity_catalog"
+            android:parentActivityName=".view.ShopActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.ShopActivity" />
+        </activity>
+        <activity
+            android:name=".view.CartActivity"
+            android:label="@string/title_activity_cart"
+            android:parentActivityName=".view.ShopActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.ShopActivity" />
+        </activity>
+        <activity
+            android:name=".view.CreateProductActivity"
+            android:label="@string/title_activity_create_product"
+            android:parentActivityName=".view.CatalogActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.CatalogActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class Session {
   @DatabaseField(generatedId = true)
-  private Long rowId;
+  private int rowId;
   @DatabaseField
   private String id;
   @DatabaseField
@@ -48,11 +48,11 @@ public class Session {
     this.url = url;
   }
 
-  public Long getRowId() {
+  public int getRowId() {
     return rowId;
   }
 
-  public void setRowId(Long rowId) {
+  public void setRowId(int rowId) {
     this.rowId = rowId;
   }
 

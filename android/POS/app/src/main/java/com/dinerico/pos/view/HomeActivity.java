@@ -45,9 +45,8 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-
     switch (item.getItemId()) {
-      case R.id.action_settings:
+      case R.id.addProduct:
         return true;
       default:
         return super.onOptionsItemSelected(item);

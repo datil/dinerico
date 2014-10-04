@@ -1,46 +1,58 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dinerico.pos.view.LoginActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.dinerico.pos.view.LoginActivity">
 
-    <TextView
-        android:text="@string/loginDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:textSize="20sp"/>
-
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/linearLayout">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="match_parent"
+        <TextView
+            android:text="@string/loginDes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:id="@+id/email"
-            android:text="joseph.leon@datilmedia.com"
-            android:hint="@string/emailAddress"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="100dp"
+            android:id="@+id/name"/>
 
-        <EditText
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/password"
-            android:text="akjsdasd"
-            android:hint="@string/password"
-            android:inputType="textPassword"/>
-    </LinearLayout>
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/name"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-</RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:id="@+id/email"
+                android:text="joseph.leon@datilmedia.com"
+                android:hint="@string/emailAddress"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/password"
+                android:text="akjsdasd"
+                android:hint="@string/initials"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

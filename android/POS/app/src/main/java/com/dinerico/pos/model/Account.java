@@ -60,7 +60,7 @@ public class Account implements Serializable{
     SessionDB sessionDB = new SessionDB(activity);
     List<Session> sessions = sessionDB.getAll();
     for(Session session: sessions){
-      sessionDB.delete(session.getRowId().intValue());
+      sessionDB.delete(session.getRowId());
     }
     Intent intent = new Intent(activity, HomeActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent

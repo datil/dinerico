@@ -24,12 +24,14 @@ public class AccountDB {
 
   public Account create(Account account) {
     try {
-      dbHelperORMLite.getDaoAccount().create(account);
+      dbHelperORMLite.getDaoAccount().createOrUpdate(account);
       List<Account> list = dbHelperORMLite.getDaoAccount().queryForAll();
       Account accountSaved = list.get(list.size() - 1);
       Log.d(LOG_TAG, "Created account: " + accountSaved);
+      dbHelperORMLite.close();
       return accountSaved;
     } catch (java.sql.SQLException e) {
+      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on create account");
       return account;
     }
@@ -38,8 +40,10 @@ public class AccountDB {
   public void delete(int id) {
     try {
       dbHelperORMLite.getDaoAccount().deleteById(id);
+      dbHelperORMLite.close();
       Log.d(LOG_TAG, "Deleted account id: " + id);
     } catch (java.sql.SQLException e) {
+      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on delete account");
     }
   }
@@ -48,8 +52,10 @@ public class AccountDB {
     try {
       List<Account> list = dbHelperORMLite.getDaoAccount().queryForAll();
       Log.d(LOG_TAG, "Account list: \n" + list);
+      dbHelperORMLite.close();
       return list;
     } catch (java.sql.SQLException e) {
+      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on get all Account");
       return Collections.EMPTY_LIST;
     }

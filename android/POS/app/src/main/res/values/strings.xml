@@ -17,21 +17,22 @@
     <!-- Sign up -->
     <string name="signUp">Registrar</string>
     <string name="signUpDes">Regístrate y <b>crea tu cuenta</b></string>
-    <string name="ruc">RUC</string>
-    <string name="mobilePhone">Teléfono celular</string>
-    <string name="email">Correo electrónico</string>
-    <string name="password">Contraseña</string>
+    <string name="name">RUC</string>
+    <string name="price">Teléfono celular</string>
+    <string name="image">Correo electrónico</string>
+    <string name="initials">Contraseña</string>
     <string name="noValidRUC">El RUC ingresado no es válido</string>
-    <string name="noValidEmail">El email ingresado no es válido</string>
+    <string name="noValidEmail">El image ingresado no es válido</string>
     <string name="noValidMobilePhone">El número de celular ingresado no es
         válido</string>
     <string name="noValidPassword">La contraseña ingresada no es
         válida</string>
 
-    <!-- Catalog -->
+    <!-- Shop -->
     <string name="search">Buscar</string>
     <string name="actualSale">Venta Actual</string>
     <string name="addDess">Añade productos a tu catálogo en \'Editar\'</string>
+    <string name="edit">Editar</string>
 
     <!-- Contributor -->
     <string name="contributorDes">Tu información como Contribuyente</string>
@@ -50,5 +51,17 @@
 
     <!-- Tittle -->
     <string name="validationErrorTittle">Datos incorrectos</string>
+    <string name="title_activity_catalog">CatalogActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Product -->
+    <string name="noValidProductName">El nombre del producto  no es
+        válido</string>
+    <string name="noValidPrice">El precio ingresado no es válido</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_create_product">" "</string>
+    <string name="save">Guardar</string>
+    <string name="delete">Eliminar</string>
+    <string name="add">Agregar</string>
 
 </resources>

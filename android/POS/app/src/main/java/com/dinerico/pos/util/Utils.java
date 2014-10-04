@@ -20,4 +20,10 @@ public class Utils {
     return (s != null && !s.isEmpty());
   }
 
+  public static boolean isValidFloat(float n) {
+    if (n > 0)
+      return true;
+    return false;
+  }
+
 }
