@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 5;
+  private static final int DATABASE_VERSION = 8;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
@@ -55,6 +55,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       Log.i(DataBaseHelper.class.getName(), "onUpgrade");
       TableUtils.dropTable(connectionSource, Session.class, true);
       TableUtils.dropTable(connectionSource, Account.class, true);
+      TableUtils.dropTable(connectionSource, Product.class, true);
       onCreate(db);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getName(), "Can't drop databases", e);

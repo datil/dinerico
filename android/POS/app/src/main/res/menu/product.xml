@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.dinerico.pos.view.CreateProductActivity" >
+    tools:context="com.dinerico.pos.view.ProductActivity" >
     <item android:id="@+id/save"
         android:title="@string/save"
         android:orderInCategory="100"

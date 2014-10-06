@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.model.Product;
+import com.dinerico.pos.util.ImageHelper;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -46,19 +47,22 @@ public class ProductsListViewAdapter extends ArrayAdapter<Product> {
     Product product = productList.get(position);
 
     name.setText(product.getName());
-    price.setText("$" + String.valueOf(product.getPrice()));
+    price.setText("$" + String.format(Locale.US, "%.02f", product.getPrice()));
 
-    if (product.getImage() != null) {
+    if (product.getImageByte() != null) {
       initials.setVisibility(View.INVISIBLE);
       image.setVisibility(View.VISIBLE);
-      image.setImageBitmap(product.getImage());
+      image.setImageBitmap(ImageHelper.getImageAjustedToDensity(product
+              .getImageByte(), 45, 45, context.getResources()
+              .getDisplayMetrics().density));
     } else {
+      initials.setVisibility(View.VISIBLE);
+      image.setVisibility(View.INVISIBLE);
       initials.setText(product.getInitials());
       if (product.getColor() != 0) {
         initials.setBackgroundColor(product.getColor());
       }
     }
-
     return rowView;
   }
 

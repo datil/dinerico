@@ -33,14 +33,14 @@ public class WelcomeActivity extends Activity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.welcome, menu);
+//    getMenuInflater().inflate(R.menu.welcome, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.addProduct:
+      case R.id.welcome:
         return true;
       default:
         return super.onOptionsItemSelected(item);

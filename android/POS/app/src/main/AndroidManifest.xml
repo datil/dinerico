@@ -61,32 +61,35 @@
         </activity>
         <activity
             android:name=".view.ShopActivity"
-            android:label="@string/title_activity_catalog" >
+            android:label="@string/appName"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".view.CatalogActivity"
-            android:label="@string/title_activity_catalog"
-            android:parentActivityName=".view.ShopActivity" >
+            android:label="@string/appName"
+            android:parentActivityName=".view.ShopActivity"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.ShopActivity" />
         </activity>
         <activity
             android:name=".view.CartActivity"
-            android:label="@string/title_activity_cart"
+            android:label="@string/appName"
             android:parentActivityName=".view.ShopActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.ShopActivity" />
         </activity>
         <activity
-            android:name=".view.CreateProductActivity"
-            android:label="@string/title_activity_create_product"
+            android:name=".view.ProductActivity"
+            android:label="@string/appName"
             android:parentActivityName=".view.CatalogActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.CatalogActivity" />
         </activity>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
     </application>
 
 </manifest>

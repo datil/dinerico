@@ -9,7 +9,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -124,11 +123,10 @@ public class Product implements Serializable{
   @Override
   public String toString() {
     return "Product{ \n" +
-            "id=" + id +
+            "id=" + id +  "'\n" +
             "name='" + name + "'\n" +
             "initials='" + initials + "'\n" +
             "price=" + price + "'\n" +
-            "imageByte=" + Arrays.toString(imageByte) + "'\n" +
             "image=" + image + "'\n" +
             "color=" + color + "'\n" +
             "isActive=" + isActive + "'\n" +

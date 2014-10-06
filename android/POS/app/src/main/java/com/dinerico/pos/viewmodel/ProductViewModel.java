@@ -4,12 +4,13 @@ import android.graphics.Bitmap;
 
 import com.dinerico.pos.db.ProductDB;
 import com.dinerico.pos.model.Product;
+import com.dinerico.pos.util.ImageHelper;
 import com.dinerico.pos.util.Utils;
 
 /**
  * Created by josephleon on 10/3/14.
  */
- public class CreateProductViewModel {
+public class ProductViewModel {
 
   private Product model;
 
@@ -20,16 +21,16 @@ import com.dinerico.pos.util.Utils;
 
   private ProductDB productDB;
 
-  public CreateProductViewModel(Product model, ProductDB productDB) {
+  public ProductViewModel(Product model, ProductDB productDB) {
     this.model = model;
     this.productDB = productDB;
   }
 
-  public Product saveProduct(){
+  public Product saveProduct() {
     return productDB.create(model);
   }
 
-  public void deleteProduct(){
+  public void deleteProduct() {
     productDB.delete(model.getId());
   }
 
@@ -40,16 +41,16 @@ import com.dinerico.pos.util.Utils;
 
   public void setPrice(String price) {
     this.price = price;
-    String numberPrice = "";
-    if(Utils.isValidString(price)){
-      numberPrice =  price.substring(1);
-      model.setPrice(Float.parseFloat(numberPrice));
-    }
+    if(Utils.isValidString(price))
+      model.setPrice(Float.parseFloat(price));
+    else
+      model.setPrice(Float.parseFloat("0.00"));
   }
 
   public void setImage(Bitmap image) {
     this.image = image;
     model.setImage(image);
+    model.setImageByte(ImageHelper.getBytes(image));
   }
 
   public void setInitials(String initials) {

@@ -15,6 +15,8 @@ import com.dinerico.pos.model.Product;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.CatalogViewModel;
 
+import java.util.ArrayList;
+
 import rx.android.Events;
 import rx.functions.Action1;
 
@@ -26,6 +28,7 @@ public class CatalogActivity extends ActivityBase {
   private ProductsListViewAdapter adapter;
 
   public final static String EDIT_PRODUCT = "edit_product";
+  public final static String DELETED_PRODUCT = "product_deleted";
   private static final int CREATE_EDIT_PRODUCT_REQUEST = 101;
 
   @Override
@@ -37,25 +40,33 @@ public class CatalogActivity extends ActivityBase {
     showProductList();
   }
 
-  private void showProductList(){
-    if(!viewModel.getProductList().isEmpty()){
+  private void showProductList() {
+    if (!viewModel.getProductList().isEmpty()) {
       view.addImage.setVisibility(View.GONE);
       view.productList.setVisibility(View.VISIBLE);
     }
   }
 
   private void createProduct() {
-    Intent intent = new Intent(this, CreateProductActivity.class);
-    startActivityForResult(intent,CREATE_EDIT_PRODUCT_REQUEST);
+    Intent intent = new Intent(this, ProductActivity.class);
+    startActivityForResult(intent, CREATE_EDIT_PRODUCT_REQUEST);
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode,
                                   Intent data) {
     if (resultCode == RESULT_OK && requestCode == CREATE_EDIT_PRODUCT_REQUEST) {
-      adapter = new ProductsListViewAdapter(this,viewModel.getProductList());
-      view.productList.setAdapter(adapter);
-      System.out.println("Entro en result");
+      ArrayList<Product> catalog = viewModel.getProductList();
+      if (catalog.size() > 0) {
+        view.addImage.setVisibility(View.INVISIBLE);
+        view.productList.setVisibility(View.VISIBLE);
+        adapter = new ProductsListViewAdapter(this, catalog);
+        view.productList.setAdapter(adapter);
+      } else {
+        view.addImage.setVisibility(View.VISIBLE);
+        view.productList.setVisibility(View.INVISIBLE);
+      }
+
     }
   }
 
@@ -76,7 +87,7 @@ public class CatalogActivity extends ActivityBase {
     }
   }
 
-  private class ViewHolder implements AdapterView.OnItemClickListener{
+  private class ViewHolder implements AdapterView.OnItemClickListener {
     public EditText search;
     public ListView productList;
     public View addImage;
@@ -88,11 +99,11 @@ public class CatalogActivity extends ActivityBase {
 
     private void findViews() {
       search = (EditText) findViewById(R.id.search);
-      search.clearFocus();
       addImage = findViewById(R.id.addImage);
-      productList = (ListView)findViewById(R.id.listView);
+      productList = (ListView) findViewById(R.id.listView);
       productList.setOnItemClickListener(this);
-      adapter = new ProductsListViewAdapter(CatalogActivity.this,viewModel.getProductList());
+      adapter = new ProductsListViewAdapter(CatalogActivity.this,
+              viewModel.getProductList());
       productList.setAdapter(adapter);
     }
 
@@ -108,13 +119,13 @@ public class CatalogActivity extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view,
-                            int position,long l) {
+                            int position, long l) {
       Intent intent = new Intent(CatalogActivity.this,
-              CreateProductActivity.class);
+              ProductActivity.class);
       Product product = viewModel.getProductList().get(position);
-      intent.putExtra(EDIT_PRODUCT,product);
+      intent.putExtra(EDIT_PRODUCT, product);
 //      startActivity(intent);
-      startActivityForResult(intent,CREATE_EDIT_PRODUCT_REQUEST);
+      startActivityForResult(intent, CREATE_EDIT_PRODUCT_REQUEST);
     }
   }
 
