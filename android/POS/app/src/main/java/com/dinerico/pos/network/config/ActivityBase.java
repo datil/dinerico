@@ -59,7 +59,7 @@ public abstract class ActivityBase extends Activity {
     dialog.show();
   }
 
-  public void hideActionBar() {
+  public void hideActionBarComponents() {
     getActionBar().setDisplayShowHomeEnabled(false);
     getActionBar().setDisplayShowTitleEnabled(false);
     getActionBar().setDisplayShowCustomEnabled(true);

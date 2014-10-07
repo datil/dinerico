@@ -1,14 +1,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/greenApp"
-    tools:context="com.dinerico.pos.view.HomeActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@color/greenApp"
+                tools:context="com.dinerico.pos.view.HomeActivity">
+
 
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/paisana"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_big"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:id="@+id/separator"
+        android:layout_marginLeft="160dp"
+        android:layout_width="1dp"
+        android:layout_height="84dp"
+        android:background="@color/white"
+        android:layout_marginTop="119dp"/>
+
+    <TextView
+        android:textSize="13.8sp"
+        android:text="@string/appDes"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"/>
+        android:id="@+id/textView"
+        android:layout_toEndOf="@+id/separator"
+        android:layout_alignTop="@+id/separator"
+        android:layout_toRightOf="@+id/separator"
+        android:layout_marginLeft="14dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginRight="22dp"/>
+
+    <TextView
+        android:textSize="13.8sp"
+        android:text="@string/dineroElectronico"
+        android:textColor="@color/greenApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/separator"
+        android:layout_toRightOf="@+id/separator"
+        android:layout_below="@+id/textView"
+        android:textStyle="bold"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"/>
+
+    <Button
+        android:textSize="14sp"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:text="@string/login"
+        android:background="@color/white"
+        android:layout_alignTop="@+id/signUp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/gray"
+        android:id="@+id/login"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginRight="16dp"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:text="@string/signUpyou"
+        android:background="@color/greenApp"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/signUp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

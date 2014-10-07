@@ -5,4 +5,9 @@
         android:title="@string/edit"
         android:orderInCategory="100"
         android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/logout"
+          android:title="@string/logout"
+          android:orderInCategory="100"
+          android:showAsAction="never" />
 </menu>

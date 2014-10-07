@@ -16,7 +16,8 @@
 
         <activity
             android:name=".view.HomeActivity"
-            android:label="@string/appName" >
+            android:label="@string/appName"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,13 +63,13 @@
         <activity
             android:name=".view.ShopActivity"
             android:label="@string/appName"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".view.CatalogActivity"
             android:label="@string/appName"
             android:parentActivityName=".view.ShopActivity"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.ShopActivity" />
@@ -90,6 +91,10 @@
                 android:value="com.dinerico.pos.view.CatalogActivity" />
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity
+            android:name=".view.HomeSplashActivity"
+            android:label="@string/title_activity_home_splash" >
+        </activity>
     </application>
 
 </manifest>

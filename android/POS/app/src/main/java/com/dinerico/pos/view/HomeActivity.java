@@ -2,10 +2,11 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.db.SessionDB;
@@ -20,8 +21,11 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+    getActionBar().hide();
     setContentView(R.layout.activity_home);
-    setCustomBar();
+    findViews();
+//    setCustomBar();
     viewModel = new HomeViewModel(new SessionDB(this));
     if(hasSession()){
       startActivity(new Intent(this,WelcomeActivity.class));
@@ -61,18 +65,15 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
         break;
       case R.id.signUp:
         startSignUpActivity();
+        break;
     }
   }
 
-  private void setCustomBar(){
-    LayoutInflater inflater = LayoutInflater.from(this);
-    View customBar = inflater.inflate(R.layout.action_bar_home,null);
-    View login = customBar.findViewById(R.id.login);
-    View signUp = customBar.findViewById(R.id.signUp);
+  private void findViews(){
+    Button login = (Button)findViewById(R.id.login);
+    Button signUp = (Button)findViewById(R.id.signUp);
     login.setOnClickListener(this);
     signUp.setOnClickListener(this);
-    hideActionBar();
-    getActionBar().setCustomView(customBar);
   }
   private void startLoginActivity(){
     Intent intent = new Intent(this,LoginActivity.class);

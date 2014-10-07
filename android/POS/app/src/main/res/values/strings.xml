@@ -8,6 +8,10 @@
     <!-- Home -->
     <string name="createAccount">Crear cuenta</string>
     <string name="login">Iniciar sesión</string>
+    <string name="appDes">Gestiona tu negocio desde la palma de tu
+        mano <b>y empieza a aceptar</b></string>
+    <string name="dineroElectronico">dinero eletrónico</string>
+    <string name="signUpyou">Regístrate</string>
 
     <!-- Login -->
     <string name="loginDes">Inicia sesión</string>
@@ -64,11 +68,15 @@
     <string name="delete">Eliminar</string>
     <string name="add">Agregar</string>
 
-    <!--Product Image -->
+    <!-- Product Image -->
     <string name="options_to_image">Opciones para logotipo</string>
+
     <string-array name="image_options">
         <item>Elegir de mis fotos</item>
         <item>Tomar foto ahora</item>
     </string-array>
+
+    <string name="title_activity_home_splash">" "</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

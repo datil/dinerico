@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.ShopViewModel;
@@ -85,6 +86,9 @@ public class ShopActivity extends ActivityBase {
     switch (item.getItemId()) {
       case R.id.addProduct:
         startCatalog();
+        return true;
+      case R.id.logout:
+        Account.logout(this);
         return true;
       default:
         return super.onOptionsItemSelected(item);
