@@ -56,8 +56,8 @@ public class AccountViewModel {
     return "SignUpViewModel{ \n" +
             "model=" + model +
             "ruc='" + ruc + "'\n" +
-            "mobilePhone='" + mobilePhone + "'\n" +
-            "email='" + email + "'\n" +
+            "sendReceipt='" + mobilePhone + "'\n" +
+            "customerId='" + email + "'\n" +
             "password='" + password + "'\n" +
             '}';
   }

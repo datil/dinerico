@@ -2,7 +2,8 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.dinerico.pos.view.LoginActivity">
+            tools:context="com.dinerico.pos.view.LoginActivity"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,41 +18,33 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginTop="100dp"
-            android:id="@+id/name"/>
+            android:layout_marginTop="77dp"
+            android:id="@+id/name"
+            android:fontFamily="sans-serif-light"
+            style="@style/HeaderTittle"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="25dp"
-            android:paddingLeft="25dp"
-            android:layout_marginTop="50dp"
+
+        <EditText
+            android:background="@drawable/underline_gray_back_white"
             android:layout_below="@id/name"
-            android:id="@+id/linearLayout"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_marginTop="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:id="@+id/customerId"
+            android:hint="@string/emailAddress"
+            style="@style/EditTextForm"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:id="@+id/email"
-                android:text="joseph.leon@datilmedia.com"
-                android:hint="@string/emailAddress"/>
+        <EditText
+            android:background="@drawable/underline_gray_back_white"
+            android:layout_below="@id/customerId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:hint="@string/initials"
+            android:inputType="textPassword"
+            style="@style/EditTextForm"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/password"
-                android:text="akjsdasd"
-                android:hint="@string/initials"
-                android:inputType="textPassword"/>
-        </LinearLayout>
 
     </RelativeLayout>
 

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
@@ -26,7 +28,10 @@ public abstract class ActivityBase extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     spiceManager = new SpiceManager(ApiService.class);
-
+    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+    getActionBar().setIcon(R.drawable.logo);
+    getActionBar().setDisplayShowTitleEnabled(false);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
   }
 
   @Override

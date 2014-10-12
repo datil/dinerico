@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="40dp">
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:text="Naranja"
+        android:id="@+id/name"
+        style="@style/TextViewCommom"/>
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:text="(x7)"
+        android:id="@+id/amount"
+        android:layout_below="@+id/name"
+        style="@style/TextViewCommom"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:text="$0.10"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/price"
+        style="@style/TextViewCommom"/>
+
+</RelativeLayout>

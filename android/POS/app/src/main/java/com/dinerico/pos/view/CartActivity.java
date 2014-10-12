@@ -1,36 +1,128 @@
 package com.dinerico.pos.view;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.Cart;
+import com.dinerico.pos.model.ItemCart;
+import com.dinerico.pos.model.Product;
+import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.util.Utils;
+import com.dinerico.pos.viewmodel.CartViewModel;
+import com.dinerico.pos.viewmodel.ShopViewModel;
 
-public class CartActivity extends Activity {
+import java.util.ArrayList;
+import java.util.Map;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-    }
+public class CartActivity extends ActivityBase {
+
+  private CartViewModel viewModel;
+  private ViewHolder view;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_cart);
+    Map<Integer, ArrayList<Product>> shopCartMap = (Map<Integer,
+            ArrayList<Product>>) getIntent().getSerializableExtra
+            (ShopActivity.CART);
+    viewModel = new CartViewModel(shopCartMap);
+    view = new ViewHolder();
+    showListItems(viewModel.getCart(), (LinearLayout) view.itemList);
+    showTotals(view.charge, view.totalBill, viewModel.getCart().getTotal());
+  }
+
+  private void cleanCart() {
+    ShopViewModel.reset();
+    Toast.makeText(this, "Venta eliminada", Toast.LENGTH_SHORT).show();
+    finish();
+  }
+
+  private void showTotals(Button charge, TextView totalBill, float total) {
+    String value = Utils.currencyFormatter(total);
+    totalBill.setText(value);
+    String chargeAmount = String.format(getString(R.string.chargeAmount),
+            value);
+    charge.setText(chargeAmount);
+  }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cart, menu);
+  private void charge() {
+    Intent intent = new Intent(this, PaymentTypeActivity.class);
+    startActivity(intent);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.cart, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.deleteSell:
+        cleanCart();
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.save) {
-            return true;
-        }
+      default:
         return super.onOptionsItemSelected(item);
     }
+  }
+
+  private void showListItems(Cart cart, LinearLayout list) {
+
+    LayoutInflater inflater = (LayoutInflater) getSystemService(Context
+            .LAYOUT_INFLATER_SERVICE);
+    ArrayList<ItemCart> items = cart.getItems();
+
+    for (int position = 0; position < items.size(); position++) {
+      ItemCart item = items.get(position);
+      View rowView = inflater.inflate(R.layout.item_bill, null);
+      TextView productName = (TextView) rowView.findViewById(R.id.name);
+      productName.setText(item.getProduct().getName());
+      TextView amount = (TextView) rowView.findViewById(R.id.amount);
+      amount.setText("(x" + item.getAmount() + ")");
+      TextView price = (TextView) rowView.findViewById(R.id.price);
+      price.setText(Utils.currencyFormatter(item.getItemTotal()));
+      list.addView(rowView);
+    }
+  }
+
+  private class ViewHolder implements View.OnClickListener {
+    public Button charge;
+    public TextView totalBill;
+    public View itemList;
+
+    public ViewHolder() {
+      findViews();
+    }
+
+    private void findViews() {
+      charge = (Button) findViewById(R.id.charge);
+      charge.setOnClickListener(this);
+      totalBill = (TextView) findViewById(R.id.totalBill);
+      itemList = findViewById(R.id.itemList);
+    }
+
+    @Override
+    public void onClick(View view) {
+      switch (view.getId()) {
+        case R.id.charge:
+          charge();
+          break;
+      }
+    }
+
+  }
+
 }

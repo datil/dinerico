@@ -49,14 +49,14 @@ public class LoginActivity extends ActivityBase {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.login, menu);
+    getMenuInflater().inflate(R.menu.next, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.actionlogin:
+      case R.id.next:
         confirmLogin();
         return true;
       default:

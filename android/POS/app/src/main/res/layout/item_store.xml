@@ -4,45 +4,53 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp">
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
 
     <TextView
-        android:id="@+id/storeName"
+        android:textStyle="bold"
+        android:id="@+id/businessName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MegaSoft Quito"/>
+        android:text="MegaSoft Quito"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="0dp"
+        style="@style/LabelForm"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address"
-        android:layout_below="@id/storeName"
-        android:layout_marginTop="6dp"
-        android:id="@+id/initials"/>
-
-    <TextView
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-light"
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valle de los chillos"
-        android:layout_alignTop="@+id/initials"
-        android:layout_toRightOf="@+id/initials"/>
+        android:text="Direccion, Valle de los chillos"
+        android:layout_alignTop="@+id/textView"
+        android:textColor="@color/gray"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_below="@id/businessName"/>
 
     <TextView
-        android:id="@+id/price"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/local"
-        android:layout_below="@id/initials"/>
+        android:text="@string/localNumber"
+        android:layout_below="@id/address"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        style="@style/LabelForm"/>
 
     <TextView
-        android:id="@+id/local"
+        android:id="@+id/localNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
-        android:layout_alignTop="@+id/price"
-        android:layout_toRightOf="@+id/price"/>
+        android:text="001"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/gray"
+        android:textStyle="bold"/>
 
 
 </RelativeLayout>

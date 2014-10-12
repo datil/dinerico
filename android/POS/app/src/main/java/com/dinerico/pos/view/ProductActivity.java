@@ -87,7 +87,7 @@ public class ProductActivity extends FragmentActivityBase {
     Bitmap bitmap = imageHelper.getBitmap();
     view.image.setImageBitmap(bitmap);
     viewModel.setImage(bitmap);
-    view.initials.setVisibility(View.INVISIBLE);
+    view.initialsImage.setVisibility(View.INVISIBLE);
     view.image.setVisibility(View.VISIBLE);
   }
 
@@ -96,13 +96,13 @@ public class ProductActivity extends FragmentActivityBase {
             product.getPrice()));
     view.name.setText(product.getName());
     if (product.getImageByte() != null) {
-      view.initials.setVisibility(View.INVISIBLE);
+      view.initialsImage.setVisibility(View.INVISIBLE);
       view.image.setVisibility(View.VISIBLE);
       view.image.setImageBitmap(ImageHelper.getImageAjustedToDensity(product
               .getImageByte(), 100, 100, getResources().getDisplayMetrics()
               .density));
     } else {
-      view.initials.setVisibility(View.VISIBLE);
+      view.initialsImage.setVisibility(View.VISIBLE);
       view.image.setVisibility(View.INVISIBLE);
       view.initials.setText(product.getInitials());
       if (product.getColor() != 0) {
@@ -147,6 +147,8 @@ public class ProductActivity extends FragmentActivityBase {
     public TextView initials;
     public Button delete;
     public ImageView image;
+    public View initialsImage;
+    public TextView editImage;
 
     public ViewHolder() {
       findViews();
@@ -158,11 +160,14 @@ public class ProductActivity extends FragmentActivityBase {
       price = (EditText) findViewById(R.id.price);
       price.setText("0.00");
       initials = (TextView) findViewById(R.id.initials);
+      editImage = (TextView) findViewById(R.id.editImage);
       delete = (Button) findViewById(R.id.delete);
       image = (ImageView) findViewById(R.id.image);
       delete.setOnClickListener(this);
       image.setOnClickListener(this);
+      initialsImage = findViewById(R.id.initialsImage);
       initials.setOnClickListener(this);
+      editImage.setOnClickListener(this);
     }
 
     private void subscribeToViewComponents() {
@@ -223,6 +228,10 @@ public class ProductActivity extends FragmentActivityBase {
           break;
         case R.id.initials:
           DialogFragment newFragment = new ProductImageFragment();
+          newFragment.show(getSupportFragmentManager(), "pickerFragment");
+          break;
+        case R.id.editImage:
+          newFragment = new ProductImageFragment();
           newFragment.show(getSupportFragmentManager(), "pickerFragment");
           break;
         case R.id.image:

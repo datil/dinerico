@@ -75,7 +75,7 @@ public class AccountActivity extends ActivityBase {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.account, menu);
+    getMenuInflater().inflate(R.menu.next, menu);
     return true;
   }
 
@@ -83,7 +83,7 @@ public class AccountActivity extends ActivityBase {
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
-      case R.id.account:
+      case R.id.next:
         startContributorInfoActivity();
         return true;
       default:

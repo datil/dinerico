@@ -16,31 +16,90 @@
     </style>
 
     <style name="Divider">
+        <item name="android:layout_marginRight">@dimen/margin</item>
+        <item name="android:layout_marginLeft">@dimen/margin</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">?android:attr/listDivider</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="OptionButtonForm">
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:drawableRight">@drawable/arrow_right</item>
+    </style>
+
+    <style name="GreenButtonForm">
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/greenButton</item>
+    </style>
+
+    <style name="SilverButtonForm">
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/grayBackgroud</item>
+    </style>
+
+    <style name="TextViewCommom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/gray</item>
+
+    </style>
+
+    <style name="TextViewHome">
+        <item name="android:layout_width">160dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13.8sp</item>
+        <item name="android:textColor">@color/white</item>
+
     </style>
 
     <style name="HeaderTittle">
-        <item name="android:textSize">17sp</item>
-        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:textColor">@color/greenApp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
     <style name="EditTextForm">
-        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">15dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textColorHint">@color/grayHint</item>
+        <item name="android:background">@drawable/underline_gray_back_white</item>
     </style>
-
-    <style name="MainContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingLeft">18dp</item>
-        <item name="android:paddingRight">18dp</item>
+    
+    <style name="LabelForm">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:layout_marginTop">5dp</item>
     </style>
 
     <!-- NATIVE -->

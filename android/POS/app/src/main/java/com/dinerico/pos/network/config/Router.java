@@ -1,6 +1,7 @@
 package com.dinerico.pos.network.config;
 
 import com.dinerico.pos.model.Contributor;
+import com.dinerico.pos.model.Invoice;
 
 import retrofit.http.GET;
 import retrofit.http.Headers;
@@ -15,4 +16,6 @@ public interface Router {
   @Headers("Content-Type: application/json")
   @GET("/contribuyentes/{RUC}")
   Contributor createAccount(@Path("RUC") String RUC);
+
+  Invoice createInvoice(Invoice invoice);
 }

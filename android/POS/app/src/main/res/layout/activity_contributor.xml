@@ -3,73 +3,98 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="15dp">
+                android:background="@color/white">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:layout_width="match_parent"
         android:text="@string/contributorDes"
-        android:id="@+id/storeName"
+        android:id="@+id/confirmDes"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        style="@style/HeaderTittle"
+        android:layout_marginTop="40dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/contributorDes2"
+        android:id="@+id/confirmDes2"
+        style="@style/HeaderTittle"
+        android:layout_below="@+id/confirmDes"
+        android:layout_alignLeft="@+id/confirmDes"
+        android:layout_alignStart="@+id/confirmDes"
+        android:textStyle="bold"/>
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/confirmDes"
+        android:layout_marginTop="41dp"
+        android:id="@+id/separator"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:fontFamily="sans-serif-light"
         android:text="@string/businessName"
-        android:layout_below="@id/storeName"
+        android:layout_below="@id/separator"
         android:id="@+id/textView2"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="18dp"
+        style="@style/LabelForm"/>
 
     <TextView
         android:id="@+id/businessName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Joseph Leon S.A."
-        android:layout_below="@id/textView2"/>
+        android:textStyle="bold"
+        android:layout_below="@id/textView2"
+        style="@style/LabelForm"/>
 
     <TextView
+        android:fontFamily="sans-serif-light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/commercialName"
         android:layout_below="@id/businessName"
         android:id="@+id/textView4"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"
+        style="@style/LabelForm"/>
 
     <EditText
         android:id="@+id/commercialName"
-        android:textSize="14sp"
-        android:enabled="false"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MegaSoft"
-        android:background="@color/white"
         android:layout_below="@id/textView4"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/underline_gray_back_white"
+        style="@style/EditTextForm"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/editBusinessName"
-        android:layout_toEndOf="@+id/commercialName"
-        android:text="Editar"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toRightOf="@+id/commercialName"
-        android:layout_marginLeft="80dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
         android:text="@string/economicActivity"
         android:layout_below="@id/commercialName"
         android:id="@+id/textView6"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"
+        style="@style/LabelForm"/>
 
     <TextView
         android:id="@+id/economicActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invención de codigo"
-        android:layout_below="@id/textView6"/>
+        android:layout_below="@id/textView6"
+        style="@style/LabelForm"
+        android:textStyle="bold"/>
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/economicActivity"
+        android:layout_marginTop="18dp"
+        android:id="@+id/separator2"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"/>
 </RelativeLayout>

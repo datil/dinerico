@@ -1,6 +1,5 @@
 package com.dinerico.pos.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.network.config.ActivityBase;
 
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends ActivityBase {
 
   private final int SPLASH_DISPLAY_LENGTH = 2000;
 

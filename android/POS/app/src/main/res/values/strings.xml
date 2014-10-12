@@ -3,14 +3,16 @@
 
     <!-- Global -->
     <string name="appName">Dinérico</string>
-    <string name="continues">Continuar</string>
+    <string name="continues">Siguiente</string>
 
     <!-- Home -->
     <string name="createAccount">Crear cuenta</string>
     <string name="login">Iniciar sesión</string>
-    <string name="appDes">Gestiona tu negocio desde la palma de tu
-        mano <b>y empieza a aceptar</b></string>
-    <string name="dineroElectronico">dinero eletrónico</string>
+    <string name="appDes1">Gestiona </string>
+    <string name="appDes2">tu negocio desde </string>
+    <string name="appDes3">la palma de tu mano </string>
+    <string name="appDes4">y empieza a aceptar</string>
+    <string name="appDes5">dinero eletrónico</string>
     <string name="signUpyou">Regístrate</string>
 
     <!-- Login -->
@@ -20,26 +22,32 @@
 
     <!-- Sign up -->
     <string name="signUp">Registrar</string>
-    <string name="signUpDes">Regístrate y <b>crea tu cuenta</b></string>
-    <string name="name">RUC</string>
-    <string name="price">Teléfono celular</string>
-    <string name="image">Correo electrónico</string>
+    <string name="signUpDes">Regístrate y</string>
+    <string name="signUpDes2">crea tu cuenta</string>
+    <string name="ruc">R.U.C</string>
+    <string name="mobilePhone">Número de teléfono celular</string>
+    <string name="email">Correo electrónico</string>
     <string name="initials">Contraseña</string>
     <string name="noValidRUC">El RUC ingresado no es válido</string>
-    <string name="noValidEmail">El image ingresado no es válido</string>
+    <string name="noValidEmail">El correo ingresado no es válido</string>
     <string name="noValidMobilePhone">El número de celular ingresado no es
         válido</string>
     <string name="noValidPassword">La contraseña ingresada no es
         válida</string>
+    <string name="welcome">¡Bienvenido!</string>
 
     <!-- Shop -->
     <string name="search">Buscar</string>
     <string name="actualSale">Venta Actual</string>
-    <string name="addDess">Añade productos a tu catálogo en \'Editar\'</string>
+    <string name="addDess">Pulsa \'Editar\' para añadir productos a tu
+        lista</string>
     <string name="edit">Editar</string>
+    <string name="myProducts">Mis Productos</string>
 
     <!-- Contributor -->
-    <string name="contributorDes">Tu información como Contribuyente</string>
+    <string name="confirm">Confirmar</string>
+    <string name="contributorDes">Confirma la información</string>
+    <string name="contributorDes2">de tu negocio</string>
     <string name="businessName">Razón Social:</string>
     <string name="commercialName">Nombre Comercial:</string>
     <string name="economicActivity">Actividad Económica Principal:</string>
@@ -47,36 +55,69 @@
         no es válido</string>
 
     <!-- Store -->
-    <string name="storeDes">Elige el local que deseas operar con la
-        Aplicación</string>
-    <string name="storeList">Tus Locales Registrados</string>
-    <string name="address">Dirección:</string>
-    <string name="local">Local:</string>
+    <string name="storeDes1">Elige el establecimiento que </string>
+    <string name="storeDes2">deseas operar</string>
+    <string name="storeList">TUS ESTABLECIMIENTOS REGISTRADOS</string>
+    <string name="address">Dirección, </string>
+    <string name="localNumber">ESTABLECIMIENTO: </string>
 
     <!-- Tittle -->
     <string name="validationErrorTittle">Datos incorrectos</string>
-    <string name="title_activity_catalog">CatalogActivity</string>
-    <string name="hello_world">Hello world!</string>
 
     <!-- Product -->
     <string name="noValidProductName">El nombre del producto  no es
         válido</string>
     <string name="noValidPrice">El precio ingresado no es válido</string>
-    <string name="title_activity_cart">CartActivity</string>
-    <string name="title_activity_create_product">" "</string>
     <string name="save">Guardar</string>
-    <string name="delete">Eliminar</string>
+    <string name="delete">Eliminar Producto</string>
     <string name="add">Agregar</string>
+    <string name="name">Nombre</string>
+    <string name="editImage">Editar Imagen</string>
 
     <!-- Product Image -->
-    <string name="options_to_image">Opciones para logotipo</string>
+    <string name="options_to_image">Opciones para imagen</string>
 
     <string-array name="image_options">
         <item>Elegir de mis fotos</item>
         <item>Tomar foto ahora</item>
     </string-array>
 
-    <string name="title_activity_home_splash">" "</string>
-    <string name="action_settings">Settings</string>
+    <!-- Cart -->
+    <string name="theBillIs">La cuenta es</string>
+    <string name="deleteSale">Borrar venta</string>
+    <string name="chargeAmount">COBRAR %1$s</string>
+    <string name="tax">Impuesto</string>
+    <string name="tax12">%12</string>
+    <string name="total">TOTAL</string>
+    <string name="actualSales">Venta Actual</string>
+
+    <!-- Payment -->
+    <string name="paymentTypeDes1">¿Qué forma de pago</string>
+    <string name="paymentTypeDes2">vas a recibir?</string>
+    <string name="cash">Efectivo</string>
+    <string name="electronicMoney">Dinero electrónico</string>
+    <string name="creditCard">Tarjeta de crédito</string>
+
+    <!-- Customer Data -->
+    <string name="customerDataDes1">Introduce los datos</string>
+    <string name="customerDataDes2">del cliente</string>
+    <string name="charge">Cobrar</string>
+    <string name="customerId">Cédula</string>
+    <string name="noValidCustomerId">La cédula ingresada no es válida</string>
+
+    <!-- Successfull Sale -->
+    <string name="sucessfullSale">¡Venta exitosa!</string>
+    <string name="noThanks">¡No gracias!</string>
+    <string name="sendReceipt">Enviar comprobante</string>
+
+    <!-- Receipt -->
+    <string name="newSale">Venta nueva</string>
+    <string name="receiptDes1">Introduce el <b>correo electrónico</b></string>
+    <string name="receiptDes2">al que deseas enviar</string>
+    <string name="receiptSent">¡Comprobante enviado!</string>
+
+    <!--Thaks-->
+    <string name="thanks">¡Gracias!</string>
+
 
 </resources>

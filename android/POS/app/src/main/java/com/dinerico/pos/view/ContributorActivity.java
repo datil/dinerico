@@ -1,13 +1,9 @@
 package com.dinerico.pos.view;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -62,7 +58,7 @@ public class ContributorActivity extends ActivityBase {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.contributor, menu);
+    getMenuInflater().inflate(R.menu.confirm, menu);
     return true;
   }
 
@@ -70,7 +66,7 @@ public class ContributorActivity extends ActivityBase {
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
-      case R.id.actionContinue:
+      case R.id.confirm:
         confirmContributorInfo();
         return true;
       default:
@@ -78,11 +74,10 @@ public class ContributorActivity extends ActivityBase {
     }
   }
 
-  private class ViewHolder implements View.OnClickListener{
+  private class ViewHolder{
     public TextView businessName;
     public EditText commercialName;
     public TextView economicActivity;
-    public Button editBusinessName;
 
     public ViewHolder(){
       findViews();
@@ -103,18 +98,6 @@ public class ContributorActivity extends ActivityBase {
       businessName = (TextView) findViewById(R.id.businessName);
       commercialName = (EditText) findViewById(R.id.commercialName);
       economicActivity = (TextView) findViewById(R.id.economicActivity);
-      editBusinessName = (Button) findViewById(R.id.editBusinessName);
-      editBusinessName.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-      commercialName.setEnabled(true);
-      int pos = commercialName.getText().length();
-      commercialName.setSelection(pos);
-      InputMethodManager imm = (InputMethodManager)getSystemService(Service
-              .INPUT_METHOD_SERVICE);
-      imm.showSoftInput(commercialName, 0);
     }
   }
 

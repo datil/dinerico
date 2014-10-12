@@ -2,6 +2,8 @@ package com.dinerico.pos.util;
 
 import android.text.TextUtils;
 
+import java.util.Locale;
+
 /**
  * Created by josephleon on 9/30/14.
  */
@@ -24,6 +26,10 @@ public class Utils {
     if (n > 0)
       return true;
     return false;
+  }
+
+  public static String currencyFormatter(float number){
+    return "$" + String.format(Locale.US, "%.02f", number);
   }
 
 }

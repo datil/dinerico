@@ -41,7 +41,7 @@ public class StoreActivity extends ActivityBase {
     storeList = contributor.getEstablecimientos();
 
     list = (LinearLayout) findViewById(R.id.list);
-    showListItems();
+    showListItems(storeList,list);
   }
 
 
@@ -62,25 +62,27 @@ public class StoreActivity extends ActivityBase {
     }
   }
 
-  private void showListItems() {
+  private void showListItems(ArrayList<Store> storeList, LinearLayout list) {
 
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context
             .LAYOUT_INFLATER_SERVICE);
 
     for (int position = 0; position < storeList.size(); position++) {
       View rowView = inflater.inflate(R.layout.item_store, null);
-      TextView storeName = (TextView) rowView.findViewById(R.id.storeName);
+      TextView storeName = (TextView) rowView.findViewById(R.id.businessName);
       storeName.setText(storeList.get(position).getNombreComercial());
       TextView address = (TextView) rowView.findViewById(R.id.address);
-      address.setText(storeList.get(position).getDireccion().getCalle());
-      TextView local = (TextView) rowView.findViewById(R.id.local);
-      local.setText(storeList.get(position).getCodigo());
+      address.setText(getResources().getString(R.string.address) + storeList.get
+              (position).getDireccion().getCalle());
+      TextView localNumber = (TextView) rowView.findViewById(R.id.localNumber);
+      localNumber.setText(storeList.get(position).getCodigo());
       rowView.setTag(storeList.get(position));
 
       rowView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           Store store = (Store) view.getTag();
+          Account.getInstance().setLocalNumber(store.getCodigo());
           Account.getInstance().setAddress(store.getDireccion().getCalle());
           Account.getInstance().setBusinessName(store.getNombreComercial());
           viewModel.createAccount(Account.getInstance());

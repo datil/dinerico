@@ -1,64 +1,90 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.dinerico.pos.view.ProductActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grayBackgroud"
+                tools:context="com.dinerico.pos.view.ProductActivity">
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:visibility="visible"
-        android:id="@+id/initials"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:maxLength="2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/initialsImage"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="38dp"
+        android:visibility="visible">
+
+        <TextView
+            android:fontFamily="sans-serif-thin"
+            android:layout_width="113dp"
+            android:layout_height="87dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Na"
+            android:id="@+id/initials"
+            android:textSize="54sp"
+            android:maxLength="2"/>
+
+        <TextView
+            android:layout_width="113dp"
+            android:layout_height="26dp"
+            android:background="@drawable/rectangle_gray"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:text="@string/editImage"
+            android:textSize="12sp"
+            android:id="@+id/editImage"/>
+
+    </LinearLayout>
+
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_marginTop="38dp"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
         android:visibility="invisible"
         android:id="@+id/image"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher"/>
 
     <EditText
         android:id="@+id/name"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/initials"
+        android:layout_below="@+id/initialsImage"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
         android:layout_alignParentStart="true"
-        android:inputType="textCapWords"/>
+        android:inputType="textCapWords"
+        style="@style/EditTextForm"
+        android:hint="@string/name"/>
 
     <EditText
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/name"
-        android:layout_alignEnd="@+id/name"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        style="@style/EditTextForm"
+        android:layout_below="@+id/name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="201dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
         android:text="@string/delete"
         android:id="@+id/delete"
         android:layout_below="@+id/price"
         android:visibility="gone"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:background="@color/red"/>
 
 </RelativeLayout>

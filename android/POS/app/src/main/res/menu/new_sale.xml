@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dinerico.pos.view.ReceiptActivity" >
+    <item android:id="@+id/newSale"
+        android:title="@string/newSale"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom" />
+</menu>

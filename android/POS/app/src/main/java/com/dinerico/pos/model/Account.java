@@ -25,15 +25,17 @@ public class Account implements Serializable{
   @DatabaseField
   private String businessName;
   @DatabaseField
-  private String email;
+  private String email;//
   @DatabaseField
-  private String RUC;
+  private String RUC;//
   @DatabaseField
   private String address;
   @DatabaseField
-  private String mobilePhone;
+  private String localNumber;
   @DatabaseField
-  private String password;
+  private String mobilePhone;//
+  @DatabaseField
+  private String password;//
   @DatabaseField
   private String specialContributor;
   @DatabaseField
@@ -72,7 +74,7 @@ public class Account implements Serializable{
   }
 
   public boolean validate() throws ValidationError {
-    if( isValidEmail() && isValidRUC() && isValidPassword() &&
+    if( isValidRUC() && isValidEmail() && isValidPassword() &&
             isValidMobilePhone());
     return true;
   }
@@ -112,6 +114,14 @@ public class Account implements Serializable{
               errorData);
     }
     return true;
+  }
+
+  public String getLocalNumber() {
+    return localNumber;
+  }
+
+  public void setLocalNumber(String localNumber) {
+    this.localNumber = localNumber;
   }
 
   public String getCommercialName() {

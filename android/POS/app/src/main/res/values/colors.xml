@@ -5,7 +5,7 @@
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>
-    <color name="red">#FF0000</color>
+    <color name="red">#FF6864</color>
     <color name="silver">#C0C0C0</color>
     <color name="gray">#999999</color>
     <color name="olive">#808000</color>
@@ -27,10 +27,10 @@
 
     <!--Gray-->
     <color name="grayBackgroud">#F1F2F2</color>
-    <color name="grayText">#D1D3D4</color>
+    <color name="grayHint">#D1D3D4</color>
 
     <!--Green-->
     <color name="greenApp">#20D3A0</color>
-
+    <color name="greenButton">#91E070</color>
 
 </resources>

@@ -1,16 +1,86 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.dinerico.pos.view.CartActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:context="com.dinerico.pos.view.CartActivity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:fontFamily="sans-serif-thin"
+                    android:gravity="center"
+                    android:text="@string/theBillIs"
+                    android:layout_width="match_parent"
+                    style="@style/HeaderTittle"
+                    android:layout_height="71dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/itemList">
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:id="@+id/total">
+
+                <TextView
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total"/>
+
+                <TextView
+                    android:id="@+id/totalBill"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/charge"
+        android:text="@string/chargeAmount"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_alignParentBottom="true"
+        style="@style/GreenButtonForm"/>
 </RelativeLayout>
+
+
+

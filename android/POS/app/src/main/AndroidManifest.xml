@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +14,14 @@
         <service
             android:name=".network.config.ApiService"
             android:exported="false" />
+        <service
+            android:name=".network.config.BCEApiService"
+            android:exported="false" />
 
         <activity
             android:name=".view.HomeActivity"
             android:label="@string/appName"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,7 +97,56 @@
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name=".view.HomeSplashActivity"
-            android:label="@string/title_activity_home_splash" >
+            android:label="@string/appName" >
+        </activity>
+        <activity
+            android:name=".view.PaymentTypeActivity"
+            android:label="$0.00" >
+        </activity>
+        <activity
+            android:name=".view.CustomerDataEMActivity"
+            android:label="$0.00"
+            android:parentActivityName=".view.PaymentTypeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.PaymentTypeActivity" />
+        </activity>
+        <activity
+            android:name=".view.RecieveMoneyActivity"
+            android:label="$0.00"
+            android:parentActivityName=".view.PaymentTypeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.PaymentTypeActivity" />
+        </activity>
+        <activity
+            android:name=".view.SuccessfulSaleActivity"
+            android:label="$0.00"
+            android:parentActivityName=".view.CustomerDataEMActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.CustomerDataEMActivity" />
+        </activity>
+        <activity
+            android:name=".view.ReceiptActivity"
+            android:parentActivityName=".view.SuccessfulSaleActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.SuccessfulSaleActivity" />
+        </activity>
+        <activity
+            android:name=".view.ReceiptSentActivity"
+            android:parentActivityName=".view.ReceiptActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.ReceiptActivity" />
+        </activity>
+        <activity
+            android:name=".view.ThanksActivity"
+            android:parentActivityName=".view.SuccessfulSaleActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dinerico.pos.view.SuccessfulSaleActivity" />
         </activity>
     </application>
 

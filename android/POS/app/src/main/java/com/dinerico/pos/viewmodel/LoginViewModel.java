@@ -60,7 +60,7 @@ public class LoginViewModel {
   @Override
   public String toString() {
     return "LoginViewModel{ \n" +
-            "email='" + email + "'\n" +
+            "customerId='" + email + "'\n" +
             "password='" + password + "'\n" +
             '}';
   }

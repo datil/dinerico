@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.dinerico.pos.view.PaymentTypeActivity">
+
+    <TextView
+        android:text="@string/paymentTypeDes1"
+        android:layout_marginTop="53dp"
+        style="@style/HeaderTittle"
+        android:id="@+id/header1"/>
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:text="@string/paymentTypeDes2"
+        style="@style/HeaderTittle"
+        android:layout_below="@+id/header1"
+        android:id="@+id/header2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        style="@style/OptionButtonForm"
+        android:text="@string/electronicMoney"
+        android:layout_below="@id/header2"
+        android:layout_marginTop="43dp"
+        android:id="@+id/electronicMoney"/>
+
+    <TextView
+        android:id="@+id/cash"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        style="@style/OptionButtonForm"
+        android:text="@string/cash"
+        android:layout_below="@id/electronicMoney"/>
+
+</RelativeLayout>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import com.dinerico.pos.R;
@@ -21,11 +20,9 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
     getActionBar().hide();
     setContentView(R.layout.activity_home);
     findViews();
-//    setCustomBar();
     viewModel = new HomeViewModel(new SessionDB(this));
     if(hasSession()){
       startActivity(new Intent(this,WelcomeActivity.class));

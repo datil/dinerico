@@ -42,8 +42,9 @@ public class CatalogActivity extends ActivityBase {
 
   private void showProductList() {
     if (!viewModel.getProductList().isEmpty()) {
-      view.addImage.setVisibility(View.GONE);
+      view.addImage.setVisibility(View.INVISIBLE);
       view.productList.setVisibility(View.VISIBLE);
+      view.headerList.setVisibility(View.VISIBLE);
     }
   }
 
@@ -60,11 +61,13 @@ public class CatalogActivity extends ActivityBase {
       if (catalog.size() > 0) {
         view.addImage.setVisibility(View.INVISIBLE);
         view.productList.setVisibility(View.VISIBLE);
+        view.headerList.setVisibility(View.VISIBLE);
         adapter = new ProductsListViewAdapter(this, catalog);
         view.productList.setAdapter(adapter);
       } else {
         view.addImage.setVisibility(View.VISIBLE);
         view.productList.setVisibility(View.INVISIBLE);
+        view.headerList.setVisibility(View.GONE);
       }
 
     }
@@ -91,6 +94,7 @@ public class CatalogActivity extends ActivityBase {
     public EditText search;
     public ListView productList;
     public View addImage;
+    public View headerList;
 
     public ViewHolder() {
       findViews();
@@ -105,6 +109,7 @@ public class CatalogActivity extends ActivityBase {
       adapter = new ProductsListViewAdapter(CatalogActivity.this,
               viewModel.getProductList());
       productList.setAdapter(adapter);
+      headerList = findViewById(R.id.headerList);
     }
 
     private void subscribeToViewComponents() {

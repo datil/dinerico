@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinerico.pos.R;
@@ -17,6 +18,7 @@ import com.dinerico.pos.model.Product;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.ShopViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import rx.android.Events;
@@ -29,36 +31,32 @@ public class ShopActivity extends ActivityBase {
 
   private ProductsListViewAdapter adapter;
 
-  private final static String CART = "cart";
+  public final static String CART = "cart";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shop);
-    viewModel = new ShopViewModel(new ProductDB(this));
-    view = new ViewHolder();
-    showProductList();
+//    viewModel = new ShopViewModel(new ProductDB(this));
   }
 
-  private void showProductList() {
-    if (!viewModel.getCatalog().isEmpty()) {
-      view.addImage.setVisibility(View.GONE);
-      view.productList.setVisibility(View.VISIBLE);
-    }
-  }
 
   @Override
   protected void onResume() {
     super.onResume();
+    viewModel = ShopViewModel.getInstance(new ProductDB(this));
+    view = new ViewHolder();
     ArrayList<Product> catalog = viewModel.getCatalog();
-    if (catalog.size() > 0) {
+    if (!catalog.isEmpty()) {
       view.addImage.setVisibility(View.INVISIBLE);
       view.productList.setVisibility(View.VISIBLE);
+      view.headerList.setVisibility(View.VISIBLE);
       adapter = new ProductsListViewAdapter(this, viewModel.getCatalog());
       view.productList.setAdapter(adapter);
     } else {
       view.addImage.setVisibility(View.VISIBLE);
       view.productList.setVisibility(View.INVISIBLE);
+      view.headerList.setVisibility(View.GONE);
     }
 
   }
@@ -71,7 +69,7 @@ public class ShopActivity extends ActivityBase {
 
   private void startCart() {
     Intent intent = new Intent(this, CartActivity.class);
-    intent.putExtra(CART, viewModel.getCart());
+    intent.putExtra(CART, (Serializable) viewModel.getCart());
     startActivity(intent);
   }
 
@@ -101,6 +99,8 @@ public class ShopActivity extends ActivityBase {
     public View actualSalesButton;
     public ListView productList;
     public View addImage;
+    public View headerList;
+    public TextView counter;
 
     public ViewHolder() {
       findViews();
@@ -114,9 +114,11 @@ public class ShopActivity extends ActivityBase {
       addImage = findViewById(R.id.addImage);
       productList = (ListView) findViewById(R.id.listView);
       productList.setOnItemClickListener(this);
-      adapter = new ProductsListViewAdapter(ShopActivity.this,
-              viewModel.getCatalog());
+      adapter = new ProductsListViewAdapter(ShopActivity.this,viewModel.getCatalog());
       productList.setAdapter(adapter);
+      headerList = findViewById(R.id.headerList);
+      counter = (TextView) findViewById(R.id.counter);
+      counter.setText("(0)");
     }
 
     private void subscribeToViewComponents() {
@@ -138,14 +140,14 @@ public class ShopActivity extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view,
-                            int position,
-                            long l) {
+                            int position,long l) {
       Product product = viewModel.getCatalog().get(position);
-      viewModel.getCart().add(product);
+      viewModel.addToCart(product);
       Toast.makeText(ShopActivity.this, "Producto agregado",
-              Toast.LENGTH_LONG).show();
+              Toast.LENGTH_SHORT).show();
+
+      viewModel.setCounter(viewModel.getCounter()+1);
+      counter.setText("("+viewModel.getCounter()+")");
     }
   }
-
-
 }

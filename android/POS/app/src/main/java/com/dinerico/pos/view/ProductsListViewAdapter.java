@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.dinerico.pos.R;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.util.ImageHelper;
+import com.dinerico.pos.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -47,7 +48,7 @@ public class ProductsListViewAdapter extends ArrayAdapter<Product> {
     Product product = productList.get(position);
 
     name.setText(product.getName());
-    price.setText("$" + String.format(Locale.US, "%.02f", product.getPrice()));
+    price.setText(Utils.currencyFormatter(product.getPrice()));
 
     if (product.getImageByte() != null) {
       initials.setVisibility(View.INVISIBLE);

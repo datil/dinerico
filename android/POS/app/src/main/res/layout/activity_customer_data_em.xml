@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.dinerico.pos.view.CustomerDataEMActivity">
+
+    <TextView
+        android:text="@string/customerDataDes1"
+        style="@style/HeaderTittle"
+        android:id="@+id/header1"
+        android:layout_marginTop="52dp"/>
+
+    <TextView
+        android:text="@string/customerDataDes2"
+        style="@style/HeaderTittle"
+        android:id="@+id/header2"
+        android:layout_below="@+id/header1"/>
+
+    <EditText
+        android:inputType="number"
+        android:layout_marginTop="55dp"
+        android:hint="@string/customerId"
+        style="@style/EditTextForm"
+        android:id="@+id/customerId"
+        android:layout_below="@+id/header2"/>
+
+    <EditText
+        android:inputType="number"
+        android:hint="@string/mobilePhone"
+        style="@style/EditTextForm"
+        android:id="@+id/mobilePhone"
+        android:layout_below="@+id/customerId"/>
+    
+    <Button
+        android:id="@+id/charge"
+        android:text="@string/charge"
+        android:layout_marginTop="46dp"
+        android:layout_below="@id/mobilePhone"
+        style="@style/GreenButtonForm"/>
+
+</RelativeLayout>
