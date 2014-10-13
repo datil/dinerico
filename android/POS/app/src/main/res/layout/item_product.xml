@@ -25,7 +25,7 @@
         android:visibility="invisible"/>
 
     <TextView
-        android:textSize="13.33sp"
+        android:textSize="@dimen/textSize"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:text="Naranja"
@@ -41,7 +41,7 @@
         android:padding="10dp"/>
 
     <TextView
-        android:textSize="13.33sp"
+        android:textSize="@dimen/textSize"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:text="$1.00"

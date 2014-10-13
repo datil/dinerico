@@ -31,13 +31,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:id="@+id/customerId"
+            android:id="@+id/email"
             android:hint="@string/emailAddress"
             style="@style/EditTextForm"/>
 
         <EditText
             android:background="@drawable/underline_gray_back_white"
-            android:layout_below="@id/customerId"
+            android:layout_below="@id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"

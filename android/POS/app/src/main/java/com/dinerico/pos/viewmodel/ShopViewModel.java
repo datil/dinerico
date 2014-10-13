@@ -39,6 +39,8 @@ public class ShopViewModel {
   }
 
   public boolean addToCart(Product product) {
+    product.setImageByte(null);
+    product.setImage(null);
     ArrayList<Product> sameProductList = cart.get(product.getId());
     if (sameProductList != null)
       return sameProductList.add(product);

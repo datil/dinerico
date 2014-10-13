@@ -7,11 +7,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/charge"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="33dp"
             android:paddingRight="33dp">
@@ -30,12 +32,14 @@
 
             </RelativeLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/itemList">
             </LinearLayout>
+
 
             <View
                 android:layout_marginTop="15dp"
@@ -52,7 +56,7 @@
 
                 <TextView
                     android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/textSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/total"/>
@@ -61,7 +65,7 @@
                     android:id="@+id/totalBill"
                     android:textStyle="bold"
                     android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/textSize"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:gravity="right"

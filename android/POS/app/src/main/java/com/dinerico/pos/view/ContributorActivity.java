@@ -12,6 +12,7 @@ import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.util.Utils;
 import com.dinerico.pos.viewmodel.ContributorViewModel;
 
 import rx.android.Events;
@@ -34,8 +35,9 @@ public class ContributorActivity extends ActivityBase {
     showContributorInfo(contributor);
   }
 
-  public Contributor getContributor(Intent intent){
-    return (Contributor)intent.getSerializableExtra(AccountActivity.CONTRIBUTOR);
+  public Contributor getContributor(Intent intent) {
+    return (Contributor) intent.getSerializableExtra(AccountActivity
+            .CONTRIBUTOR);
   }
 
   private void confirmContributorInfo() {
@@ -45,14 +47,17 @@ public class ContributorActivity extends ActivityBase {
       intent.putExtra(CONTRIBUTOR, viewModel.getModel());
       startActivity(intent);
     } catch (ValidationError e) {
-      showErrorValidation(e,this);
+      showErrorValidation(e, this);
     }
 
   }
 
   private void showContributorInfo(Contributor contributor) {
     view.businessName.setText(contributor.getRazonSocial());
-    view.commercialName.setText(contributor.getNombreComercial());
+    if (Utils.isValidString(contributor.getNombreComercial()))
+      view.commercialName.setText(contributor.getNombreComercial());
+    else
+      view.commercialName.setText(contributor.getRazonSocial());
     view.economicActivity.setText(contributor.getActividadPrincipal());
   }
 
@@ -74,17 +79,17 @@ public class ContributorActivity extends ActivityBase {
     }
   }
 
-  private class ViewHolder{
+  private class ViewHolder {
     public TextView businessName;
     public EditText commercialName;
     public TextView economicActivity;
 
-    public ViewHolder(){
+    public ViewHolder() {
       findViews();
       subscribeViewsToViewModel();
     }
 
-    private void subscribeViewsToViewModel(){
+    private void subscribeViewsToViewModel() {
       Events.text(commercialName).subscribe(new Action1<String>() {
         @Override
         public void call(String string) {

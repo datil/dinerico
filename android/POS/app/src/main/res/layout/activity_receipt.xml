@@ -40,6 +40,7 @@
         android:background="@drawable/underline_gray_back_white">
 
         <EditText
+            android:inputType="textEmailAddress"
             android:layout_margin="1dp"
             android:id="@+id/email"
             style="@style/EditTextForm"
@@ -50,7 +51,7 @@
         <ImageView
             android:id="@+id/sendEmail"
             android:layout_gravity="right"
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:src="@drawable/arrow_right_green"
             android:layout_alignTop="@+id/email"

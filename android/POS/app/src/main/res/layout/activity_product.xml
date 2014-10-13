@@ -1,90 +1,95 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/grayBackgroud"
-                tools:context="com.dinerico.pos.view.ProductActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grayBackgroud"
+            tools:context="com.dinerico.pos.view.ProductActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/initialsImage"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_marginTop="38dp"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:fontFamily="sans-serif-thin"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/initialsImage"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginTop="38dp"
+            android:visibility="visible">
+
+            <TextView
+                android:fontFamily="sans-serif-thin"
+                android:layout_width="113dp"
+                android:layout_height="87dp"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Na"
+                android:id="@+id/initials"
+                android:textSize="54sp"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="113dp"
+                android:layout_height="26dp"
+                android:background="@drawable/rectangle_gray"
+                android:gravity="center"
+                android:textColor="@color/gray"
+                android:text="@string/editImage"
+                android:textSize="12sp"
+                android:id="@+id/editImage"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_marginTop="38dp"
             android:layout_width="113dp"
             android:layout_height="87dp"
-            android:background="@color/gray"
-            android:gravity="center"
+            android:visibility="invisible"
+            android:id="@+id/image"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_launcher"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_below="@+id/initialsImage"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="21dp"
+            android:layout_alignParentStart="true"
+            android:inputType="textCapWords"
+            style="@style/EditTextForm"
+            android:background="@drawable/underline_gray_back_gray"
+            android:hint="@string/name"/>
+
+        <EditText
+            android:background="@drawable/underline_gray_back_gray"
+            android:id="@+id/price"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:inputType="numberDecimal"
+            style="@style/EditTextForm"
+            android:layout_below="@+id/name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="201dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:text="@string/delete"
+            android:id="@+id/delete"
+            android:layout_below="@+id/price"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
             android:textColor="@color/white"
-            android:text="Na"
-            android:id="@+id/initials"
-            android:textSize="54sp"
-            android:maxLength="2"/>
+            android:background="@color/red"/>
 
-        <TextView
-            android:layout_width="113dp"
-            android:layout_height="26dp"
-            android:background="@drawable/rectangle_gray"
-            android:gravity="center"
-            android:textColor="@color/gray"
-            android:text="@string/editImage"
-            android:textSize="12sp"
-            android:id="@+id/editImage"/>
-
-    </LinearLayout>
-
-
-    <ImageView
-        android:layout_marginTop="38dp"
-        android:layout_width="113dp"
-        android:layout_height="113dp"
-        android:visibility="invisible"
-        android:id="@+id/image"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_launcher"/>
-
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/initialsImage"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="21dp"
-        android:layout_alignParentStart="true"
-        android:inputType="textCapWords"
-        style="@style/EditTextForm"
-        android:hint="@string/name"/>
-
-    <EditText
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="numberDecimal"
-        style="@style/EditTextForm"
-        android:layout_below="@+id/name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
-    <Button
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:text="@string/delete"
-        android:id="@+id/delete"
-        android:layout_below="@+id/price"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:background="@color/red"/>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

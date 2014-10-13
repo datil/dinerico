@@ -10,45 +10,37 @@
     <TextView
         android:textStyle="bold"
         android:id="@+id/businessName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="MegaSoft Quito"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="0dp"
-        style="@style/LabelForm"/>
+        android:layout_marginTop="10dp"
+        style="@style/TextViewCommom"/>
 
     <TextView
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-light"
         android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Direccion, Valle de los chillos"
         android:layout_alignTop="@+id/textView"
-        android:textColor="@color/gray"
         android:layout_toRightOf="@+id/textView"
-        android:layout_below="@id/businessName"/>
+        android:layout_below="@id/businessName"
+        style="@style/TextViewCommom"/>
 
     <TextView
         android:fontFamily="sans-serif-light"
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/localNumber"
         android:layout_below="@id/address"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        style="@style/LabelForm"/>
+        style="@style/TextViewCommom"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
+        android:layout_marginBottom="10dp"
         android:id="@+id/localNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="001"
         android:layout_alignTop="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/textSize"
         android:textColor="@color/gray"
         android:textStyle="bold"/>
 

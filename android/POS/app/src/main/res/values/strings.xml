@@ -59,7 +59,7 @@
     <string name="storeDes2">deseas operar</string>
     <string name="storeList">TUS ESTABLECIMIENTOS REGISTRADOS</string>
     <string name="address">Dirección, </string>
-    <string name="localNumber">ESTABLECIMIENTO: </string>
+    <string name="localNumber">Establecimiento: </string>
 
     <!-- Tittle -->
     <string name="validationErrorTittle">Datos incorrectos</string>

@@ -26,14 +26,12 @@
         android:textStyle="bold"/>
 
     <View
-        android:background="@color/gray"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_below="@id/confirmDes"
         android:layout_marginTop="41dp"
         android:id="@+id/separator"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginRight="@dimen/doubleMargin"
+        android:layout_marginLeft="@dimen/doubleMargin"
+        style="@style/Divider"/>
 
     <TextView
         android:fontFamily="sans-serif-light"
@@ -89,12 +87,10 @@
         android:textStyle="bold"/>
 
     <View
-        android:background="@color/gray"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_below="@id/economicActivity"
         android:layout_marginTop="18dp"
         android:id="@+id/separator2"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginRight="@dimen/doubleMargin"
+        android:layout_marginLeft="@dimen/doubleMargin"
+        style="@style/Divider"/>
 </RelativeLayout>

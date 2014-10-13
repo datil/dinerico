@@ -68,6 +68,7 @@ public class ShopActivity extends ActivityBase {
 
 
   private void startCart() {
+    System.gc();
     Intent intent = new Intent(this, CartActivity.class);
     intent.putExtra(CART, (Serializable) viewModel.getCart());
     startActivity(intent);
@@ -118,7 +119,7 @@ public class ShopActivity extends ActivityBase {
       productList.setAdapter(adapter);
       headerList = findViewById(R.id.headerList);
       counter = (TextView) findViewById(R.id.counter);
-      counter.setText("(0)");
+      counter.setText("("+viewModel.getCounter()+")");
     }
 
     private void subscribeToViewComponents() {

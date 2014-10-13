@@ -96,13 +96,13 @@ public class ProductActivity extends FragmentActivityBase {
             product.getPrice()));
     view.name.setText(product.getName());
     if (product.getImageByte() != null) {
-      view.initialsImage.setVisibility(View.INVISIBLE);
+      view.initials.setVisibility(View.INVISIBLE);
       view.image.setVisibility(View.VISIBLE);
       view.image.setImageBitmap(ImageHelper.getImageAjustedToDensity(product
               .getImageByte(), 100, 100, getResources().getDisplayMetrics()
               .density));
     } else {
-      view.initialsImage.setVisibility(View.VISIBLE);
+      view.initials.setVisibility(View.VISIBLE);
       view.image.setVisibility(View.INVISIBLE);
       view.initials.setText(product.getInitials());
       if (product.getColor() != 0) {
@@ -158,7 +158,7 @@ public class ProductActivity extends FragmentActivityBase {
     private void findViews() {
       name = (EditText) findViewById(R.id.name);
       price = (EditText) findViewById(R.id.price);
-      price.setText("0.00");
+      setUpInitialValuePrice(price);
       initials = (TextView) findViewById(R.id.initials);
       editImage = (TextView) findViewById(R.id.editImage);
       delete = (Button) findViewById(R.id.delete);
@@ -168,6 +168,23 @@ public class ProductActivity extends FragmentActivityBase {
       initialsImage = findViewById(R.id.initialsImage);
       initials.setOnClickListener(this);
       editImage.setOnClickListener(this);
+    }
+
+    private void setUpInitialValuePrice(final EditText price){
+      price.setText("0.00");
+      price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean b) {
+          price.setSelection(price.getText().toString().length());
+        }
+      });
+
+      price.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          price.setSelection(price.getText().toString().length());
+        }
+      });
     }
 
     private void subscribeToViewComponents() {
@@ -186,6 +203,7 @@ public class ProductActivity extends FragmentActivityBase {
       Events.text(price).subscribe(new Action1<String>() {
         @Override
         public void call(String s) {
+          viewModel.setPrice(s);
           if (!s.toString().matches("(\\d{1,3}(\\,\\d{3})*|(\\d+))(\\.\\d{2})" +
                   "?$")) {
             String userInput = "" + s.toString().replaceAll("[^\\d]", "");

@@ -31,10 +31,9 @@
         </LinearLayout>
 
         <TextView
-            android:fontFamily="sans-serif-light"
             android:layout_width="match_parent"
             android:textSize="11.5sp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:text="@string/storeList"
             android:textColor="@color/gray"
             android:id="@+id/registeredStores"
@@ -51,7 +50,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.378dp"
             android:background="@color/gray"
             android:layout_below="@id/registeredStores"/>
 
