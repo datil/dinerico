@@ -2,12 +2,11 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.model.Session;
 import com.dinerico.pos.network.config.ActivityBase;
@@ -23,35 +22,19 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
     getActionBar().hide();
     setContentView(R.layout.activity_home);
     findViews();
-    viewModel = new HomeViewModel(new SessionDB(this));
+    viewModel = new HomeViewModel(new SessionDB(this),new AccountDB(this));
     if(hasSession()){
-      startActivity(new Intent(this,WelcomeActivity.class));
+      startActivity(new Intent(this, WelcomeActivity.class));
       finish();
     }
   }
 
   private boolean hasSession(){
-    Session session = viewModel.getCreatedSession();
+    Session session = viewModel.getCurrentSession();
     if(session==null)
       return false;
     else
       return true;
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.home, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.addProduct:
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
   }
 
   @Override

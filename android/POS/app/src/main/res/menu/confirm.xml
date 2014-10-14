@@ -1,9 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.dinerico.pos.view.ContributorActivity" >
-    <item android:id="@+id/confirm"
-        android:title="@string/confirm"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom"
-        android:icon="@drawable/confirm"/>
-</menu>

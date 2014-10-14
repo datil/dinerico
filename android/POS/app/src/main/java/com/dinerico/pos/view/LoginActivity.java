@@ -2,11 +2,11 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Login;
@@ -26,15 +26,33 @@ public class LoginActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
+    setUpActionBar();
     viewModel = new LoginViewModel(new Login(), new LoginService(),
-            new SessionDB(this));
+            new SessionDB(this), new AccountDB(this));
     viewHolder = new ViewHolder();
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_sign_up,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        confirmLogin();
+      }
+    });
+    getActionBar().setCustomView(actionBar);
   }
 
   private void confirmLogin() {
     try {
-      viewModel.login();
-      startWelcomeActivity();
+      if(viewModel.login())
+        startWelcomeActivity();
+      else
+        showMessage(getString(R.string.autenticationFailed),this);
+
     } catch (ValidationError e) {
       showErrorValidation(e, this);
     }
@@ -45,23 +63,6 @@ public class LoginActivity extends ActivityBase {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent
             .FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.next, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.next:
-        confirmLogin();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
   }
 
   private class ViewHolder {

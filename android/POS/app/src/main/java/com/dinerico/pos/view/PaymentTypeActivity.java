@@ -6,15 +6,31 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.Cart;
 import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.util.Utils;
 
 public class PaymentTypeActivity extends ActivityBase {
+
+  ViewHolder view;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_payment_type);
-    ViewHolder view = new ViewHolder();
+    setUpActionBar();
+
+    view = new ViewHolder();
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_single_tittle,
+            null);
+    view.totalAmount = (TextView)actionBar.findViewById(R.id.tittle);
+    String total = Utils.currencyFormatter(Cart.getInstance(null).getTotal());
+    view.totalAmount.setText(total);
+    getActionBar().setCustomView(actionBar);
   }
 
   private void chargeWithElectronicMoney(){
@@ -30,6 +46,7 @@ public class PaymentTypeActivity extends ActivityBase {
   private class ViewHolder implements View.OnClickListener {
     public TextView electronicMoney;
     public TextView cash;
+    public TextView totalAmount;
 
     public ViewHolder() {
       findViews();

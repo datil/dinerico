@@ -2,8 +2,6 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -35,9 +33,24 @@ public class CatalogActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_catalog);
+    setUpActionBar();
     viewModel = new CatalogViewModel(new ProductDB(this));
     view = new ViewHolder();
     showProductList();
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_catalog,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        createProduct();
+      }
+    });
+    getActionBar().setCustomView(actionBar);
   }
 
   private void showProductList() {
@@ -70,23 +83,6 @@ public class CatalogActivity extends ActivityBase {
         view.headerList.setVisibility(View.GONE);
       }
 
-    }
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.catalog, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.addProduct:
-        createProduct();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
     }
   }
 

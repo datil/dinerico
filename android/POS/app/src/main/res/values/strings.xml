@@ -19,6 +19,8 @@
     <string name="loginDes">Inicia sesión</string>
     <string name="emailAddress">Dirección correo electrónico</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="autenticationFailed">El usuario o la contraseña
+        ingresada no es correcta</string>
 
     <!-- Sign up -->
     <string name="signUp">Registrar</string>
@@ -68,11 +70,13 @@
     <string name="noValidProductName">El nombre del producto  no es
         válido</string>
     <string name="noValidPrice">El precio ingresado no es válido</string>
-    <string name="save">Guardar</string>
+    <string name="saveChanges">Guardar Cambios</string>
+    <string name="saved">¡Guardado!</string>
     <string name="delete">Eliminar Producto</string>
-    <string name="add">Agregar</string>
+    <string name="add">Añadir</string>
     <string name="name">Nombre</string>
     <string name="editImage">Editar Imagen</string>
+    <string name="setUpProduct">Configuración de Producto</string>
 
     <!-- Product Image -->
     <string name="options_to_image">Opciones para imagen</string>

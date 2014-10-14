@@ -17,7 +17,7 @@ public class CartViewModel {
 
 
   public CartViewModel(Map<Integer, ArrayList<Product>> productList) {
-    cart = new Cart(new ArrayList<ItemCart>());
+    cart = Cart.getInstance(new ArrayList<ItemCart>());
     initializeCart(cart, productList);
   }
 

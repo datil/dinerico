@@ -4,10 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +32,7 @@ public class CartActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cart);
+    setUpActionBar();
     Map<Integer, ArrayList<Product>> shopCartMap = (Map<Integer,
             ArrayList<Product>>) getIntent().getSerializableExtra
             (ShopActivity.CART);
@@ -40,6 +40,26 @@ public class CartActivity extends ActivityBase {
     view = new ViewHolder();
     showListItems(viewModel.getCart(), (LinearLayout) view.itemList);
     showTotals(view.charge, view.totalBill, viewModel.getCart().getTotal());
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_catalog,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        cleanCart();
+      }
+    });
+    TextView action = (TextView)actionBar.findViewById(R.id.action);
+    action.setText(getString(R.string.deleteSale));
+
+    ImageView actionImg = (ImageView)actionBar.findViewById(R.id.actionImg);
+    actionImg.setImageResource(R.drawable.delete_sale);
+
+    getActionBar().setCustomView(actionBar);
   }
 
   private void cleanCart() {
@@ -60,23 +80,6 @@ public class CartActivity extends ActivityBase {
   private void charge() {
     Intent intent = new Intent(this, PaymentTypeActivity.class);
     startActivity(intent);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.cart, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.deleteSell:
-        cleanCart();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
   }
 
   private void showListItems(Cart cart, LinearLayout list) {

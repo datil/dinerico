@@ -28,11 +28,10 @@ public class AccountDB {
       List<Account> list = dbHelperORMLite.getDaoAccount().queryForAll();
       Account accountSaved = list.get(list.size() - 1);
       Log.d(LOG_TAG, "Created account: " + accountSaved);
-      dbHelperORMLite.close();
       return accountSaved;
     } catch (java.sql.SQLException e) {
-      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on create account");
+      e.printStackTrace();
       return account;
     }
   }
@@ -40,11 +39,10 @@ public class AccountDB {
   public void delete(int id) {
     try {
       dbHelperORMLite.getDaoAccount().deleteById(id);
-      dbHelperORMLite.close();
       Log.d(LOG_TAG, "Deleted account id: " + id);
     } catch (java.sql.SQLException e) {
-      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on delete account");
+      e.printStackTrace();
     }
   }
 
@@ -52,11 +50,22 @@ public class AccountDB {
     try {
       List<Account> list = dbHelperORMLite.getDaoAccount().queryForAll();
       Log.d(LOG_TAG, "Account list: \n" + list);
-      dbHelperORMLite.close();
       return list;
     } catch (java.sql.SQLException e) {
-      dbHelperORMLite.close();
       Log.e(LOG_TAG, "Error on get all Account");
+      e.printStackTrace();
+      return Collections.EMPTY_LIST;
+    }
+  }
+
+  public List<Account> queryByEmail(String email){
+    try {
+      List<Account> list = dbHelperORMLite.getDaoAccount().queryForEq("email",email);
+      Log.d(LOG_TAG, "Account list: \n" + list);
+      return list;
+    } catch (java.sql.SQLException e) {
+      Log.e(LOG_TAG, "Error on query Account by email");
+      e.printStackTrace();
       return Collections.EMPTY_LIST;
     }
   }

@@ -47,20 +47,16 @@
 
         <View
             android:id="@+id/separator"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="0.378dp"
-            android:background="@color/gray"
-            android:layout_below="@id/registeredStores"/>
+            android:layout_below="@id/registeredStores"
+            style="@style/Divider"/>
 
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/list"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/separator">
-        </LinearLayout>
+        </RadioGroup>
 
 
     </RelativeLayout>

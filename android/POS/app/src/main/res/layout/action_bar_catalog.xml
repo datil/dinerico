@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingRight="@dimen/margin"
+                android:paddingLeft="@dimen/margin"
+                android:background="@color/greenApp"
+                android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/setUpProduct"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:id="@+id/logo"/>
+
+    <View
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="11dp"
+        android:layout_width="0.51dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/actionContainer"
+        android:layout_toStartOf="@+id/actionContainer"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/actionContainer">
+
+        <TextView
+            android:text="@string/add"
+            android:id="@+id/action"
+            style="@style/ActionBarTextButton"/>
+
+        <ImageView
+            android:id="@+id/actionImg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/add"/>
+    </LinearLayout>
+
+</RelativeLayout>

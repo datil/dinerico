@@ -1,15 +1,16 @@
 package com.dinerico.pos.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.Cart;
+import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.ShopViewModel;
 
-public class ReceiptSentActivity extends Activity {
+public class ReceiptSentActivity extends ActivityBase {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class ReceiptSentActivity extends Activity {
             .FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);
     ShopViewModel.reset();
+    Cart.reset();
   }
 
   @Override

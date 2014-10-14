@@ -60,7 +60,7 @@ public abstract class FragmentActivityBase extends FragmentActivity {
     dialog.show();
   }
 
-  public void hideActionBar() {
+  public void hideActionBarComponents() {
     getActionBar().setDisplayShowHomeEnabled(false);
     getActionBar().setDisplayShowTitleEnabled(false);
     getActionBar().setDisplayShowCustomEnabled(true);
@@ -88,6 +88,18 @@ public abstract class FragmentActivityBase extends FragmentActivity {
   }
 
   public void showMessage(String message, Activity activity) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    builder.setTitle(activity.getTitle());
+    builder.setMessage(message);
+    builder.setCancelable(true);
+    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int id) {
+        dialog.cancel();
+      }
+    });
+
+    AlertDialog alert = builder.create();
+    alert.show();
 
   }
 

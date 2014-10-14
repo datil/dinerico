@@ -92,7 +92,18 @@ public abstract class ActivityBase extends Activity {
   }
 
   public void showMessage(String message, Activity activity) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    builder.setTitle(activity.getTitle());
+    builder.setMessage(message);
+    builder.setCancelable(true);
+    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int id) {
+        dialog.cancel();
+      }
+    });
 
+    AlertDialog alert = builder.create();
+    alert.show();
   }
 
   public SpiceManager getSpiceManager() {

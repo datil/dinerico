@@ -25,7 +25,7 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 8;
+  private static final int DATABASE_VERSION = 10;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
@@ -46,9 +46,9 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.createTable(connectionSource, Session.class);
       TableUtils.createTable(connectionSource, Account.class);
       TableUtils.createTable(connectionSource, Product.class);
-      TableUtils.createTable(connectionSource, Store.class);
-      TableUtils.createTable(connectionSource, Sales.class);
-      TableUtils.createTable(connectionSource, Charge.class);
+//      TableUtils.createTable(connectionSource, Store.class);
+//      TableUtils.createTable(connectionSource, Sales.class);
+//      TableUtils.createTable(connectionSource, Charge.class);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getSimpleName(), "Can't create database", e);
       e.printStackTrace();
@@ -64,9 +64,9 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.dropTable(connectionSource, Session.class, true);
       TableUtils.dropTable(connectionSource, Account.class, true);
       TableUtils.dropTable(connectionSource, Product.class, true);
-      TableUtils.dropTable(connectionSource, Store.class, true);
-      TableUtils.dropTable(connectionSource, Sales.class, true);
-      TableUtils.dropTable(connectionSource, Charge.class, true);
+//      TableUtils.dropTable(connectionSource, Store.class, true);
+//      TableUtils.dropTable(connectionSource, Sales.class, true);
+//      TableUtils.dropTable(connectionSource, Charge.class, true);
       onCreate(db);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getName(), "Can't drop databases", e);

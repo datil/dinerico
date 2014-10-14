@@ -2,9 +2,9 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
@@ -28,11 +28,32 @@ public class ContributorActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contributor);
+    setUpActionBar();
     Contributor contributor = getContributor(getIntent());
     viewModel = new ContributorViewModel(new Contributor());
     view = new ViewHolder();
     viewModel.setModel(contributor);
     showContributorInfo(contributor);
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_sign_up,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        confirmContributorInfo();
+      }
+    });
+    TextView action = (TextView)actionBar.findViewById(R.id.action);
+    action.setText(R.string.confirm);
+
+    ImageView actionImg = (ImageView)actionBar.findViewById(R.id.actionImg);
+    actionImg.setImageResource(R.drawable.confirm);
+
+    getActionBar().setCustomView(actionBar);
   }
 
   public Contributor getContributor(Intent intent) {
@@ -59,24 +80,6 @@ public class ContributorActivity extends ActivityBase {
     else
       view.commercialName.setText(contributor.getRazonSocial());
     view.economicActivity.setText(contributor.getActividadPrincipal());
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.confirm, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()) {
-      case R.id.confirm:
-        confirmContributorInfo();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
   }
 
   private class ViewHolder {

@@ -3,8 +3,6 @@ package com.dinerico.pos.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.network.config.ActivityBase;
@@ -30,20 +28,4 @@ public class WelcomeActivity extends ActivityBase {
     }, SPLASH_DISPLAY_LENGTH);
   }
 
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-//    getMenuInflater().inflate(R.menu.welcome, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.welcome:
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
 }

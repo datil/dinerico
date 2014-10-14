@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.Cart;
 import com.dinerico.pos.viewmodel.ShopViewModel;
 
 public class ThanksActivity extends Activity {
@@ -23,6 +24,7 @@ public class ThanksActivity extends Activity {
             .FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);
     ShopViewModel.reset();
+    Cart.reset();
   }
 
 

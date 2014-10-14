@@ -16,6 +16,18 @@ public class Cart implements Serializable {
   @DatabaseField
   private ArrayList<ItemCart> items;
 
+  private static Cart cart;
+
+  public static Cart getInstance(ArrayList<ItemCart> items) {
+    if (cart == null)
+      cart = new Cart(items);
+    return cart;
+  }
+
+  public static void reset() {
+    cart = null;
+  }
+
   public Cart(ArrayList<ItemCart> items) {
     this.items = items;
   }

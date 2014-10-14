@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Selection;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +39,7 @@ public class ProductActivity extends FragmentActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_product);
+    setUpActionBar();
     viewModel = new ProductViewModel(new Product(), new ProductDB(this));
     view = new ViewHolder();
 
@@ -49,6 +48,24 @@ public class ProductActivity extends FragmentActivityBase {
     if (product != null) {
       showProduct(product);
     }
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_simple_button,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        saveProduct();
+      }
+    });
+    TextView action = (TextView) actionBar.findViewById(R.id.action);
+    action.setText(getString(R.string.saveChanges));
+    ImageView actionImg = (ImageView) actionBar.findViewById(R.id.actionImg);
+    actionImg.setImageResource(R.drawable.save);
+    getActionBar().setCustomView(actionBar);
   }
 
   @Override
@@ -87,7 +104,7 @@ public class ProductActivity extends FragmentActivityBase {
     Bitmap bitmap = imageHelper.getBitmap();
     view.image.setImageBitmap(bitmap);
     viewModel.setImage(bitmap);
-    view.initialsImage.setVisibility(View.INVISIBLE);
+    view.initials.setVisibility(View.INVISIBLE);
     view.image.setVisibility(View.VISIBLE);
   }
 
@@ -113,12 +130,6 @@ public class ProductActivity extends FragmentActivityBase {
     viewModel.setModel(product);
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.product, menu);
-    return true;
-  }
-
   private void saveProduct() {
     try {
       viewModel.getModel().validate();
@@ -127,17 +138,6 @@ public class ProductActivity extends FragmentActivityBase {
       finish();
     } catch (ValidationError e) {
       showErrorValidation(e, this);
-    }
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.save:
-        saveProduct();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
     }
   }
 

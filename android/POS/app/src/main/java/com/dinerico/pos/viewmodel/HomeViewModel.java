@@ -1,5 +1,6 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.model.Session;
 
@@ -11,12 +12,14 @@ import java.util.List;
 public class HomeViewModel {
 
   private SessionDB sessionDB;
+  private AccountDB accountDB;
 
-  public HomeViewModel(SessionDB sessionDB) {
+  public HomeViewModel(SessionDB sessionDB, AccountDB accountDB) {
     this.sessionDB = sessionDB;
+    this.accountDB = accountDB;
   }
 
-  public Session getCreatedSession() {
+  public Session getCurrentSession() {
     List<Session> list = sessionDB.getAll();
     if (list.size() > 0) {
       Session session = list.get(0);
@@ -25,6 +28,5 @@ public class HomeViewModel {
     } else
       return null;
   }
-
 }
 

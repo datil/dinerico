@@ -5,8 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
@@ -38,10 +37,24 @@ public class AccountActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_account);
-
+    setUpActionBar();
     viewModel = new AccountViewModel(Account.getInstance(),
             new ContributorService(getSpiceManager()));
     viewHolder = new ViewHolder();
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_sign_up,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startContributorInfoActivity();
+      }
+    });
+    getActionBar().setCustomView(actionBar);
   }
 
   private void getContributorInfo() {
@@ -67,29 +80,12 @@ public class AccountActivity extends ActivityBase {
             });
   }
 
-  private void startContributorActivity(Contributor contributor){
+  private void startContributorActivity(Contributor contributor) {
     Intent intent = new Intent(this, ContributorActivity.class);
-    intent.putExtra(CONTRIBUTOR,contributor);
+    intent.putExtra(CONTRIBUTOR, contributor);
     startActivity(intent);
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.next, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-
-    switch (item.getItemId()) {
-      case R.id.next:
-        startContributorInfoActivity();
-        return true;
-      default:
-        return super.onOptionsItemSelected(item);
-    }
-  }
 
   private void startContributorInfoActivity() {
     try {

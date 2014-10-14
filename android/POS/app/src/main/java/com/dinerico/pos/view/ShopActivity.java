@@ -37,15 +37,31 @@ public class ShopActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shop);
-//    viewModel = new ShopViewModel(new ProductDB(this));
+    setUpActionBar();
+    viewModel = ShopViewModel.getInstance(new ProductDB(this));
+    view = new ViewHolder();
+  }
+
+  private void setUpActionBar(){
+    hideActionBarComponents();
+    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_shop,
+            null);
+    View actionContainer = actionBar.findViewById(R.id.actionContainer);
+    actionContainer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startCatalog();
+      }
+    });
+    TextView tittle = (TextView)actionBar.findViewById(R.id.titleText);
+    tittle.setText(Account.getInstance().getCommercialName());
+    getActionBar().setCustomView(actionBar);
   }
 
 
   @Override
   protected void onResume() {
     super.onResume();
-    viewModel = ShopViewModel.getInstance(new ProductDB(this));
-    view = new ViewHolder();
     ArrayList<Product> catalog = viewModel.getCatalog();
     if (!catalog.isEmpty()) {
       view.addImage.setVisibility(View.INVISIBLE);
@@ -83,9 +99,6 @@ public class ShopActivity extends ActivityBase {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.addProduct:
-        startCatalog();
-        return true;
       case R.id.logout:
         Account.logout(this);
         return true;
