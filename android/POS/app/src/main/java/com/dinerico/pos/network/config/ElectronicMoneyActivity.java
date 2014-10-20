@@ -1,11 +1,11 @@
 package com.dinerico.pos.network.config;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Created by josephleon on 10/11/14.
  */
 
-public abstract class ElectronicMoneyActivity extends Activity {
+public abstract class ElectronicMoneyActivity extends FragmentActivity {
 
   private Dialog dialog;
   private SpiceManager spiceManager;
@@ -75,9 +75,9 @@ public abstract class ElectronicMoneyActivity extends Activity {
       dialog.dismiss();
   }
 
-  public void showErrorValidation(ValidationError e, Activity activity) {
+  public void showErrorValidation(ValidationError e) {
     HashMap<String, Integer> errorData = e.getMapMessage();
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle(this.getResources().getString(R.string.validationErrorTittle));
     builder.setMessage(getResources().getString(errorData.get("userMessage")));
     builder.setCancelable(true);
@@ -91,8 +91,19 @@ public abstract class ElectronicMoneyActivity extends Activity {
     alert.show();
   }
 
-  public void showMessage(String message, Activity activity) {
+  public void showMessage(String message, String tittle) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(tittle);
+    builder.setMessage(message);
+    builder.setCancelable(true);
+    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int id) {
+        dialog.cancel();
+      }
+    });
 
+    AlertDialog alert = builder.create();
+    alert.show();
   }
 
   public SpiceManager getSpiceManager() {

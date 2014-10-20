@@ -1,5 +1,6 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.network.service.EMService;
 
@@ -13,10 +14,15 @@ public class CustomerViewModel {
 
   private String customerId;
   private String mobilePhone;
+  private String pin;
 
   public CustomerViewModel(Customer model, EMService emService) {
     this.model = model;
     this.emService = emService;
+  }
+
+  public boolean validate() throws ValidationError {
+    return model.isValidCustomerId() && model.isValidMobilePhone();
   }
 
   public Customer getModel() {
@@ -43,5 +49,21 @@ public class CustomerViewModel {
   public void setMobilePhone(String mobilePhone) {
     model.setMobilePhone(mobilePhone);
     this.mobilePhone = mobilePhone;
+  }
+
+  public EMService getEmService() {
+    return emService;
+  }
+
+  public void setEmService(EMService emService) {
+    this.emService = emService;
+  }
+
+  public String getPin() {
+    return pin;
+  }
+
+  public void setPin(String pin) {
+    this.pin = pin;
   }
 }

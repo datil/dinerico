@@ -2,10 +2,12 @@ package com.dinerico.pos.model;
 
 import com.j256.ormlite.field.DatabaseField;
 
+import java.io.Serializable;
+
 /**
  * Created by josephleon on 7/31/14.
  */
-public class Session {
+public class Session implements Serializable{
   @DatabaseField(generatedId = true)
   private int rowId;
   @DatabaseField
@@ -18,6 +20,8 @@ public class Session {
   private String object;
   @DatabaseField
   private String url;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
+  private Account account;
 
   public static Session session;
 
@@ -46,6 +50,22 @@ public class Session {
     this.created = created;
     this.object = object;
     this.url = url;
+  }
+
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
+  }
+
+  public String getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
   public int getRowId() {
@@ -100,12 +120,13 @@ public class Session {
   @Override
   public String toString() {
     return "Session{ \n" +
-            "rowId='" + rowId +"'\n" +
+            "rowId=" + rowId + "'\n" +
             "id='" + id + "'\n" +
             "lastUpdated='" + lastUpdated + "'\n" +
             "created='" + created + "'\n" +
             "object='" + object + "'\n" +
             "url='" + url + "'\n" +
+            "account=" + account + "'\n" +
             '}';
   }
 }

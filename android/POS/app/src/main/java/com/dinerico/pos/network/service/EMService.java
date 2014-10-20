@@ -1,7 +1,6 @@
 package com.dinerico.pos.network.service;
 
-import com.dinerico.pos.model.EMCharge;
-import com.dinerico.pos.model.EMChargeReceipt;
+import com.dinerico.pos.model.Payment;
 import com.dinerico.pos.network.config.BCEApiService;
 import com.dinerico.pos.network.request.EMChargeRequest;
 import com.octo.android.robospice.SpiceManager;
@@ -19,8 +18,8 @@ public class EMService {
     this.spiceManager = spiceManager;
   }
 
-  public void charge(EMCharge emCharge, RequestListener<EMChargeReceipt> listener) {
-    EMChargeRequest request = new EMChargeRequest(emCharge);
+  public void charge(Payment emPayment, RequestListener<Payment> listener) {
+    EMChargeRequest request = new EMChargeRequest(emPayment);
     spiceManager.execute(request, request.createCacheKey(), BCEApiService.CACHE_TIME,
             listener);
   }

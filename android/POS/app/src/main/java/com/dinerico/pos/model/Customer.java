@@ -19,17 +19,20 @@ public class Customer implements Serializable {
   private String customerId;
   @DatabaseField
   private String mobilePhone;
+  @DatabaseField
+  private String email;
+  @DatabaseField
+  private String name;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
+  private Address address;
+  @DatabaseField
+  private String telephone;
 
   public Customer() {
-
-  }
-
-  public boolean validate() throws ValidationError {
-    return isValidMobilePhone() && isValidCustomerId();
   }
 
   public boolean isValidCustomerId() throws ValidationError {
-    if (!Utils.isValidString(customerId) && customerId.length() < 10) {
+    if (!Utils.isValidString(customerId) || customerId.length() < 10) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidCustomerId);
       throw new ValidationError("CustomerId null, blank or incorrect size",
@@ -46,6 +49,77 @@ public class Customer implements Serializable {
               errorData);
     }
     return true;
+  }
+
+  public boolean isValidName() throws ValidationError {
+    if (!Utils.isValidString(name)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidCustomerName);
+      throw new ValidationError("Customer name null or blank", errorData);
+    }
+    return true;
+  }
+
+  public boolean isValidEmail() throws ValidationError {
+    if (!Utils.isValidString(email) || !Utils.isValidEmail(email)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidEmail);
+      throw new ValidationError("Email null or blank", errorData);
+    }
+    return true;
+  }
+
+  public boolean isValidTelephone() throws ValidationError {
+    if (!Utils.isValidString(telephone)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidTelephone);
+      throw new ValidationError("Telephone null or blank", errorData);
+    }
+    return true;
+  }
+
+  public boolean isValidAddress() throws ValidationError {
+    return address.isValidCalle();
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public String getTelephone() {
+    return telephone;
+  }
+
+  public void setTelephone(String telephone) {
+    this.telephone = telephone;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getCustomerId() {

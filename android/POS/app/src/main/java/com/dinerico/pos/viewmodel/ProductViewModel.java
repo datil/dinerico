@@ -3,6 +3,7 @@ package com.dinerico.pos.viewmodel;
 import android.graphics.Bitmap;
 
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.util.ImageHelper;
 import com.dinerico.pos.util.Utils;
@@ -27,6 +28,7 @@ public class ProductViewModel {
   }
 
   public Product saveProduct() {
+    model.setStore(Account.getInstance().getStore());
     return productDB.create(model);
   }
 

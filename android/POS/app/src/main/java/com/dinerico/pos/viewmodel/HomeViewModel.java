@@ -2,6 +2,7 @@ package com.dinerico.pos.viewmodel;
 
 import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
+import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Session;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class HomeViewModel {
     List<Session> list = sessionDB.getAll();
     if (list.size() > 0) {
       Session session = list.get(0);
-      Session.setInstance(session);
+      Account.setInstance(session.getAccount());
       return session;
     } else
       return null;

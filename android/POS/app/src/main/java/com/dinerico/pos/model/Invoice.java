@@ -1,38 +1,41 @@
 package com.dinerico.pos.model;
 
-import com.dinerico.pos.R;
-import com.dinerico.pos.exception.ValidationError;
-import com.dinerico.pos.util.Utils;
+import com.j256.ormlite.field.DatabaseField;
 
-import java.util.HashMap;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by josephleon on 10/10/14.
  */
-public class Invoice {
-
-  private String email;
+public class Invoice implements Serializable{
+  @DatabaseField (generatedId = true)
+  private int id;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
   private Customer customer;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
+  private Store store;
+  @DatabaseField
+  private int invoiceId;
+  @DatabaseField
+  private Date created;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
+  private Order order;
 
-  public boolean validate() throws ValidationError {
-    return isValidEmail() && customer.validate();
+  public Order getOrder() {
+    return order;
   }
 
-  public boolean isValidEmail() throws ValidationError {
-    if (!Utils.isValidString(email) || !Utils.isValidEmail(email)){
-      HashMap<String,Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.noValidEmail);
-      throw new ValidationError("Email null or blank", errorData);
-    }
-    return true;
+  public void setOrder(Order order) {
+    this.order = order;
   }
 
-  public String getEmail() {
-    return email;
+  public int getId() {
+    return id;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public Customer getCustomer() {
@@ -41,5 +44,29 @@ public class Invoice {
 
   public void setCustomer(Customer customer) {
     this.customer = customer;
+  }
+
+  public Store getStore() {
+    return store;
+  }
+
+  public void setStore(Store store) {
+    this.store = store;
+  }
+
+  public int getInvoiceId() {
+    return invoiceId;
+  }
+
+  public void setInvoiceId(int invoiceId) {
+    this.invoiceId = invoiceId;
+  }
+
+  public Date getCreated() {
+    return created;
+  }
+
+  public void setCreated(Date created) {
+    this.created = created;
   }
 }

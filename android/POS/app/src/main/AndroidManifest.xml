@@ -141,13 +141,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.ReceiptActivity" />
         </activity>
-        <activity
-            android:name=".view.ThanksActivity"
-            android:parentActivityName=".view.SuccessfulSaleActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dinerico.pos.view.SuccessfulSaleActivity" />
-        </activity>
     </application>
 
 </manifest>

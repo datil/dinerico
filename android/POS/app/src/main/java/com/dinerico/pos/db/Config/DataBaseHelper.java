@@ -6,9 +6,14 @@ import android.util.Log;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.model.Account;
-import com.dinerico.pos.model.Charge;
+import com.dinerico.pos.model.Address;
+import com.dinerico.pos.model.Customer;
+import com.dinerico.pos.model.Invoice;
+import com.dinerico.pos.model.Order;
+import com.dinerico.pos.model.OrderItem;
+import com.dinerico.pos.model.Payment;
+import com.dinerico.pos.model.PaymentType;
 import com.dinerico.pos.model.Product;
-import com.dinerico.pos.model.Sales;
 import com.dinerico.pos.model.Session;
 import com.dinerico.pos.model.Store;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -25,14 +30,19 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 10;
+  private static final int DATABASE_VERSION = 17;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
   private Dao<Product, Integer> productDAO = null;
   private Dao<Store, Integer> storeDAO = null;
-  private Dao<Sales, Integer> salesDAO = null;
-  private Dao<Charge, Integer> chargeDAO = null;
+  private Dao<PaymentType, Integer> paymentTypeDAO = null;
+  private Dao<OrderItem, Integer> orderItemDAO = null;
+  private Dao<Order, Integer> orderDAO = null;
+  private Dao<Customer, Integer> customerDAO = null;
+  private Dao<Invoice, Integer> invoiceDAO = null;
+  private Dao<Payment, Integer> paymentDAO = null;
+  private Dao<Address, Integer> addressDAO = null;
 
   public DataBaseHelper(Activity context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION,
@@ -46,9 +56,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.createTable(connectionSource, Session.class);
       TableUtils.createTable(connectionSource, Account.class);
       TableUtils.createTable(connectionSource, Product.class);
-//      TableUtils.createTable(connectionSource, Store.class);
-//      TableUtils.createTable(connectionSource, Sales.class);
-//      TableUtils.createTable(connectionSource, Charge.class);
+      TableUtils.createTable(connectionSource, Address.class);
+      TableUtils.createTable(connectionSource, Store.class);
+      TableUtils.createTable(connectionSource, Order.class);
+      TableUtils.createTable(connectionSource, OrderItem.class);
+      TableUtils.createTable(connectionSource, Payment.class);
+      TableUtils.createTable(connectionSource, PaymentType.class);
+      TableUtils.createTable(connectionSource, Invoice.class);
+      TableUtils.createTable(connectionSource, Customer.class);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getSimpleName(), "Can't create database", e);
       e.printStackTrace();
@@ -64,9 +79,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.dropTable(connectionSource, Session.class, true);
       TableUtils.dropTable(connectionSource, Account.class, true);
       TableUtils.dropTable(connectionSource, Product.class, true);
-//      TableUtils.dropTable(connectionSource, Store.class, true);
-//      TableUtils.dropTable(connectionSource, Sales.class, true);
-//      TableUtils.dropTable(connectionSource, Charge.class, true);
+      TableUtils.dropTable(connectionSource, Address.class, true);
+      TableUtils.dropTable(connectionSource, Store.class, true);
+      TableUtils.dropTable(connectionSource, Order.class, true);
+      TableUtils.dropTable(connectionSource, Payment.class, true);
+      TableUtils.dropTable(connectionSource, PaymentType.class, true);
+      TableUtils.dropTable(connectionSource, Invoice.class, true);
+      TableUtils.dropTable(connectionSource, OrderItem.class, true);
+      TableUtils.dropTable(connectionSource, Customer.class, true);
       onCreate(db);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getName(), "Can't drop databases", e);
@@ -101,17 +121,53 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     }
     return storeDAO;
   }
-  public Dao<Sales, Integer> getDaoSales() throws SQLException {
-    if (salesDAO == null) {
-      salesDAO = getDao(Sales.class);
+  public Dao<Order, Integer> getDaoOrder() throws SQLException {
+    if (orderDAO == null) {
+      orderDAO = getDao(Order.class);
     }
-    return salesDAO;
+    return orderDAO;
   }
-  public Dao<Charge, Integer> getDaoCharge() throws SQLException {
-    if (chargeDAO == null) {
-      chargeDAO = getDao(Charge.class);
+
+  public Dao<OrderItem, Integer> getDaoOrderItem() throws SQLException {
+    if (orderItemDAO == null) {
+      orderItemDAO = getDao(OrderItem.class);
     }
-    return chargeDAO;
+    return orderItemDAO;
+  }
+
+  public Dao<PaymentType, Integer> getDaoPaymentType() throws SQLException {
+    if (paymentTypeDAO == null) {
+      paymentTypeDAO = getDao(PaymentType.class);
+    }
+    return paymentTypeDAO;
+  }
+
+  public Dao<Invoice, Integer> getDaoInvoice() throws SQLException {
+    if (invoiceDAO == null) {
+      invoiceDAO = getDao(Invoice.class);
+    }
+    return invoiceDAO;
+  }
+
+  public Dao<Payment, Integer> getDaoPayment() throws SQLException {
+    if (paymentDAO == null) {
+      paymentDAO = getDao(Payment.class);
+    }
+    return paymentDAO;
+  }
+
+  public Dao<Customer, Integer> getDaoCustomer() throws SQLException {
+    if (customerDAO == null) {
+      customerDAO = getDao(Customer.class);
+    }
+    return customerDAO;
+  }
+
+  public Dao<Address, Integer> getDaoAddress() throws SQLException {
+    if (addressDAO == null) {
+      addressDAO = getDao(Address.class);
+    }
+    return addressDAO;
   }
 
   @Override
@@ -121,7 +177,12 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     accountDAO = null;
     productDAO = null;
     storeDAO = null;
-    salesDAO = null;
-    chargeDAO = null;
+    orderDAO = null;
+    paymentTypeDAO = null;
+    paymentDAO = null;
+    customerDAO = null;
+    orderItemDAO = null;
+    invoiceDAO = null;
+    addressDAO = null;
   }
 }

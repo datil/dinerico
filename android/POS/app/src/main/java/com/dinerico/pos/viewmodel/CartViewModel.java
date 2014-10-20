@@ -1,43 +1,42 @@
 package com.dinerico.pos.viewmodel;
 
-import com.dinerico.pos.model.Cart;
-import com.dinerico.pos.model.ItemCart;
-import com.dinerico.pos.model.Product;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
+import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.model.Order;
+import com.dinerico.pos.model.OrderItem;
 
 /**
  * Created by josephleon on 10/9/14.
  */
 public class CartViewModel {
 
-  private Cart cart;
+  private Order order;
 
+  private ProductDB productDB;
 
-  public CartViewModel(Map<Integer, ArrayList<Product>> productList) {
-    cart = Cart.getInstance(new ArrayList<ItemCart>());
-    initializeCart(cart, productList);
+  public CartViewModel(Order order, ProductDB productDB) {
+    this.productDB = productDB;
+    this.order = order;
   }
 
-  public Cart getCart() {
-    return cart;
-  }
-
-  public void setCart(Cart cart) {
-    this.cart = cart;
-  }
-
-  private Cart initializeCart(Cart cart, Map<Integer, ArrayList<Product>> productList) {
-    Iterator it = productList.entrySet().iterator();
-    while (it.hasNext()) {
-      Map.Entry pair = (Map.Entry) it.next();
-      ArrayList<Product> sameProductList = (ArrayList<Product>) pair.getValue();
-      ItemCart itemCart = new ItemCart(sameProductList);
-      cart.getItems().add(itemCart);
+  public void refreshOrder() {
+    float total = 0;
+    for (OrderItem item : order.getItems()) {
+      float subTotal = 0;
+      productDB.refresh(item.getProduct());
+      subTotal = item.getAmount() * item.getProduct().getPrice();
+      item.setTotal(subTotal);
+      total += item.getTotal();
     }
-    return cart;
+    order.setTotal(total);
+  }
+
+  public Order getOrder() {
+    refreshOrder();
+    return order;
+  }
+
+  public void setOrder(Order Order) {
+    this.order = Order;
   }
 
 }

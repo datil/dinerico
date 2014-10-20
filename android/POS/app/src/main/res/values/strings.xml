@@ -4,6 +4,8 @@
     <!-- Global -->
     <string name="appName">Dinérico</string>
     <string name="continues">Siguiente</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
 
     <!-- Home -->
     <string name="createAccount">Crear cuenta</string>
@@ -24,10 +26,11 @@
 
     <!-- Sign up -->
     <string name="signUp">Registrar</string>
+    <string name="signUpDe">Regístro</string>
     <string name="signUpDes">Regístrate y</string>
     <string name="signUpDes2">crea tu cuenta</string>
     <string name="ruc">R.U.C</string>
-    <string name="mobilePhone">Número de teléfono celular</string>
+    <string name="numeroCelular">Número de teléfono celular</string>
     <string name="email">Correo electrónico</string>
     <string name="initials">Contraseña</string>
     <string name="noValidRUC">El RUC ingresado no es válido</string>
@@ -50,7 +53,7 @@
     <string name="confirm">Confirmar</string>
     <string name="contributorDes">Confirma la información</string>
     <string name="contributorDes2">de tu negocio</string>
-    <string name="businessName">Razón Social:</string>
+    <string name="razonSocial">Razón Social:</string>
     <string name="commercialName">Nombre Comercial:</string>
     <string name="economicActivity">Actividad Económica Principal:</string>
     <string name="noValidCommercialName">El nombre comercial ingresado
@@ -60,7 +63,7 @@
     <string name="storeDes1">Elige el establecimiento que </string>
     <string name="storeDes2">deseas operar</string>
     <string name="storeList">TUS ESTABLECIMIENTOS REGISTRADOS</string>
-    <string name="address">Dirección, </string>
+    <string name="address">Dirección</string>
     <string name="localNumber">Establecimiento: </string>
 
     <!-- Tittle -->
@@ -108,6 +111,13 @@
     <string name="charge">Cobrar</string>
     <string name="customerId">Cédula</string>
     <string name="noValidCustomerId">La cédula ingresada no es válida</string>
+    <string name="noValidCustomerIdRUC">La cédula o RUC ingresado no es
+        válida</string>
+    <string name="noValidCustomerName">El nombre ingresado no es válido</string>
+    <string name="noValidAddress">La dirección ingresada no es válida</string>
+    <string name="noValidTelephone">El teléfono ingresado no es válido</string>
+    <string name="pin">PIN</string>
+    <string name="enterPin">Ingrese su PIN</string>
 
     <!-- Successfull Sale -->
     <string name="sucessfullSale">¡Venta exitosa!</string>
@@ -116,8 +126,15 @@
 
     <!-- Receipt -->
     <string name="newSale">Venta nueva</string>
-    <string name="receiptDes1">Introduce el <b>correo electrónico</b></string>
-    <string name="receiptDes2">al que deseas enviar</string>
+    <string name="receiptDes1">Datos para la factura</string>
+    <string name="finalConsumer">Consumidor final</string>
+    <string name="finalConsumerRUC">9999999999999</string>
+    <string name="nameAndLastName">Nombres y apellidos</string>
+    <string name="telephoneNumber">Número de teléfono</string>
+    <string name="yes">SÍ</string>
+    <string name="no">NO</string>
+    <string name="rucOrpersonalId">RUC o cédula</string>
+    <string name="send">Enviar</string>
     <string name="receiptSent">¡Comprobante enviado!</string>
 
     <!--Thaks-->

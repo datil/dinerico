@@ -1,7 +1,5 @@
 package com.dinerico.pos.view;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +31,8 @@ public class AccountActivity extends ActivityBase {
           .getSimpleName();
   public final static String CONTRIBUTOR = "contributor";
 
+  private final static String MESSAJE_TITTLE = "Registro";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -59,20 +59,20 @@ public class AccountActivity extends ActivityBase {
 
   private void getContributorInfo() {
     showProgressDialog();
-    viewModel.getDetailInfoAccount(Account.getInstance().getRUC(),
+    viewModel.getDetailInfoAccount(Account.getInstance().getStore().getRUC(),
             new RequestListener<Contributor>() {
               @Override
               public void onRequestFailure(SpiceException spiceException) {
                 dismissProgressDialog();
-                showMessage(spiceException.getMessage());
+                showMessage(spiceException.getMessage(),MESSAJE_TITTLE);
               }
 
               @Override
               public void onRequestSuccess(Contributor contributor) {
                 dismissProgressDialog();
-                Account.getInstance().setSpecialContributor(contributor
-                        .getClase());
-                Account.getInstance().setForcedAccounting(contributor
+                Account.getInstance().getStore().setContribuidorEspecial
+                        (contributor.getClase());
+                Account.getInstance().getStore().setObligadoContabilidad(contributor
                         .isObligadoContabilidad());
                 startContributorActivity(contributor);
                 Log.d(LOG_TAG, contributor.toString());
@@ -89,7 +89,7 @@ public class AccountActivity extends ActivityBase {
 
   private void startContributorInfoActivity() {
     try {
-      viewModel.getModel().validate();
+      viewModel.getAccount().validate();
       getContributorInfo();
     } catch (ValidationError e) {
       showExceptionError(e);
@@ -97,25 +97,10 @@ public class AccountActivity extends ActivityBase {
 
   }
 
-  public void showMessage(String message) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle(this.getResources().getString(R.string.signUpDes));
-    builder.setMessage(message);
-    builder.setCancelable(true);
-    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int id) {
-        dialog.cancel();
-      }
-    });
-
-    AlertDialog alert = builder.create();
-    alert.show();
-  }
-
   private void showExceptionError(ValidationError e) {
-    Log.e(AccountActivity.class.getSimpleName(), e.getMessage());
+    Log.e(LOG_TAG, e.getMessage());
     HashMap<String, Integer> errorData = e.getMapMessage();
-    showMessage(getResources().getString(errorData.get("userMessage")));
+    showMessage(getString(errorData.get("userMessage")), MESSAJE_TITTLE);
   }
 
   private class ViewHolder {

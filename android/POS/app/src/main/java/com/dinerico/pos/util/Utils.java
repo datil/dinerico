@@ -2,6 +2,9 @@ package com.dinerico.pos.util;
 
 import android.text.TextUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -30,6 +33,11 @@ public class Utils {
 
   public static String currencyFormatter(float number){
     return "$" + String.format(Locale.US, "%.02f", number);
+  }
+
+  public static String dateFormatter(Date date){
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    return dateFormat.format(date);
   }
 
 }

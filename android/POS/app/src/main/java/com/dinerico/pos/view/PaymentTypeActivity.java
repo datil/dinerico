@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
-import com.dinerico.pos.model.Cart;
+import com.dinerico.pos.model.Order;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.util.Utils;
 
@@ -18,18 +18,17 @@ public class PaymentTypeActivity extends ActivityBase {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_payment_type);
-    setUpActionBar();
-
     view = new ViewHolder();
+    setUpActionBar();
   }
 
   private void setUpActionBar(){
     hideActionBarComponents();
     View actionBar = getLayoutInflater().inflate(R.layout.action_bar_single_tittle,
             null);
-    view.totalAmount = (TextView)actionBar.findViewById(R.id.tittle);
-    String total = Utils.currencyFormatter(Cart.getInstance(null).getTotal());
-    view.totalAmount.setText(total);
+    TextView totalAmount = (TextView)actionBar.findViewById(R.id.tittle);
+    String total = Utils.currencyFormatter(Order.getInstance().getTotal());
+    totalAmount.setText(total);
     getActionBar().setCustomView(actionBar);
   }
 
@@ -46,7 +45,6 @@ public class PaymentTypeActivity extends ActivityBase {
   private class ViewHolder implements View.OnClickListener {
     public TextView electronicMoney;
     public TextView cash;
-    public TextView totalAmount;
 
     public ViewHolder() {
       findViews();

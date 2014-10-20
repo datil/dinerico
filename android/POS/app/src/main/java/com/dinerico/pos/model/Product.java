@@ -29,8 +29,8 @@ public class Product implements Serializable{
   private Bitmap image;
   @DatabaseField
   private int color;
-  @DatabaseField
-  private boolean isActive;
+  @DatabaseField(foreign = true, foreignAutoRefresh = true)
+  private Store store;
 
   public boolean validate() throws ValidationError {
     if (isValidName() && isValidPrice()) ;
@@ -55,20 +55,20 @@ public class Product implements Serializable{
     return true;
   }
 
+  public Store getStore() {
+    return store;
+  }
+
+  public void setStore(Store store) {
+    this.store = store;
+  }
+
   public Bitmap getImage() {
     return image;
   }
 
   public void setImage(Bitmap image) {
     this.image = image;
-  }
-
-  public boolean isActive() {
-    return isActive;
-  }
-
-  public void setActive(boolean isActive) {
-    this.isActive = isActive;
   }
 
   public int getColor() {
@@ -129,7 +129,6 @@ public class Product implements Serializable{
             "price=" + price + "'\n" +
             "image=" + image + "'\n" +
             "color=" + color + "'\n" +
-            "isActive=" + isActive + "'\n" +
             '}';
   }
 }

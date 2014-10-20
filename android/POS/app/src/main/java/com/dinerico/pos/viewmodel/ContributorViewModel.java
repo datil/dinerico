@@ -1,6 +1,7 @@
 package com.dinerico.pos.viewmodel;
 
 import com.dinerico.pos.model.Contributor;
+import com.dinerico.pos.model.Store;
 
 /**
  * Created by josephleon on 10/2/14.
@@ -8,10 +9,11 @@ import com.dinerico.pos.model.Contributor;
 public class ContributorViewModel {
 
   private String commercialName;
-  private Contributor model;
+  private Contributor contributor;
+  private Store store;
 
-  public ContributorViewModel(Contributor model) {
-    this.model = model;
+  public ContributorViewModel(Store model) {
+    this.store = model;
   }
 
   public String getCommercialName() {
@@ -20,15 +22,27 @@ public class ContributorViewModel {
 
   public void setCommercialName(String commercialName) {
     this.commercialName = commercialName;
-    model.setNombreComercial(commercialName);
+    store.setNombreComercial(commercialName);
   }
 
-  public Contributor getModel() {
-    return model;
+  public Store getStore() {
+    return store;
   }
 
-  public void setModel(Contributor model) {
-    this.commercialName = model.getNombreComercial();
-    this.model = model;
+  public void setStoreAndContributor(Contributor contributor) {
+    this.contributor = contributor;
+    this.commercialName = contributor.getNombreComercial();
+    store.setActividadPrincipal(contributor.getActividadPrincipal());
+    store.setNombreComercial(contributor.getNombreComercial());
+    store.setRazonSocial(contributor.getRazonSocial());
+    store.setObligadoContabilidad(contributor.isObligadoContabilidad());
+    store.setEstado(contributor.getEstado());
+    store.setContribuidorEspecial(contributor.getClase());
+    store.setTipo(contributor.getTipo());
   }
+
+  public Contributor getContributor() {
+    return contributor;
+  }
+
 }

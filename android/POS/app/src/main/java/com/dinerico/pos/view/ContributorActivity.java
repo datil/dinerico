@@ -30,9 +30,9 @@ public class ContributorActivity extends ActivityBase {
     setContentView(R.layout.activity_contributor);
     setUpActionBar();
     Contributor contributor = getContributor(getIntent());
-    viewModel = new ContributorViewModel(new Contributor());
+    viewModel = new ContributorViewModel(Account.getInstance().getStore());
     view = new ViewHolder();
-    viewModel.setModel(contributor);
+    viewModel.setStoreAndContributor(contributor);
     showContributorInfo(contributor);
   }
 
@@ -63,12 +63,12 @@ public class ContributorActivity extends ActivityBase {
 
   private void confirmContributorInfo() {
     try {
-      viewModel.getModel().validate();
+      viewModel.getStore().validate();
       Intent intent = new Intent(ContributorActivity.this, StoreActivity.class);
-      intent.putExtra(CONTRIBUTOR, viewModel.getModel());
+      intent.putExtra(CONTRIBUTOR, viewModel.getContributor());
       startActivity(intent);
     } catch (ValidationError e) {
-      showErrorValidation(e, this);
+      showErrorValidation(e);
     }
 
   }
@@ -97,7 +97,6 @@ public class ContributorActivity extends ActivityBase {
         @Override
         public void call(String string) {
           viewModel.setCommercialName(string);
-          Account.getInstance().setCommercialName(string);
         }
       });
     }

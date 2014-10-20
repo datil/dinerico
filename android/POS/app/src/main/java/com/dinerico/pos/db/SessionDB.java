@@ -59,4 +59,17 @@ public class SessionDB {
       return Collections.EMPTY_LIST;
     }
   }
+
+  public List<Session> queryByEmail(String email){
+    try {
+      List<Session> list = dbHelperORMLite.getDaoSession().queryForEq("email",email);
+      Log.d(LOG_TAG, "Account list: \n" + list);
+      return list;
+    } catch (java.sql.SQLException e) {
+      Log.e(LOG_TAG, "Error on query Account by email");
+      e.printStackTrace();
+      return Collections.EMPTY_LIST;
+    }
+  }
+
 }

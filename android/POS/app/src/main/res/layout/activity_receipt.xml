@@ -1,65 +1,70 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.dinerico.pos.view.ReceiptActivity"
-                android:background="@color/white">
-
-    <ImageView
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/receipt"
-        android:id="@+id/img"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:fontFamily="sans-serif-light"
-        android:layout_marginTop="15sp"
-        android:textSize="18sp"
-        android:text="@string/receiptDes1"
-        style="@style/HeaderTittle"
-        android:layout_below="@+id/img"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
-        android:text="@string/receiptDes2"
-        style="@style/HeaderTittle"
-        android:layout_below="@+id/textView"/>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dinerico.pos.view.ReceiptActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/textView2"
-        android:layout_marginRight="@dimen/doubleMargin"
-        android:layout_marginLeft="@dimen/doubleMargin"
-        android:background="@drawable/underline_gray_back_white">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:id="@+id/textView"
+            android:fontFamily="sans-serif-light"
+            android:textSize="18sp"
+            android:text="@string/receiptDes1"
+            style="@style/HeaderTittle"/>
+
+        <Switch
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:text="@string/finalConsumer"
+            android:id="@+id/switch1"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textOff="@string/no"
+            android:textOn="@string/yes"
+            style="@style/LabelForm"/>
 
         <EditText
             android:inputType="textEmailAddress"
-            android:layout_margin="1dp"
             android:id="@+id/email"
+            android:layout_marginTop="30dp"
+            android:hint="@string/emailAddress"
             style="@style/EditTextForm"
-            android:layout_width="wrap_content"
-            android:background="@color/white"
-            android:hint="@string/emailAddress"/>
+            android:layout_below="@id/switch1"/>
 
-        <ImageView
-            android:id="@+id/sendEmail"
-            android:layout_gravity="right"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/arrow_right_green"
-            android:layout_alignTop="@+id/email"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+        <EditText
+            android:inputType="number"
+            android:id="@+id/customerId"
+            android:hint="@string/rucOrpersonalId"
+            style="@style/EditTextForm"
+            android:layout_below="@id/email"/>
 
-        </RelativeLayout>
+        <EditText
+            android:inputType="textCapWords"
+            android:id="@+id/name"
+            android:hint="@string/nameAndLastName"
+            style="@style/EditTextForm"
+            android:layout_below="@id/customerId"/>
+
+        <EditText
+            android:id="@+id/address"
+            android:hint="@string/address"
+            style="@style/EditTextForm"
+            android:layout_below="@id/name"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/telephoneNumber"
+            android:hint="@string/telephoneNumber"
+            style="@style/EditTextForm"
+            android:layout_below="@id/address"/>
 
 
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

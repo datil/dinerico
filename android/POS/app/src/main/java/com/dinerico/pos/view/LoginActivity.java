@@ -9,7 +9,7 @@ import com.dinerico.pos.R;
 import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.exception.ValidationError;
-import com.dinerico.pos.model.Login;
+import com.dinerico.pos.model.Account;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.network.service.LoginService;
 import com.dinerico.pos.viewmodel.LoginViewModel;
@@ -22,12 +22,14 @@ public class LoginActivity extends ActivityBase {
   private LoginViewModel viewModel;
   private ViewHolder viewHolder;
 
+  private final static String MESSAJE_TITTLE = "Inicio de sesión";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
     setUpActionBar();
-    viewModel = new LoginViewModel(new Login(), new LoginService(),
+    viewModel = new LoginViewModel(new Account(), new LoginService(),
             new SessionDB(this), new AccountDB(this));
     viewHolder = new ViewHolder();
   }
@@ -51,10 +53,10 @@ public class LoginActivity extends ActivityBase {
       if(viewModel.login())
         startWelcomeActivity();
       else
-        showMessage(getString(R.string.autenticationFailed),this);
+        showMessage(getString(R.string.autenticationFailed), MESSAJE_TITTLE);
 
     } catch (ValidationError e) {
-      showErrorValidation(e, this);
+      showErrorValidation(e);
     }
   }
 

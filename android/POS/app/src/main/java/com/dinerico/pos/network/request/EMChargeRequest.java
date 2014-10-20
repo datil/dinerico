@@ -1,7 +1,6 @@
 package com.dinerico.pos.network.request;
 
-import com.dinerico.pos.model.EMCharge;
-import com.dinerico.pos.model.EMChargeReceipt;
+import com.dinerico.pos.model.Payment;
 import com.dinerico.pos.network.config.BCERouter;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
@@ -11,22 +10,22 @@ import roboguice.util.temp.Ln;
  * Created by josephleon on 10/11/14.
  */
 
-public class EMChargeRequest extends RetrofitSpiceRequest<EMChargeReceipt, BCERouter> {
+public class EMChargeRequest extends RetrofitSpiceRequest<Payment, BCERouter> {
 
-  private EMCharge emCharge;
+  private Payment emPayment;
 
-  public EMChargeRequest(EMCharge emCharge) {
-    super(EMChargeReceipt.class, BCERouter.class);
-    this.emCharge = emCharge;
+  public EMChargeRequest(Payment emPayment) {
+    super(Payment.class, BCERouter.class);
+    this.emPayment = emPayment;
   }
 
   @Override
-  public EMChargeReceipt loadDataFromNetwork() {
+  public Payment loadDataFromNetwork() {
     Ln.d("Call web service ");
-    return getService().chargeElectronicMoney(emCharge);
+    return getService().chargeElectronicMoney(emPayment);
   }
 
   public String createCacheKey() {
-    return "charge." + emCharge.toString();
+    return "charge." + emPayment.toString();
   }
 }

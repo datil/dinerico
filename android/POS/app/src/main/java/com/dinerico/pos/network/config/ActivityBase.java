@@ -75,9 +75,9 @@ public abstract class ActivityBase extends Activity {
       dialog.dismiss();
   }
 
-  public void showErrorValidation(ValidationError e, Activity activity) {
+  public void showErrorValidation(ValidationError e) {
     HashMap<String, Integer> errorData = e.getMapMessage();
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle(this.getResources().getString(R.string.validationErrorTittle));
     builder.setMessage(getResources().getString(errorData.get("userMessage")));
     builder.setCancelable(true);
@@ -91,9 +91,9 @@ public abstract class ActivityBase extends Activity {
     alert.show();
   }
 
-  public void showMessage(String message, Activity activity) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    builder.setTitle(activity.getTitle());
+  public void showMessage(String message, String tittle) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(tittle);
     builder.setMessage(message);
     builder.setCancelable(true);
     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

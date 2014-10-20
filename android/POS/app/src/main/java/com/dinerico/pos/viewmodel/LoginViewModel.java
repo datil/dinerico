@@ -4,7 +4,6 @@ import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.db.SessionDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
-import com.dinerico.pos.model.Login;
 import com.dinerico.pos.model.Session;
 import com.dinerico.pos.network.service.LoginService;
 
@@ -19,30 +18,22 @@ public class LoginViewModel {
   private String email;
   private String password;
 
-  private Login model;
+  private Account account;
 
-  private SessionDB sessionDB;
   private AccountDB accountDB;
+  private SessionDB sessionDB;
   private LoginService service;
 
-  public LoginViewModel(Login model, LoginService service,
+  public LoginViewModel(Account account, LoginService service,
                         SessionDB sessionDB, AccountDB accountDB) {
-    this.model = model;
+    this.account = account;
     this.service = service;
     this.sessionDB = sessionDB;
     this.accountDB = accountDB;
   }
 
-  public Account getAccount() {
-    List<Account> list = accountDB.getAll();
-    int size = list.size();
-    if (size > 0)
-      return list.get(size);
-    else return null;
-  }
-
   public boolean login() throws ValidationError {
-    model.validate();
+    account.validate();
     List<Account> list = accountDB.queryByEmail(email);
     int size = list.size();
     if (size == 0)
@@ -53,6 +44,8 @@ public class LoginViewModel {
       Calendar c = Calendar.getInstance();
       Session sessionFake = new Session();
       sessionFake.setCreated(c.toString());
+      sessionFake.setAccount(account);
+      Account.getInstance().setSession(sessionFake);
       sessionDB.create(sessionFake);
       return true;
     } else
@@ -65,7 +58,7 @@ public class LoginViewModel {
 
   public void setEmail(String email) {
     this.email = email;
-    model.setEmail(email);
+    account.setEmail(email);
   }
 
   public String getPassword() {
@@ -73,12 +66,16 @@ public class LoginViewModel {
   }
 
   public void setPassword(String password) {
-    model.setPassword(password);
+    account.setPassword(password);
     this.password = password;
   }
 
-  public Login getModel() {
-    return model;
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
   }
 
   @Override

@@ -1,5 +1,7 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.model.Address;
+import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.network.service.InvoiceService;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -9,13 +11,21 @@ import com.octo.android.robospice.request.listener.RequestListener;
  */
 public class ReceiptViewModel {
 
+  private String email;
+  private String names;
+  private String address;
+  private String telephoneNumber;
+  private String customerId;
+
+
   private Invoice invoice;
+  private Customer customer;
   private InvoiceService service;
 
-  private String email;
-
-  public ReceiptViewModel(Invoice invoice, InvoiceService service) {
+  public ReceiptViewModel(Invoice invoice,Customer customer,
+                          InvoiceService service) {
     this.invoice = invoice;
+    this.customer = customer;
     this.service = service;
   }
 
@@ -36,6 +46,45 @@ public class ReceiptViewModel {
   }
 
   public void setEmail(String email) {
+    customer.setEmail(email);
     this.email = email;
+  }
+
+  public String getNames() {
+    return names;
+  }
+
+  public void setNames(String names) {
+    customer.setName(names);
+    this.names = names;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    Address address1 = new Address();
+    address1.setCalle(address);
+    customer.setAddress(address1);
+    this.address = address;
+  }
+
+  public String getTelephoneNumber() {
+    return telephoneNumber;
+  }
+
+  public void setTelephoneNumber(String telephoneNumber) {
+    customer.setTelephone(telephoneNumber);
+    this.telephoneNumber = telephoneNumber;
+  }
+
+  public String getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(String customerId) {
+    customer.setCustomerId(customerId);
+    this.customerId = customerId;
   }
 }

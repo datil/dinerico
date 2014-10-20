@@ -1,11 +1,12 @@
 package com.dinerico.pos.network.config;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
@@ -27,6 +28,10 @@ public abstract class FragmentActivityBase extends FragmentActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     spiceManager = new SpiceManager(ApiService.class);
+    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+    getActionBar().setIcon(R.drawable.logo);
+    getActionBar().setDisplayShowTitleEnabled(false);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
   }
 
@@ -71,9 +76,9 @@ public abstract class FragmentActivityBase extends FragmentActivity {
       dialog.dismiss();
   }
 
-  public void showErrorValidation(ValidationError e, Activity activity) {
+  public void showErrorValidation(ValidationError e) {
     HashMap<String, Integer> errorData = e.getMapMessage();
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle(this.getResources().getString(R.string.validationErrorTittle));
     builder.setMessage(getResources().getString(errorData.get("userMessage")));
     builder.setCancelable(true);
@@ -87,9 +92,9 @@ public abstract class FragmentActivityBase extends FragmentActivity {
     alert.show();
   }
 
-  public void showMessage(String message, Activity activity) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    builder.setTitle(activity.getTitle());
+  public void showMessage(String message, String tittle) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(tittle);
     builder.setMessage(message);
     builder.setCancelable(true);
     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

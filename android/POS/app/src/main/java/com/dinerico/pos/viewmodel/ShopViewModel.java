@@ -1,10 +1,22 @@
 package com.dinerico.pos.viewmodel;
 
+import android.app.Activity;
+import android.content.Intent;
+
+import com.dinerico.pos.db.OrderDB;
+import com.dinerico.pos.db.OrderItemDB;
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.db.SessionDB;
+import com.dinerico.pos.model.Account;
+import com.dinerico.pos.model.Order;
+import com.dinerico.pos.model.OrderItem;
 import com.dinerico.pos.model.Product;
+import com.dinerico.pos.view.HomeActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -12,44 +24,70 @@ import java.util.Map;
  */
 public class ShopViewModel {
 
+  private Order order;
   private ArrayList<Product> catalog;
-  private Map<Integer, ArrayList<Product>> cart;
+  private Map<Integer, ArrayList<Product>> cartMap;
   private String search;
   private int counter;
 
-  private static ShopViewModel shop;
-
+  private OrderDB orderDB;
+  private OrderItemDB orderItemDB;
   private ProductDB productDB;
 
-  public static ShopViewModel getInstance(ProductDB productDB) {
-    if (shop == null)
-      shop = new ShopViewModel(productDB);
-    return shop;
-  }
-
-  public static void reset() {
-    shop = null;
-  }
-
-  public ShopViewModel(ProductDB productDB) {
-    this.cart = new HashMap<Integer, ArrayList<Product>>();
+  public ShopViewModel(Order order, ProductDB productDB,
+                       OrderItemDB orderItemDB, OrderDB orderDB) {
+    this.order = order;
+    this.cartMap = new HashMap<Integer, ArrayList<Product>>();
     this.productDB = productDB;
+    this.orderDB = orderDB;
+    this.orderItemDB = orderItemDB;
     this.catalog = (ArrayList) productDB.getAll();
     this.counter = 0;
   }
 
+  public boolean logout(Activity activity) {
+    SessionDB sessionDB = new SessionDB(activity);
+    sessionDB.delete(Account.getInstance().getSession().getRowId());
+    Intent intent = new Intent(activity, HomeActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent
+            .FLAG_ACTIVITY_CLEAR_TASK);
+    activity.startActivity(intent);
+    activity.finish();
+    Account.reset();
+    return true;
+  }
+
+
   public boolean addToCart(Product product) {
     product.setImageByte(null);
     product.setImage(null);
-    ArrayList<Product> sameProductList = cart.get(product.getId());
+    ArrayList<Product> sameProductList = cartMap.get(product.getId());
     if (sameProductList != null)
       return sameProductList.add(product);
     else {
       sameProductList = new ArrayList<Product>();
-       sameProductList.add(product);
-      cart.put(product.getId(),sameProductList);
+      sameProductList.add(product);
+      cartMap.put(product.getId(), sameProductList);
       return true;
     }
+  }
+
+  public Order generateOrder() {
+    Order.reset();
+    order = Order.getInstance();
+    Iterator it = cartMap.entrySet().iterator();
+    float total = 0;
+    order.setCreated(new Date());
+    while (it.hasNext()) {
+      Map.Entry pair = (Map.Entry) it.next();
+      ArrayList<Product> sameProductList = (ArrayList<Product>) pair.getValue();
+      OrderItem orderItem = new OrderItem(sameProductList, order);
+      order.getItems().add(orderItem);
+      total += orderItem.getTotal();
+    }
+    order.setTotal(total);
+    return order;
+
   }
 
   public String getSearch() {
@@ -69,12 +107,12 @@ public class ShopViewModel {
     this.catalog = catalog;
   }
 
-  public Map<Integer, ArrayList<Product>> getCart() {
-    return cart;
+  public Map<Integer, ArrayList<Product>> getCartMap() {
+    return cartMap;
   }
 
-  public void setCart(Map<Integer, ArrayList<Product>> cart) {
-    this.cart = cart;
+  public void setCartMap(Map<Integer, ArrayList<Product>> cartMap) {
+    this.cartMap = cartMap;
   }
 
   public ProductDB getProductDB() {

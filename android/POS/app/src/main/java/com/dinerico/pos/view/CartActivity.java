@@ -12,16 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinerico.pos.R;
-import com.dinerico.pos.model.Cart;
-import com.dinerico.pos.model.ItemCart;
-import com.dinerico.pos.model.Product;
+import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.model.Order;
+import com.dinerico.pos.model.OrderItem;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.util.Utils;
 import com.dinerico.pos.viewmodel.CartViewModel;
-import com.dinerico.pos.viewmodel.ShopViewModel;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Iterator;
 
 public class CartActivity extends ActivityBase {
 
@@ -33,16 +32,14 @@ public class CartActivity extends ActivityBase {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cart);
     setUpActionBar();
-    Map<Integer, ArrayList<Product>> shopCartMap = (Map<Integer,
-            ArrayList<Product>>) getIntent().getSerializableExtra
-            (ShopActivity.CART);
-    viewModel = new CartViewModel(shopCartMap);
+    viewModel = new CartViewModel(Order.getInstance(), new ProductDB(this));
     view = new ViewHolder();
-    showListItems(viewModel.getCart(), (LinearLayout) view.itemList);
-    showTotals(view.charge, view.totalBill, viewModel.getCart().getTotal());
+    showListItems(viewModel.getOrder(), (LinearLayout) view.itemList);
+    showTotals(view.charge, view.totalBill, viewModel.getOrder().getTotal());
+
   }
 
-  private void setUpActionBar(){
+  private void setUpActionBar() {
     hideActionBarComponents();
     View actionBar = getLayoutInflater().inflate(R.layout.action_bar_catalog,
             null);
@@ -53,18 +50,19 @@ public class CartActivity extends ActivityBase {
         cleanCart();
       }
     });
-    TextView action = (TextView)actionBar.findViewById(R.id.action);
+    TextView action = (TextView) actionBar.findViewById(R.id.action);
     action.setText(getString(R.string.deleteSale));
 
-    ImageView actionImg = (ImageView)actionBar.findViewById(R.id.actionImg);
+    ImageView actionImg = (ImageView) actionBar.findViewById(R.id.actionImg);
     actionImg.setImageResource(R.drawable.delete_sale);
 
     getActionBar().setCustomView(actionBar);
   }
 
   private void cleanCart() {
-    ShopViewModel.reset();
+    Order.reset();
     Toast.makeText(this, "Venta eliminada", Toast.LENGTH_SHORT).show();
+    setResult(RESULT_OK, null);
     finish();
   }
 
@@ -76,29 +74,39 @@ public class CartActivity extends ActivityBase {
     charge.setText(chargeAmount);
   }
 
-
   private void charge() {
     Intent intent = new Intent(this, PaymentTypeActivity.class);
     startActivity(intent);
   }
 
-  private void showListItems(Cart cart, LinearLayout list) {
+  private void showListItems(Order cart, LinearLayout list) {
 
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context
             .LAYOUT_INFLATER_SERVICE);
-    ArrayList<ItemCart> items = cart.getItems();
+//    ForeignCollection<OrderItem> items = cart.getItemsOnDB();
+        ArrayList<OrderItem> items = cart.getItems();
+    if (items != null) {
+//      CloseableIterator<OrderItem> iterator = items.closeableIterator();
+      Iterator<OrderItem> iterator = items.iterator();
+      while (iterator.hasNext()) {
+        OrderItem item = iterator.next();
+        View rowView = inflater.inflate(R.layout.item_bill, null);
+        TextView productName = (TextView) rowView.findViewById(R.id.name);
+        productName.setText(item.getProduct().getName());
+        TextView amount = (TextView) rowView.findViewById(R.id.amount);
+        amount.setText("(x" + item.getAmount() + ")");
+        TextView price = (TextView) rowView.findViewById(R.id.price);
+        price.setText(Utils.currencyFormatter(item.getTotal()));
+        list.addView(rowView);
+      }
 
-    for (int position = 0; position < items.size(); position++) {
-      ItemCart item = items.get(position);
-      View rowView = inflater.inflate(R.layout.item_bill, null);
-      TextView productName = (TextView) rowView.findViewById(R.id.name);
-      productName.setText(item.getProduct().getName());
-      TextView amount = (TextView) rowView.findViewById(R.id.amount);
-      amount.setText("(x" + item.getAmount() + ")");
-      TextView price = (TextView) rowView.findViewById(R.id.price);
-      price.setText(Utils.currencyFormatter(item.getItemTotal()));
-      list.addView(rowView);
+//      try {
+//        iterator.close();
+//      } catch (SQLException e) {
+//        e.printStackTrace();
+//      }
     }
+
   }
 
   private class ViewHolder implements View.OnClickListener {

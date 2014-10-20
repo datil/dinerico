@@ -12,13 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.OrderDB;
+import com.dinerico.pos.db.OrderItemDB;
 import com.dinerico.pos.db.ProductDB;
 import com.dinerico.pos.model.Account;
+import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.ShopViewModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import rx.android.Events;
@@ -31,18 +33,16 @@ public class ShopActivity extends ActivityBase {
 
   private ProductsListViewAdapter adapter;
 
-  public final static String CART = "cart";
+  public final static int DELETED_SALE = 101;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_shop);
-    setUpActionBar();
-    viewModel = ShopViewModel.getInstance(new ProductDB(this));
-    view = new ViewHolder();
+    viewModel = new ShopViewModel(Order.getInstance(),new ProductDB(this),
+            new OrderItemDB(this), new OrderDB(this));
   }
 
-  private void setUpActionBar(){
+  private void setUpActionBar() {
     hideActionBarComponents();
     View actionBar = getLayoutInflater().inflate(R.layout.action_bar_shop,
             null);
@@ -53,8 +53,8 @@ public class ShopActivity extends ActivityBase {
         startCatalog();
       }
     });
-    TextView tittle = (TextView)actionBar.findViewById(R.id.titleText);
-    tittle.setText(Account.getInstance().getCommercialName());
+    TextView tittle = (TextView) actionBar.findViewById(R.id.titleText);
+    tittle.setText(Account.getInstance().getStore().getNombreComercial());
     getActionBar().setCustomView(actionBar);
   }
 
@@ -62,6 +62,10 @@ public class ShopActivity extends ActivityBase {
   @Override
   protected void onResume() {
     super.onResume();
+    setContentView(R.layout.activity_shop);
+    setUpActionBar();
+
+    view = new ViewHolder();
     ArrayList<Product> catalog = viewModel.getCatalog();
     if (!catalog.isEmpty()) {
       view.addImage.setVisibility(View.INVISIBLE);
@@ -86,8 +90,18 @@ public class ShopActivity extends ActivityBase {
   private void startCart() {
     System.gc();
     Intent intent = new Intent(this, CartActivity.class);
-    intent.putExtra(CART, (Serializable) viewModel.getCart());
-    startActivity(intent);
+    System.out.println(viewModel.generateOrder());
+    startActivityForResult(intent, DELETED_SALE);
+//    startActivity(intent);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode,
+                                  Intent data) {
+    if (requestCode == DELETED_SALE && resultCode == RESULT_OK) {
+      viewModel = new ShopViewModel(Order.getInstance(),new ProductDB(this),
+              new OrderItemDB(this), new OrderDB(this));
+    }
   }
 
   @Override
@@ -100,7 +114,7 @@ public class ShopActivity extends ActivityBase {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.logout:
-        Account.logout(this);
+        viewModel.logout(this);
         return true;
       default:
         return super.onOptionsItemSelected(item);
@@ -128,11 +142,12 @@ public class ShopActivity extends ActivityBase {
       addImage = findViewById(R.id.addImage);
       productList = (ListView) findViewById(R.id.listView);
       productList.setOnItemClickListener(this);
-      adapter = new ProductsListViewAdapter(ShopActivity.this,viewModel.getCatalog());
+      adapter = new ProductsListViewAdapter(ShopActivity.this,
+              viewModel.getCatalog());
       productList.setAdapter(adapter);
       headerList = findViewById(R.id.headerList);
       counter = (TextView) findViewById(R.id.counter);
-      counter.setText("("+viewModel.getCounter()+")");
+      counter.setText("(" + viewModel.getCounter() + ")");
     }
 
     private void subscribeToViewComponents() {
@@ -154,14 +169,14 @@ public class ShopActivity extends ActivityBase {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view,
-                            int position,long l) {
+                            int position, long l) {
       Product product = viewModel.getCatalog().get(position);
       viewModel.addToCart(product);
       Toast.makeText(ShopActivity.this, "Producto agregado",
               Toast.LENGTH_SHORT).show();
 
-      viewModel.setCounter(viewModel.getCounter()+1);
-      counter.setText("("+viewModel.getCounter()+")");
+      viewModel.setCounter(viewModel.getCounter() + 1);
+      counter.setText("(" + viewModel.getCounter() + ")");
     }
   }
 }

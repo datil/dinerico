@@ -10,7 +10,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
  */
 public class AccountViewModel {
 
-  private Account model;
+  private Account account;
   private ContributorService service;
 
   private String ruc;
@@ -18,50 +18,53 @@ public class AccountViewModel {
   private String email;
   private String password;
 
-  public AccountViewModel(Account model, ContributorService service) {
-    this.model = model;
+  public AccountViewModel(Account account,
+                          ContributorService service) {
+    this.account = account;
     this.service = service;
   }
 
-  public void getDetailInfoAccount(String ruc,RequestListener<Contributor> listener) {
+  public void getDetailInfoAccount(String ruc, RequestListener<Contributor>
+          listener) {
     service.getInfo(ruc, listener);
   }
 
   public void setRuc(String ruc) {
     this.ruc = ruc;
-    model.setRUC(ruc);
+    account.getStore().setRUC(ruc);
   }
 
   public void setMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
-    model.setMobilePhone(mobilePhone);
+    account.getStore().setNumeroCelular(mobilePhone);
   }
 
   public void setEmail(String email) {
     this.email = email;
-    model.setEmail(email);
+    account.setEmail(email);
   }
 
   public void setPassword(String password) {
     this.password = password;
-    model.setPassword(password);
+    account.setPassword(password);
   }
 
-  public Account getModel() {
-    return model;
+  public Account getAccount() {
+    return account;
   }
+
 
   @Override
   public String toString() {
-    return "SignUpViewModel{ \n" +
-            "model=" + model +
+    return "AccountViewModel{ \n" +
+            "account=" + account + "'\n" +
+            "service=" + service + "'\n" +
             "ruc='" + ruc + "'\n" +
-            "sendReceipt='" + mobilePhone + "'\n" +
-            "customerId='" + email + "'\n" +
+            "mobilePhone='" + mobilePhone + "'\n" +
+            "email='" + email + "'\n" +
             "password='" + password + "'\n" +
             '}';
   }
-
 }
 
 

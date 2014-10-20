@@ -1,16 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            tools:context="com.dinerico.pos.view.CustomerDataEMActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        tools:context="com.dinerico.pos.view.CustomerDataEMActivity">
-
+        android:layout_height="match_parent">
 
         <TextView
             android:text="@string/customerDataDes1"
@@ -25,6 +22,7 @@
             android:layout_below="@+id/header1"/>
 
         <EditText
+            android:maxLength="13"
             android:inputType="number"
             android:layout_marginTop="55dp"
             android:hint="@string/customerId"
@@ -33,8 +31,9 @@
             android:layout_below="@+id/header2"/>
 
         <EditText
+            android:maxLength="10"
             android:inputType="number"
-            android:hint="@string/mobilePhone"
+            android:hint="@string/numeroCelular"
             style="@style/EditTextForm"
             android:id="@+id/mobilePhone"
             android:layout_below="@+id/customerId"/>

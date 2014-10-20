@@ -11,16 +11,15 @@ import android.widget.TextView;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.db.AccountDB;
+import com.dinerico.pos.db.AddressDB;
 import com.dinerico.pos.db.SessionDB;
-import com.dinerico.pos.model.Account;
+import com.dinerico.pos.db.StoreDB;
 import com.dinerico.pos.model.Contributor;
-import com.dinerico.pos.model.Session;
 import com.dinerico.pos.model.Store;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.viewmodel.SignUpViewModel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class StoreActivity extends ActivityBase {
   private LinearLayout list;
@@ -33,7 +32,8 @@ public class StoreActivity extends ActivityBase {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_store);
     setUpActionBar();
-    viewModel = new SignUpViewModel(new AccountDB(this), new SessionDB(this));
+    viewModel = new SignUpViewModel(new AccountDB(this), new SessionDB(this),
+            new StoreDB(this), new AddressDB(this));
     Contributor contributor = (Contributor) getIntent().getSerializableExtra
             (ContributorActivity.CONTRIBUTOR);
     storeList = contributor.getEstablecimientos();
@@ -50,24 +50,14 @@ public class StoreActivity extends ActivityBase {
     actionContainer.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        saveAccountAndSession(storeList, list);
+        signUp(getSelectedStore(list));
       }
     });
     getActionBar().setCustomView(actionBar);
   }
 
-  private void saveAccountAndSession(ArrayList<Store> storeList,
-                                     LinearLayout list) {
-    Store store = getCheckedRadioButtonId(list);
-    Account.getInstance().setLocalNumber(store.getCodigo());
-    Account.getInstance().setAddress(store.getDireccion().getCalle());
-    Account.getInstance().setBusinessName(store.getNombreComercial());
-    viewModel.createAccount(Account.getInstance());
-    Calendar c = Calendar.getInstance();
-    Session sessionFake = new Session();
-    sessionFake.setCreated(c.toString());
-    viewModel.createSession(sessionFake);
-
+  private void signUp(Store store) {
+    viewModel.signUpOnDB(store);
     Intent intent = new Intent(StoreActivity.this,
             WelcomeActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent
@@ -75,12 +65,11 @@ public class StoreActivity extends ActivityBase {
     startActivity(intent);
   }
 
-  private Store getCheckedRadioButtonId(LinearLayout list) {
+  private Store getSelectedStore(LinearLayout list) {
     Store store = new Store();
     for (int i = 0; i < list.getChildCount(); i++) {
       View row = list.getChildAt(i);
-      RadioButton radioButton = (RadioButton) row.findViewById(R.id
-              .radioButton);
+      RadioButton radioButton = (RadioButton) row.findViewById(R.id.radioButton);
       if (radioButton.isChecked())
         store = (Store) radioButton.getTag();
     }

@@ -137,7 +137,7 @@ public class ProductActivity extends FragmentActivityBase {
       setResult(RESULT_OK);
       finish();
     } catch (ValidationError e) {
-      showErrorValidation(e, this);
+      showErrorValidation(e);
     }
   }
 

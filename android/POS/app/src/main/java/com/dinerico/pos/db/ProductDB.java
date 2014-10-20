@@ -6,6 +6,7 @@ import android.util.Log;
 import com.dinerico.pos.db.Config.DataBaseHelper;
 import com.dinerico.pos.model.Product;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,14 @@ public class ProductDB {
       e.printStackTrace();
       Log.e(LOG_TAG, "Error on get all product");
       return list;
+    }
+  }
+
+  public void refresh(Product product){
+    try {
+      dbHelperORMLite.getDaoProduct().refresh(product);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 }
