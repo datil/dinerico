@@ -12,7 +12,10 @@ import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.OrderItem;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.view.HomeActivity;
+import com.j256.ormlite.dao.CloseableIterator;
+import com.j256.ormlite.dao.ForeignCollection;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +28,6 @@ import java.util.Map;
 public class ShopViewModel {
 
   private Order order;
-  private ArrayList<Product> catalog;
   private Map<Integer, ArrayList<Product>> cartMap;
   private String search;
   private int counter;
@@ -41,7 +43,6 @@ public class ShopViewModel {
     this.productDB = productDB;
     this.orderDB = orderDB;
     this.orderItemDB = orderItemDB;
-    this.catalog = (ArrayList) productDB.getAll();
     this.counter = 0;
   }
 
@@ -99,13 +100,24 @@ public class ShopViewModel {
   }
 
   public ArrayList<Product> getCatalog() {
-    catalog = (ArrayList) productDB.getAll();
-    return catalog;
+    ForeignCollection<Product> products = Account.getInstance().getStore()
+            .getProducts();
+    ArrayList<Product> list = new ArrayList<Product>();
+    if (products != null) {
+      try {
+        CloseableIterator<Product> iterator = products.closeableIterator();
+        while (iterator.hasNext())
+          list.add(iterator.next());
+        iterator.close();
+        return list;
+      } catch (SQLException e) {
+        e.printStackTrace();
+        return list;
+      }
+    } else
+      return new ArrayList<Product>();
   }
 
-  public void setCatalog(ArrayList<Product> catalog) {
-    this.catalog = catalog;
-  }
 
   public Map<Integer, ArrayList<Product>> getCartMap() {
     return cartMap;

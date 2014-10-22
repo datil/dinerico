@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Contributor;
@@ -39,7 +40,7 @@ public class AccountActivity extends ActivityBase {
     setContentView(R.layout.activity_account);
     setUpActionBar();
     viewModel = new AccountViewModel(Account.getInstance(),
-            new ContributorService(getSpiceManager()));
+            new ContributorService(getSpiceManager()),new AccountDB(this));
     viewHolder = new ViewHolder();
   }
 
@@ -89,7 +90,7 @@ public class AccountActivity extends ActivityBase {
 
   private void startContributorInfoActivity() {
     try {
-      viewModel.getAccount().validate();
+      viewModel.validate();
       getContributorInfo();
     } catch (ValidationError e) {
       showExceptionError(e);

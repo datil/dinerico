@@ -1,9 +1,15 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.R;
+import com.dinerico.pos.db.AccountDB;
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.network.service.ContributorService;
 import com.octo.android.robospice.request.listener.RequestListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by josephleon on 9/30/14.
@@ -11,6 +17,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 public class AccountViewModel {
 
   private Account account;
+  private AccountDB accountDB;
   private ContributorService service;
 
   private String ruc;
@@ -19,14 +26,34 @@ public class AccountViewModel {
   private String password;
 
   public AccountViewModel(Account account,
-                          ContributorService service) {
+                          ContributorService service, AccountDB accountDB) {
     this.account = account;
     this.service = service;
+    this.accountDB = accountDB;
+  }
+
+  public boolean validate() throws ValidationError {
+    return account.isValidEmail() && !existsAccountWithSameEmail() && account
+            .isValidPassword() && account.getStore().isValidMobilePhone() &&
+            account.getStore().isValidRUC();
   }
 
   public void getDetailInfoAccount(String ruc, RequestListener<Contributor>
           listener) {
     service.getInfo(ruc, listener);
+  }
+
+  public boolean existsAccountWithSameEmail() throws ValidationError {
+    ArrayList<Account> list = (ArrayList) accountDB.queryByEmail(email);
+    if (list.isEmpty())
+      return false;
+    else {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.accountWithSameEmail);
+      throw new ValidationError("Exists a account with input email", errorData);
+
+    }
+
   }
 
   public void setRuc(String ruc) {

@@ -126,7 +126,6 @@ public class Session implements Serializable{
             "created='" + created + "'\n" +
             "object='" + object + "'\n" +
             "url='" + url + "'\n" +
-            "account=" + account + "'\n" +
             '}';
   }
 }

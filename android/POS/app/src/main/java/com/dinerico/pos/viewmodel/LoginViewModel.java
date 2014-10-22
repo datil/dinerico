@@ -38,7 +38,7 @@ public class LoginViewModel {
     int size = list.size();
     if (size == 0)
       return false;
-    Account account = list.get(size - 1);
+    Account account = list.get(0);
     if (account.getPassword().equals(password)) {
       Account.setInstance(account);
       Calendar c = Calendar.getInstance();

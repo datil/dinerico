@@ -41,8 +41,12 @@ public class Store implements Serializable{
   @ForeignCollectionField
   private ForeignCollection<Product> products;
 
-  public boolean validate() throws ValidationError {
-    if (isValidRUC() && isValidMobilePhone()) ;
+  public boolean isValidNombreComercial() throws ValidationError {
+    if (!Utils.isValidString(nombreComercial)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidCommercialName);
+      throw new ValidationError("Nombre comercial null or blank", errorData);
+    }
     return true;
   }
 

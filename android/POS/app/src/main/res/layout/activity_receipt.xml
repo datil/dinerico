@@ -39,6 +39,7 @@
             android:layout_below="@id/switch1"/>
 
         <EditText
+            android:maxLength="13"
             android:inputType="number"
             android:id="@+id/customerId"
             android:hint="@string/rucOrpersonalId"
@@ -59,12 +60,11 @@
             android:layout_below="@id/name"/>
 
         <EditText
+            android:maxLength="10"
             android:inputType="number"
             android:id="@+id/telephoneNumber"
             android:hint="@string/telephoneNumber"
             style="@style/EditTextForm"
             android:layout_below="@id/address"/>
-
-
     </RelativeLayout>
 </ScrollView>

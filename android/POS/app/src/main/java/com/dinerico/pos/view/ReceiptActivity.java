@@ -10,6 +10,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.network.config.ActivityBase;
@@ -22,9 +23,11 @@ import rx.functions.Action1;
 
 public class ReceiptActivity extends ActivityBase {
 
-  private String emailString;
   private ReceiptViewModel viewModel;
   private ViewHolder view;
+
+  private String backupCustomerid;
+  private String backupName;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +58,35 @@ public class ReceiptActivity extends ActivityBase {
     getActionBar().setCustomView(actionBar);
   }
 
-  private void finalCustomerOn() {
+  private void finalConsumerOn() {
+    viewModel.setFinalConsumer(true);
+
+    backupCustomerid = view.customerId.getText().toString();
+    backupName = view.names.getText().toString();
+
     view.telephoneNumber.setVisibility(View.INVISIBLE);
     view.address.setVisibility(View.INVISIBLE);
     view.customerId.setText(getString(R.string.finalConsumerRUC));
     view.names.setText(getString(R.string.finalConsumer));
   }
 
-  private void finalCustomerOff() {
+  private void finalConsumerOff() {
+    viewModel.setFinalConsumer(false);
     view.telephoneNumber.setVisibility(View.VISIBLE);
     view.address.setVisibility(View.VISIBLE);
-    view.customerId.setText("");
-    view.names.setText("");
+    view.customerId.setText(backupCustomerid);
+    view.names.setText(backupName);
   }
 
   private void sendReceiptByEmail() {
-    Intent intent = new Intent(this, ReceiptSentActivity.class);
-    startActivity(intent);
+    try {
+      viewModel.validate();
+      Intent intent = new Intent(this, ReceiptSentActivity.class);
+      startActivity(intent);
+    } catch (ValidationError e) {
+      showErrorValidation(e);
+    }
+
   }
 
   private class ViewHolder {
@@ -100,9 +115,9 @@ public class ReceiptActivity extends ActivityBase {
         public void onCheckedChanged(CompoundButton compoundButton,
                                      boolean checked) {
           if (checked)
-            finalCustomerOn();
+            finalConsumerOn();
           else
-            finalCustomerOff();
+            finalConsumerOff();
 
         }
       });

@@ -92,7 +92,6 @@ public class ShopActivity extends ActivityBase {
     Intent intent = new Intent(this, CartActivity.class);
     System.out.println(viewModel.generateOrder());
     startActivityForResult(intent, DELETED_SALE);
-//    startActivity(intent);
   }
 
   @Override

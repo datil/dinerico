@@ -79,17 +79,32 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
+        <Spinner
+            android:spinnerMode="dialog"
+            android:prompt="@string/iva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iva"
+            android:layout_below="@+id/price"
+            android:layout_marginTop="15dp"
+            android:layout_alignLeft="@+id/price"
+            android:layout_alignStart="@+id/price"
+            android:layout_alignRight="@+id/price"
+            android:layout_alignEnd="@+id/price"/>
+
+
         <Button
             android:layout_width="201dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="62dp"
             android:text="@string/delete"
             android:id="@+id/delete"
-            android:layout_below="@+id/price"
-            android:visibility="gone"
+            android:layout_below="@+id/iva"
+            android:visibility="invisible"
             android:layout_centerHorizontal="true"
             android:textColor="@color/white"
             android:background="@color/red"/>
+
 
     </RelativeLayout>
 </ScrollView>

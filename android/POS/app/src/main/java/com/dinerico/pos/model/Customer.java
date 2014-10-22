@@ -30,11 +30,10 @@ public class Customer implements Serializable {
 
   public Customer() {
   }
-
-  public boolean isValidCustomerId() throws ValidationError {
+    public boolean isValidCustomerId() throws ValidationError {
     if (!Utils.isValidString(customerId) || customerId.length() < 10) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
-      errorData.put("userMessage", R.string.noValidCustomerId);
+      errorData.put("userMessage", R.string.noValidCustomerIdRUC);
       throw new ValidationError("CustomerId null, blank or incorrect size",
               errorData);
     }

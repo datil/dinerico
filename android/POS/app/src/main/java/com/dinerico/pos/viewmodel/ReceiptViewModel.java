@@ -1,5 +1,6 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Address;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
@@ -16,20 +17,30 @@ public class ReceiptViewModel {
   private String address;
   private String telephoneNumber;
   private String customerId;
-
+  private boolean finalConsumer;
 
   private Invoice invoice;
   private Customer customer;
   private InvoiceService service;
 
-  public ReceiptViewModel(Invoice invoice,Customer customer,
+  public ReceiptViewModel(Invoice invoice, Customer customer,
                           InvoiceService service) {
     this.invoice = invoice;
     this.customer = customer;
     this.service = service;
   }
 
-  public void createInvoice(Invoice invoice, RequestListener listener){
+  public boolean validate() throws ValidationError {
+    if (finalConsumer)
+      return customer.isValidEmail() && customer.isValidCustomerId() && customer
+              .isValidName();
+    else
+      return customer.isValidEmail() && customer.isValidCustomerId() && customer
+              .isValidName() && customer.isValidAddress() && customer
+              .isValidTelephone();
+  }
+
+  public void createInvoice(Invoice invoice, RequestListener listener) {
     service.registerInvoice(invoice, listener);
   }
 
@@ -86,5 +97,13 @@ public class ReceiptViewModel {
   public void setCustomerId(String customerId) {
     customer.setCustomerId(customerId);
     this.customerId = customerId;
+  }
+
+  public boolean isFinalConsumer() {
+    return finalConsumer;
+  }
+
+  public void setFinalConsumer(boolean finalConsumer) {
+    this.finalConsumer = finalConsumer;
   }
 }

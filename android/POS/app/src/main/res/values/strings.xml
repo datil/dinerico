@@ -40,6 +40,8 @@
     <string name="noValidPassword">La contraseña ingresada no es
         válida</string>
     <string name="welcome">¡Bienvenido!</string>
+    <string name="accountWithSameEmail">Existe una cuenta con el mismo correo
+        electrónico</string>
 
     <!-- Shop -->
     <string name="search">Buscar</string>
@@ -80,6 +82,7 @@
     <string name="name">Nombre</string>
     <string name="editImage">Editar Imagen</string>
     <string name="setUpProduct">Configuración de Producto</string>
+    <string name="iva">% I.V.A.</string>
 
     <!-- Product Image -->
     <string name="options_to_image">Opciones para imagen</string>
@@ -118,6 +121,7 @@
     <string name="noValidTelephone">El teléfono ingresado no es válido</string>
     <string name="pin">PIN</string>
     <string name="enterPin">Ingrese su PIN</string>
+    <string name="noValidPin">El pin ingresado no es válido</string>
 
     <!-- Successfull Sale -->
     <string name="sucessfullSale">¡Venta exitosa!</string>

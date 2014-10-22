@@ -25,6 +25,7 @@ public class HomeViewModel {
     if (list.size() > 0) {
       Session session = list.get(0);
       Account.setInstance(session.getAccount());
+      Account.getInstance().setSession(session);
       return session;
     } else
       return null;

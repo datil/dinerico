@@ -3,17 +3,24 @@ package com.dinerico.pos.viewmodel;
 import android.graphics.Bitmap;
 
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.db.TaxProductDB;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Product;
+import com.dinerico.pos.model.Tax;
+import com.dinerico.pos.model.TaxProduct;
 import com.dinerico.pos.util.ImageHelper;
 import com.dinerico.pos.util.Utils;
+
+import java.util.ArrayList;
 
 /**
  * Created by josephleon on 10/3/14.
  */
 public class ProductViewModel {
 
-  private Product model;
+  private Product product;
+  private TaxProduct taxProduct;
+  private Tax iva;
 
   private String name;
   private String price;
@@ -21,51 +28,75 @@ public class ProductViewModel {
   private String initials;
 
   private ProductDB productDB;
+  private TaxProductDB taxProductDB;
 
-  public ProductViewModel(Product model, ProductDB productDB) {
-    this.model = model;
+  public ProductViewModel(Product product, TaxProduct taxProduct,
+                          ProductDB productDB,
+                          TaxProductDB taxProductDB) {
+    this.taxProductDB = taxProductDB;
+    this.taxProduct = taxProduct;
+    this.product = product;
     this.productDB = productDB;
+
+    this.taxProduct.setProduct(product);
+    this.product.setStore(Account.getInstance().getStore());
+  }
+
+  public Tax getTax(String tax) {
+    ArrayList<TaxProduct> list = (ArrayList) taxProductDB
+            .queryByProductAndTypeTax(product, tax);
+    return list.get(0).getTax();
   }
 
   public Product saveProduct() {
-    model.setStore(Account.getInstance().getStore());
-    return productDB.create(model);
+    Product p = productDB.create(product);
+    taxProductDB.create(taxProduct);
+    return p;
   }
 
   public void deleteProduct() {
-    productDB.delete(model.getId());
+    productDB.delete(product.getId());
+  }
+
+  public Tax getIva() {
+    return iva;
+  }
+
+  public void setIva(Tax iva) {
+    taxProduct.setTax(iva);
+    this.iva = iva;
   }
 
   public void setName(String name) {
     this.name = name;
-    model.setName(name);
+    product.setName(name);
   }
 
   public void setPrice(String price) {
     this.price = price;
-    if(Utils.isValidString(price))
-      model.setPrice(Float.parseFloat(price));
+    if (Utils.isValidString(price))
+      product.setPrice(Float.parseFloat(price));
     else
-      model.setPrice(Float.parseFloat("0.00"));
+      product.setPrice(Float.parseFloat("0.00"));
   }
 
   public void setImage(Bitmap image) {
     this.image = image;
-    model.setImage(image);
-    model.setImageByte(ImageHelper.getBytes(image));
+    product.setImage(image);
+    product.setImageByte(ImageHelper.getBytes(image));
   }
 
   public void setInitials(String initials) {
     this.initials = initials;
-    model.setInitials(initials);
+    product.setInitials(initials);
   }
 
-  public Product getModel() {
-    return model;
+  public Product getProduct() {
+    return product;
   }
 
-  public void setModel(Product model) {
-    this.model = model;
+  public void setProduct(Product product) {
+    this.product = product;
   }
 }
 

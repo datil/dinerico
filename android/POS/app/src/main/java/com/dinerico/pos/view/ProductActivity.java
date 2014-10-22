@@ -7,22 +7,29 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Selection;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.db.TaxProductDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Product;
+import com.dinerico.pos.model.Tax;
+import com.dinerico.pos.model.TaxProduct;
 import com.dinerico.pos.network.config.FragmentActivityBase;
+import com.dinerico.pos.util.CustomSpinnerAdapter;
 import com.dinerico.pos.util.ImageHelper;
 import com.dinerico.pos.viewmodel.ProductViewModel;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import rx.android.Events;
@@ -40,7 +47,8 @@ public class ProductActivity extends FragmentActivityBase {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_product);
     setUpActionBar();
-    viewModel = new ProductViewModel(new Product(), new ProductDB(this));
+    viewModel = new ProductViewModel(new Product(), new TaxProduct(),
+            new ProductDB(this), new TaxProductDB(this));
     view = new ViewHolder();
 
     Product product = (Product) getIntent().getSerializableExtra(CatalogActivity
@@ -50,9 +58,10 @@ public class ProductActivity extends FragmentActivityBase {
     }
   }
 
-  private void setUpActionBar(){
+  private void setUpActionBar() {
     hideActionBarComponents();
-    View actionBar = getLayoutInflater().inflate(R.layout.action_bar_simple_button,
+    View actionBar = getLayoutInflater().inflate(R.layout
+                    .action_bar_simple_button,
             null);
     View actionContainer = actionBar.findViewById(R.id.actionContainer);
     actionContainer.setOnClickListener(new View.OnClickListener() {
@@ -127,18 +136,34 @@ public class ProductActivity extends FragmentActivityBase {
       }
     }
     view.delete.setVisibility(View.VISIBLE);
-    viewModel.setModel(product);
+    viewModel.setProduct(product);
   }
 
   private void saveProduct() {
     try {
-      viewModel.getModel().validate();
+      viewModel.getProduct().validate();
       viewModel.saveProduct();
       setResult(RESULT_OK);
       finish();
     } catch (ValidationError e) {
       showErrorValidation(e);
     }
+  }
+
+  private ArrayList<Tax> taxList() {
+    Tax tax0 = new Tax("iva", "", "", 0, "% I.V.A.");
+    Tax tax1 = new Tax("iva", "", "0%", 0, "No incluye iva");
+    Tax tax2 = new Tax("iva", "", "12%", 12, "I.V.A. 12%");
+    Tax tax3 = new Tax("iva", "", "0%", 0, "I.V.A. 0%");
+    Tax tax4 = new Tax("iva", "", "0%", 0, "Excepto de iva");
+
+    ArrayList<Tax> list = new ArrayList<Tax>();
+    list.add(tax0);
+    list.add(tax1);
+    list.add(tax2);
+    list.add(tax3);
+    list.add(tax4);
+    return list;
   }
 
   private class ViewHolder implements View.OnClickListener {
@@ -149,13 +174,16 @@ public class ProductActivity extends FragmentActivityBase {
     public ImageView image;
     public View initialsImage;
     public TextView editImage;
+    public Spinner iva;
 
     public ViewHolder() {
       findViews();
       subscribeToViewComponents();
+      initializeSpinner();
     }
 
     private void findViews() {
+      iva = (Spinner) findViewById(R.id.iva);
       name = (EditText) findViewById(R.id.name);
       price = (EditText) findViewById(R.id.price);
       setUpInitialValuePrice(price);
@@ -170,7 +198,34 @@ public class ProductActivity extends FragmentActivityBase {
       editImage.setOnClickListener(this);
     }
 
-    private void setUpInitialValuePrice(final EditText price){
+    private void initializeSpinner() {
+      iva.setAdapter(
+              new CustomSpinnerAdapter(
+                      ProductActivity.this,
+                      R.layout.item_spinner,
+                      taxList()));
+      iva.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view,
+                                   int position, long l) {
+//          TextView description = (TextView) view.findViewById(R.id.description);
+//          TextView percentage = (TextView) view.findViewById(R.id.percentage);
+//          if (position == 0){
+//            description.setText("No incluye I.V.A.");
+//            percentage.setText("0%");
+//          }
+
+          viewModel.setIva(taxList().get(position));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+      });
+    }
+
+    private void setUpInitialValuePrice(final EditText price) {
       price.setText("0.00");
       price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
         @Override
@@ -259,6 +314,7 @@ public class ProductActivity extends FragmentActivityBase {
       }
 
     }
+
   }
 
 }

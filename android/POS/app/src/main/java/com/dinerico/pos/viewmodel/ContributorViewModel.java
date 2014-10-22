@@ -1,5 +1,6 @@
 package com.dinerico.pos.viewmodel;
 
+import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.model.Store;
 
@@ -23,6 +24,10 @@ public class ContributorViewModel {
   public void setCommercialName(String commercialName) {
     this.commercialName = commercialName;
     store.setNombreComercial(commercialName);
+  }
+
+  public boolean validate () throws ValidationError {
+    return store.isValidNombreComercial();
   }
 
   public Store getStore() {

@@ -16,6 +16,8 @@ import com.dinerico.pos.model.PaymentType;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.model.Session;
 import com.dinerico.pos.model.Store;
+import com.dinerico.pos.model.Tax;
+import com.dinerico.pos.model.TaxProduct;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -30,7 +32,7 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 17;
+  private static final int DATABASE_VERSION = 19;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
@@ -43,6 +45,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
   private Dao<Invoice, Integer> invoiceDAO = null;
   private Dao<Payment, Integer> paymentDAO = null;
   private Dao<Address, Integer> addressDAO = null;
+  private Dao<Tax, Integer> taxDAO = null;
+  private Dao<TaxProduct, Integer> taxProductDAO = null;
 
   public DataBaseHelper(Activity context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION,
@@ -64,6 +68,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.createTable(connectionSource, PaymentType.class);
       TableUtils.createTable(connectionSource, Invoice.class);
       TableUtils.createTable(connectionSource, Customer.class);
+      TableUtils.createTable(connectionSource, Tax.class);
+      TableUtils.createTable(connectionSource, TaxProduct.class);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getSimpleName(), "Can't create database", e);
       e.printStackTrace();
@@ -87,6 +93,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.dropTable(connectionSource, Invoice.class, true);
       TableUtils.dropTable(connectionSource, OrderItem.class, true);
       TableUtils.dropTable(connectionSource, Customer.class, true);
+      TableUtils.dropTable(connectionSource, Tax.class, true);
+      TableUtils.dropTable(connectionSource, TaxProduct.class, true);
       onCreate(db);
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getName(), "Can't drop databases", e);
@@ -170,6 +178,20 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     return addressDAO;
   }
 
+  public Dao<Tax, Integer> getDaoTax() throws SQLException {
+    if (taxDAO == null) {
+      taxDAO = getDao(Tax.class);
+    }
+    return taxDAO;
+  }
+
+  public Dao<TaxProduct, Integer> getDaoTaxProduct() throws SQLException {
+    if (taxProductDAO == null) {
+      taxProductDAO = getDao(TaxProduct.class);
+    }
+    return taxProductDAO;
+  }
+
   @Override
   public void close() {
     super.close();
@@ -184,5 +206,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
     orderItemDAO = null;
     invoiceDAO = null;
     addressDAO = null;
+    taxProductDAO = null;
+    taxDAO = null;
   }
 }

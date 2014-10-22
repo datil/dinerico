@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.util.Utils;
 
 /**
  * Created by josephleon on 10/20/14.
@@ -22,7 +23,7 @@ public class CustomerPINFragment extends DialogFragment {
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    activity = (CustomerDataEMActivity)getActivity();
+    activity = (CustomerDataEMActivity) getActivity();
 
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -35,12 +36,21 @@ public class CustomerPINFragment extends DialogFragment {
                     .OnClickListener() {
               @Override
               public void onClick(DialogInterface dialog, int id) {
-                activity.viewModel.setPin(pin.getText().toString());
-                Intent intent = new Intent(activity, SuccessfulSaleActivity.class);
-                startActivity(intent);
+                String ping = pin.getText().toString();
+                if (Utils.isValidString(ping)) {
+                  activity.viewModel.setPin(ping);
+                  Intent intent = new Intent(activity, SuccessfulSaleActivity
+                          .class);
+                  startActivity(intent);
+                } else
+                  ((CustomerDataEMActivity) getActivity()).showMessage
+                          (getString(R.string.noValidPin),
+                                  getString(R.string.validationErrorTittle));
+
               }
             })
-            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.cancel, new DialogInterface
+                    .OnClickListener() {
               public void onClick(DialogInterface dialog, int id) {
                 CustomerPINFragment.this.getDialog().cancel();
               }

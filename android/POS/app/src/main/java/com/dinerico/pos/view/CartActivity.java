@@ -83,10 +83,8 @@ public class CartActivity extends ActivityBase {
 
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context
             .LAYOUT_INFLATER_SERVICE);
-//    ForeignCollection<OrderItem> items = cart.getItemsOnDB();
         ArrayList<OrderItem> items = cart.getItems();
     if (items != null) {
-//      CloseableIterator<OrderItem> iterator = items.closeableIterator();
       Iterator<OrderItem> iterator = items.iterator();
       while (iterator.hasNext()) {
         OrderItem item = iterator.next();
@@ -99,12 +97,6 @@ public class CartActivity extends ActivityBase {
         price.setText(Utils.currencyFormatter(item.getTotal()));
         list.addView(rowView);
       }
-
-//      try {
-//        iterator.close();
-//      } catch (SQLException e) {
-//        e.printStackTrace();
-//      }
     }
 
   }

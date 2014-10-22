@@ -63,7 +63,7 @@ public class ContributorActivity extends ActivityBase {
 
   private void confirmContributorInfo() {
     try {
-      viewModel.getStore().validate();
+      viewModel.validate();
       Intent intent = new Intent(ContributorActivity.this, StoreActivity.class);
       intent.putExtra(CONTRIBUTOR, viewModel.getContributor());
       startActivity(intent);
