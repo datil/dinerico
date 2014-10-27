@@ -52,10 +52,13 @@ public class Account implements Serializable {
   }
 
   public Boolean isValidPassword() throws ValidationError {
+    HashMap<String, Integer> errorData = new HashMap<String, Integer>();
     if (!Utils.isValidString(password)) {
-      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidPassword);
       throw new ValidationError("Password null or blank", errorData);
+    } else if(password.length() < 7){
+      errorData.put("userMessage", R.string.passwordSevenChar);
+      throw new ValidationError("Password too small", errorData);
     }
     return true;
   }

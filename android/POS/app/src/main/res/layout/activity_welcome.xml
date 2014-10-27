@@ -19,7 +19,7 @@
             android:text="@string/welcome"
             android:textColor="@color/greenApp"
             android:textSize="34sp"
-            android:id="@+id/name"
+            android:id="@+id/razonsocial"
             android:gravity="center"/>
 
         <ImageView

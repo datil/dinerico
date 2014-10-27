@@ -11,50 +11,122 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.Account;
+import com.dinerico.pos.model.EMResponse;
+import com.dinerico.pos.model.Order;
 import com.dinerico.pos.util.Utils;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * Created by josephleon on 10/20/14.
  */
 public class CustomerPINFragment extends DialogFragment {
 
-  CustomerDataEMActivity activity;
-  EditText pin;
+  private EMPaymentActivity act;
+  private EditText pin;
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    activity = (CustomerDataEMActivity) getActivity();
+    act = (EMPaymentActivity) getActivity();
 
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
     LayoutInflater inflater = getActivity().getLayoutInflater();
     View view = inflater.inflate(R.layout.fragment_customer_pin, null);
     pin = (EditText) view.findViewById(R.id.pin);
+//    Utils.visibleSoftKeyboard(true,pin,act);
     builder.setTitle(getString(R.string.enterPin));
-    builder.setView(view)
-            .setPositiveButton(R.string.accept, new DialogInterface
-                    .OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                String ping = pin.getText().toString();
-                if (Utils.isValidString(ping)) {
-                  activity.viewModel.setPin(ping);
-                  Intent intent = new Intent(activity, SuccessfulSaleActivity
-                          .class);
-                  startActivity(intent);
-                } else
-                  ((CustomerDataEMActivity) getActivity()).showMessage
-                          (getString(R.string.noValidPin),
-                                  getString(R.string.validationErrorTittle));
-
-              }
-            })
-            .setNegativeButton(R.string.cancel, new DialogInterface
-                    .OnClickListener() {
-              public void onClick(DialogInterface dialog, int id) {
-                CustomerPINFragment.this.getDialog().cancel();
-              }
-            });
+    builder.setView(view).setPositiveButton(R.string.accept, new ConfirmClick())
+            .setNegativeButton(R.string.cancel, new CancelClick());
     return builder.create();
   }
+
+  final private class EMPaymentListener implements RequestListener<EMResponse> {
+
+    @Override
+    public void onRequestFailure(SpiceException spiceException) {
+      act.dismissProgressDialog();
+      act.showMessage(getString(R.string.sorrySomethingWasWrong),
+              act.MESSAJE_TITTLE);
+    }
+
+    @Override
+    public void onRequestSuccess(EMResponse emResponse) {
+
+      if (emResponse.getResult() == 1) {
+        act.showMessage(emResponse.getText(), act.MESSAJE_TITTLE,
+                new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialogInterface, int i) {
+                    act.viewModel.emPaymentConfirm(
+                            Account.getInstance().getStore().getNumeroCelular(),
+                            Order.getInstance().getTotal(),
+                            new ConfirmEMPaymentListener());
+                  }
+                });
+      } else {
+        act.dismissProgressDialog();
+        act.showMessage(emResponse.getText(),
+                act.MESSAJE_TITTLE);
+      }
+
+
+    }
+  }
+
+  final private class ConfirmEMPaymentListener implements
+          RequestListener<EMResponse> {
+
+    @Override
+    public void onRequestFailure(SpiceException spiceException) {
+      act.dismissProgressDialog();
+      act.showMessage(getString(R.string.sorrySomethingWasWrong),
+              act.MESSAJE_TITTLE);
+
+    }
+
+    @Override
+    public void onRequestSuccess(EMResponse emResponse) {
+      act.dismissProgressDialog();
+      if (emResponse.getResult() == 1) {
+        Intent intent = new Intent(act, SuccessfulSaleActivity.class);
+        intent.putExtra(act.BCE_RESPONSE, emResponse);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent
+                .FLAG_ACTIVITY_CLEAR_TASK);
+        act.startActivity(intent);
+      } else {
+        act.showMessage(emResponse.getText(), act.MESSAJE_TITTLE);
+      }
+    }
+  }
+
+  final private class ConfirmClick implements DialogInterface.OnClickListener {
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+      String ping = pin.getText().toString();
+      if (Utils.isValidString(ping)) {
+        act.showProgressDialog();
+        act.viewModel.setPin(ping);
+        act.viewModel.emPayment(
+                Account.getInstance().getStore().getNumeroCelular(),
+                Order.getInstance().getTotal(),
+                new EMPaymentListener());
+
+      } else
+        act.showMessage(
+                getString(R.string.noValidPin),
+                getString(R.string.validationErrorTittle));
+    }
+  }
+
+  final private class CancelClick implements DialogInterface.OnClickListener {
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+      dialogInterface.cancel();
+    }
+  }
+
 }

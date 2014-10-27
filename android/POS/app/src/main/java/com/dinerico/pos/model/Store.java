@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * Created by josephleon on 9/30/14.
  */
-public class Store implements Serializable{
+public class Store implements Serializable {
   @DatabaseField(generatedId = true)
   private int id;
   @DatabaseField
@@ -38,8 +38,21 @@ public class Store implements Serializable{
   private String tipo;
   @DatabaseField
   private boolean obligadoContabilidad;
+  @DatabaseField
+  private String claveFacturacionElectronica;
   @ForeignCollectionField
   private ForeignCollection<Product> products;
+
+  public static final String COD_PUNTO_VENTA ="001";
+
+  public boolean isValidInvoiceKey() throws ValidationError {
+    if (!Utils.isValidString(claveFacturacionElectronica)) {
+      HashMap<String, Integer> errorData = new HashMap<String, Integer>();
+      errorData.put("userMessage", R.string.noValidInvoiceKey);
+      throw new ValidationError(" null or blank", errorData);
+    }
+    return true;
+  }
 
   public boolean isValidNombreComercial() throws ValidationError {
     if (!Utils.isValidString(nombreComercial)) {
@@ -51,7 +64,7 @@ public class Store implements Serializable{
   }
 
   public boolean isValidRUC() throws ValidationError {
-    if (!Utils.isValidString(RUC)) {
+    if (!Utils.isValidString(RUC) || RUC.length() < 13) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidRUC);
       throw new ValidationError("RUC null or blank", errorData);
@@ -83,6 +96,14 @@ public class Store implements Serializable{
 
   public void setActividadPrincipal(String actividadPrincipal) {
     this.actividadPrincipal = actividadPrincipal;
+  }
+
+  public String getClaveFacturacionElectronica() {
+    return claveFacturacionElectronica;
+  }
+
+  public void setClaveFacturacionElectronica(String claveFacturacionElectronica) {
+    this.claveFacturacionElectronica = claveFacturacionElectronica;
   }
 
   public String getTipo() {

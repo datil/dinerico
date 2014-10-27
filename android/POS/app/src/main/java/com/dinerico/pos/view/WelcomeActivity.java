@@ -10,7 +10,7 @@ import com.dinerico.pos.network.config.ActivityBase;
 
 public class WelcomeActivity extends ActivityBase {
 
-  private final int SPLASH_DISPLAY_LENGTH = 2000;
+  private final int SPLASH_DISPLAY_LENGTH = 1000;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

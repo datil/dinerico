@@ -7,12 +7,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.model.EMResponse;
 import com.dinerico.pos.model.Order;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.util.Utils;
 
 public class SuccessfulSaleActivity extends ActivityBase {
 
+  public static final String MESSAGE_TITTLE = "Venta exitosa";
   ViewHolder view;
 
   @Override
@@ -21,6 +23,9 @@ public class SuccessfulSaleActivity extends ActivityBase {
     setContentView(R.layout.activity_successful_sale);
     setUpActionBar();
     view = new ViewHolder();
+    EMResponse emResponse = (EMResponse) getIntent().getSerializableExtra
+            (EMPaymentActivity.BCE_RESPONSE);
+    showMessage(emResponse.getText(),MESSAGE_TITTLE);
   }
 
   private void setUpActionBar(){

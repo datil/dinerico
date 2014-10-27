@@ -79,4 +79,17 @@ public class Tax {
   public void setAmountPercentage(int amountPercentage) {
     this.amountPercentage = amountPercentage;
   }
+
+
+  @Override
+  public String toString() {
+    return "Tax{ \n" +
+            "id=" + id + "'\n" +
+            "description='" + description + "'\n" +
+            "amountPercentage=" + amountPercentage + "'\n" +
+            "percentage='" + percentage + "'\n" +
+            "typeId='" + typeId + "'\n" +
+            "type='" + type + "'\n" +
+            '}';
+  }
 }

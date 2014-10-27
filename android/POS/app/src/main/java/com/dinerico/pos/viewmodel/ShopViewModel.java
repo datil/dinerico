@@ -112,10 +112,11 @@ public class ShopViewModel {
         return list;
       } catch (SQLException e) {
         e.printStackTrace();
+        System.out.println(list);
         return list;
       }
     } else
-      return new ArrayList<Product>();
+      return list;
   }
 
 

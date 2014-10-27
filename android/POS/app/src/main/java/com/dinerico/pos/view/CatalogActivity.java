@@ -26,7 +26,6 @@ public class CatalogActivity extends ActivityBase {
   private ProductsListViewAdapter adapter;
 
   public final static String EDIT_PRODUCT = "edit_product";
-  public final static String DELETED_PRODUCT = "product_deleted";
   private static final int CREATE_EDIT_PRODUCT_REQUEST = 101;
 
   @Override
@@ -125,7 +124,6 @@ public class CatalogActivity extends ActivityBase {
               ProductActivity.class);
       Product product = viewModel.getProductList().get(position);
       intent.putExtra(EDIT_PRODUCT, product);
-//      startActivity(intent);
       startActivityForResult(intent, CREATE_EDIT_PRODUCT_REQUEST);
     }
   }

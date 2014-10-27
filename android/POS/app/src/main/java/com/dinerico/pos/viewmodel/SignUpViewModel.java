@@ -44,13 +44,14 @@ public class SignUpViewModel {
     Session sessionFake = new Session();
     sessionFake.setCreated(c.toString());
     sessionFake.setAccount(Account.getInstance());
+
     //Create session without account reference becasuse is not saved yet and
     // will not relate with session on database
     sessionDB.create(sessionFake);
 
-
     Account.getInstance().setSession(sessionFake);
-    accountDB.create(Account.getInstance());
+
+    Account.setInstance(accountDB.create(Account.getInstance()));
 
     //Updated session with account reference that is saved now
     sessionDB.create(sessionFake);

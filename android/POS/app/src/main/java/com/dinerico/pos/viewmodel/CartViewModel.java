@@ -21,13 +21,15 @@ public class CartViewModel {
   public void refreshOrder() {
     float total = 0;
     for (OrderItem item : order.getItems()) {
-      float subTotal = 0;
+      double subTotal = 0;
       productDB.refresh(item.getProduct());
-      subTotal = item.getAmount() * item.getProduct().getPrice();
-      item.setTotal(subTotal);
+      double iva = 1 + item.getProduct()
+              .getTaxProduct("iva").getTax().getAmountPercentage()/100.0;
+      subTotal = item.getAmount() * item.getProduct().getPrice() * iva;
+      item.setTotal(Math.round(subTotal*100.0)/100.0);
       total += item.getTotal();
     }
-    order.setTotal(total);
+    order.setTotal(Math.round(total*100.0)/100.0);
   }
 
   public Order getOrder() {

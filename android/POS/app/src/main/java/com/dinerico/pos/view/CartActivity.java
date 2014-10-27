@@ -66,7 +66,7 @@ public class CartActivity extends ActivityBase {
     finish();
   }
 
-  private void showTotals(Button charge, TextView totalBill, float total) {
+  private void showTotals(Button charge, TextView totalBill, double total) {
     String value = Utils.currencyFormatter(total);
     totalBill.setText(value);
     String chargeAmount = String.format(getString(R.string.chargeAmount),
@@ -75,8 +75,11 @@ public class CartActivity extends ActivityBase {
   }
 
   private void charge() {
-    Intent intent = new Intent(this, PaymentTypeActivity.class);
-    startActivity(intent);
+    if(Order.getInstance().getTotal()!=0) {
+      Intent intent = new Intent(this, PaymentTypeActivity.class);
+      startActivity(intent);
+    }
+
   }
 
   private void showListItems(Order cart, LinearLayout list) {

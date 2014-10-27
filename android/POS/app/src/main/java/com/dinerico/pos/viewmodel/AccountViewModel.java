@@ -24,6 +24,7 @@ public class AccountViewModel {
   private String mobilePhone;
   private String email;
   private String password;
+  private String invoiceKey;
 
   public AccountViewModel(Account account,
                           ContributorService service, AccountDB accountDB) {
@@ -33,13 +34,13 @@ public class AccountViewModel {
   }
 
   public boolean validate() throws ValidationError {
-    return account.isValidEmail() && !existsAccountWithSameEmail() && account
-            .isValidPassword() && account.getStore().isValidMobilePhone() &&
-            account.getStore().isValidRUC();
+    return account.getStore().isValidRUC() && account.isValidEmail() &&
+            !existsAccountWithSameEmail() && account.isValidPassword() &&
+            account.getStore().isValidMobilePhone()&&account.getStore().isValidInvoiceKey();
   }
 
-  public void getDetailInfoAccount(String ruc, RequestListener<Contributor>
-          listener) {
+  public void getDetailInfoAccount(RequestListener<Contributor>
+                                           listener) {
     service.getInfo(ruc, listener);
   }
 
@@ -80,6 +81,14 @@ public class AccountViewModel {
     return account;
   }
 
+  public String getInvoiceKey() {
+    return invoiceKey;
+  }
+
+  public void setInvoiceKey(String invoiceKey) {
+    account.getStore().setClaveFacturacionElectronica(invoiceKey);
+    this.invoiceKey = invoiceKey;
+  }
 
   @Override
   public String toString() {

@@ -13,25 +13,34 @@ import java.util.HashMap;
  */
 public class Customer implements Serializable {
 
+  private static final String CEDULA = "CEDULA";
+  private static final String RUC = "RUC";
+
   @DatabaseField(generatedId = true)
   private int id;
   @DatabaseField
-  private String customerId;
+  private String tipoidentificacion;
   @DatabaseField
-  private String mobilePhone;
+  private String identificacion;
   @DatabaseField
-  private String email;
+  private String razonsocial;
   @DatabaseField
-  private String name;
+  private String correo;
+  @DatabaseField
+  private String direccion;
+  @DatabaseField
+  private String telefono;
+  @DatabaseField
+  private String celular;
   @DatabaseField(foreign = true, foreignAutoRefresh = true)
-  private Address address;
-  @DatabaseField
-  private String telephone;
+  private Address localizacion;
+  
 
   public Customer() {
   }
-    public boolean isValidCustomerId() throws ValidationError {
-    if (!Utils.isValidString(customerId) || customerId.length() < 10) {
+
+  public boolean isValidIdentificacion() throws ValidationError {
+    if (!Utils.isValidString(identificacion) || identificacion.length() < 10) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidCustomerIdRUC);
       throw new ValidationError("CustomerId null, blank or incorrect size",
@@ -41,7 +50,7 @@ public class Customer implements Serializable {
   }
 
   public boolean isValidMobilePhone() throws ValidationError {
-    if (!Utils.isValidString(mobilePhone) || mobilePhone.length() < 10) {
+    if (!Utils.isValidString(celular) || celular.length() < 10) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidMobilePhone);
       throw new ValidationError("Mobile phone length lower 10, blank or null",
@@ -51,16 +60,17 @@ public class Customer implements Serializable {
   }
 
   public boolean isValidName() throws ValidationError {
-    if (!Utils.isValidString(name)) {
+    if (!Utils.isValidString(razonsocial)) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidCustomerName);
-      throw new ValidationError("Customer name null or blank", errorData);
+      throw new ValidationError("Customer razonsocial null or blank",
+              errorData);
     }
     return true;
   }
 
   public boolean isValidEmail() throws ValidationError {
-    if (!Utils.isValidString(email) || !Utils.isValidEmail(email)) {
+    if (!Utils.isValidString(correo) || !Utils.isValidEmail(correo)) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidEmail);
       throw new ValidationError("Email null or blank", errorData);
@@ -69,7 +79,7 @@ public class Customer implements Serializable {
   }
 
   public boolean isValidTelephone() throws ValidationError {
-    if (!Utils.isValidString(telephone)) {
+    if (!Utils.isValidString(telefono)) {
       HashMap<String, Integer> errorData = new HashMap<String, Integer>();
       errorData.put("userMessage", R.string.noValidTelephone);
       throw new ValidationError("Telephone null or blank", errorData);
@@ -78,39 +88,39 @@ public class Customer implements Serializable {
   }
 
   public boolean isValidAddress() throws ValidationError {
-    return address.isValidCalle();
+    return localizacion.isValidCalle();
   }
 
-  public String getName() {
-    return name;
+  public String getRazonsocial() {
+    return razonsocial;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setRazonsocial(String razonsocial) {
+    this.razonsocial = razonsocial;
   }
 
-  public Address getAddress() {
-    return address;
+  public Address getLocalizacion() {
+    return localizacion;
   }
 
-  public void setAddress(Address address) {
-    this.address = address;
+  public void setLocalizacion(Address localizacion) {
+    this.localizacion = localizacion;
   }
 
-  public String getTelephone() {
-    return telephone;
+  public String getTelefono() {
+    return telefono;
   }
 
-  public void setTelephone(String telephone) {
-    this.telephone = telephone;
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
   }
 
-  public String getEmail() {
-    return email;
+  public String getCorreo() {
+    return correo;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setCorreo(String correo) {
+    this.correo = correo;
   }
 
   public int getId() {
@@ -121,20 +131,40 @@ public class Customer implements Serializable {
     this.id = id;
   }
 
-  public String getCustomerId() {
-    return customerId;
+  public String getTipoidentificacion() {
+    return tipoidentificacion;
   }
 
-  public void setCustomerId(String customerId) {
-    this.customerId = customerId;
+  public void setTipoidentificacion(String tipoidentificacion) {
+    this.tipoidentificacion = tipoidentificacion;
   }
 
-  public String getMobilePhone() {
-    return mobilePhone;
+  public String getDireccion() {
+    return direccion;
   }
 
-  public void setMobilePhone(String mobilePhone) {
-    this.mobilePhone = mobilePhone;
+  public void setDireccion(String direccion) {
+    this.direccion = direccion;
+  }
+
+  public String getIdentificacion() {
+    return identificacion;
+  }
+
+  public void setIdentificacion(String identificacion) {
+    if (identificacion.length() > 10)
+      tipoidentificacion = RUC;
+    else
+      tipoidentificacion = CEDULA;
+    this.identificacion = identificacion;
+  }
+
+  public String getCelular() {
+    return celular;
+  }
+
+  public void setCelular(String celular) {
+    this.celular = celular;
   }
 
 
@@ -142,8 +172,8 @@ public class Customer implements Serializable {
   public String toString() {
     return "Customer{ \n" +
             "id=" + id + "'\n" +
-            "customerId='" + customerId + "'\n" +
-            "sendReceipt='" + mobilePhone + "'\n" +
+            "identificacion='" + identificacion + "'\n" +
+            "sendReceipt='" + celular + "'\n" +
             '}';
   }
 }

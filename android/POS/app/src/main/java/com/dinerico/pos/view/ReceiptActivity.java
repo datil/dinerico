@@ -10,18 +10,26 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
+import com.dinerico.pos.db.InvoiceDB;
 import com.dinerico.pos.exception.ValidationError;
+import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
-import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.model.InvoiceResponse;
+import com.dinerico.pos.model.MailingInvoice;
+import com.dinerico.pos.model.Order;
+import com.dinerico.pos.model.Store;
+import com.dinerico.pos.network.config.FactoraActivityBase;
 import com.dinerico.pos.network.service.InvoiceService;
 import com.dinerico.pos.viewmodel.ReceiptViewModel;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 import rx.android.Events;
 import rx.functions.Action1;
 
 
-public class ReceiptActivity extends ActivityBase {
+public class ReceiptActivity extends FactoraActivityBase {
 
   private ReceiptViewModel viewModel;
   private ViewHolder view;
@@ -29,14 +37,20 @@ public class ReceiptActivity extends ActivityBase {
   private String backupCustomerid;
   private String backupName;
 
+  private static String MESSAGE_TITTLE;
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_receipt);
     setUpActionBar();
+    MESSAGE_TITTLE = getString(R.string.receiptMessageTittle);
     viewModel = new ReceiptViewModel(new Invoice(),
-            new Customer(), new InvoiceService(getSpiceManager()));
+            new Customer(), new InvoiceService(getSpiceManager()),
+            new InvoiceDB(this));
     view = new ViewHolder();
+
   }
 
   private void setUpActionBar() {
@@ -48,7 +62,7 @@ public class ReceiptActivity extends ActivityBase {
     actionContainer.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        sendReceiptByEmail();
+        generateInvoice();
       }
     });
     TextView action = (TextView) actionBar.findViewById(R.id.action);
@@ -78,15 +92,70 @@ public class ReceiptActivity extends ActivityBase {
     view.names.setText(backupName);
   }
 
-  private void sendReceiptByEmail() {
+  private void generateInvoice() {
     try {
       viewModel.validate();
-      Intent intent = new Intent(this, ReceiptSentActivity.class);
-      startActivity(intent);
+
+      Store store = Account.getInstance().getStore();
+      String keyInvoice = store.getClaveFacturacionElectronica();
+      String seqInvoice = viewModel.sequentialInvoice();
+
+      showProgressDialog();
+      viewModel.createInvoice(keyInvoice, store.getCodigo(), seqInvoice,
+              Order.getInstance(), new CreateInvoiceListener());
+
     } catch (ValidationError e) {
       showErrorValidation(e);
     }
 
+  }
+
+  private final class CreateInvoiceListener implements
+          RequestListener<InvoiceResponse> {
+
+    @Override
+    public void onRequestFailure(SpiceException e) {
+      dismissProgressDialog();
+      showMessage(getString(R.string.sorrySomethingWasWrong), MESSAGE_TITTLE);
+    }
+
+    @Override
+    public void onRequestSuccess(InvoiceResponse invoiceResponse) {
+      if (invoiceResponse.getResult().equals("ok")) {
+        String keyInvoice = Account.getInstance().getStore()
+                .getClaveFacturacionElectronica();
+        viewModel.mailInvoice(new MailingInvoice(
+                        keyInvoice, invoiceResponse.getWeburl()),
+                new MailingInvoiceListener());
+      } else {
+        dismissProgressDialog();
+        showMessage(invoiceResponse.getError(), MESSAGE_TITTLE);
+      }
+
+    }
+  }
+
+  private final class MailingInvoiceListener implements
+          RequestListener<InvoiceResponse> {
+
+    @Override
+    public void onRequestFailure(SpiceException e) {
+      dismissProgressDialog();
+      showMessage(getString(R.string.sorrySomethingWasWrong), MESSAGE_TITTLE);
+    }
+
+    @Override
+    public void onRequestSuccess(InvoiceResponse invoiceResponse) {
+      dismissProgressDialog();
+      if (invoiceResponse.getResult().equals("ok")) {
+        Intent intent = new Intent(ReceiptActivity.this,
+                ReceiptSentActivity.class);
+        startActivity(intent);
+      } else {
+        showMessage(invoiceResponse.getError(), MESSAGE_TITTLE);
+      }
+
+    }
   }
 
   private class ViewHolder {

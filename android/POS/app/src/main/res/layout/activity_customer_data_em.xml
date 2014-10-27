@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            tools:context="com.dinerico.pos.view.CustomerDataEMActivity"
+            tools:context="com.dinerico.pos.view.EMPaymentActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
@@ -22,10 +22,10 @@
             android:layout_below="@+id/header1"/>
 
         <EditText
-            android:maxLength="13"
+            android:maxLength="10"
             android:inputType="number"
             android:layout_marginTop="55dp"
-            android:hint="@string/customerId"
+            android:hint="@string/identificacion"
             style="@style/EditTextForm"
             android:id="@+id/customerId"
             android:layout_below="@+id/header2"/>
