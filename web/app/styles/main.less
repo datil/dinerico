@@ -97,7 +97,8 @@ body {
     margin-bottom: 0;
   }
   &.navbar-default {
-    background-color: @green-dinerico;
+    background-color: transparent;
+    border-color: transparent;
   }
 
   &.navbar-default .navbar-nav > .active > a,
@@ -112,6 +113,9 @@ body {
   }
   &.navbar-default .navbar-brand {
     color: #fff;
+  }
+  .container{
+    border-bottom: thin solid #fff;
   }
   .btn {
     text-transform: none;
@@ -236,19 +240,22 @@ form hr {
 
 .jumbotron {
   color: #fff;
+  background: url(@banner-dinerico) no-repeat center center;
   padding-top:    (@jumbotron-padding * 3.5);
+  height: 800px;
+  background-size: 100% 100%;
   h1{
     font-size: 45px;
-    margin-top: 0;
-    margin-bottom: 35px;
-  }
-  h2{
-    margin-top: 60px;
     font-weight: lighter;
+    margin-top: 0;
+    margin-bottom: 15px;
+    &:nth-child(2){
+      font-weight: normal;
+    }
   }
-  p{
-    font-size: 16px;
-    margin-bottom: 45px;
+  .banner-text{
+      margin-top: 250px;
+
   }
   .app-go, .social{
     @media (max-width: @screen-md-min) {
