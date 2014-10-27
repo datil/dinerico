@@ -26,6 +26,7 @@ public class StoreActivity extends ActivityBase {
   private ArrayList<Store> storeList;
 
   private SignUpViewModel viewModel;
+  private static final String INCORRECT_DATA = "Datos incompletos";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,10 @@ public class StoreActivity extends ActivityBase {
     actionContainer.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        signUp(getSelectedStore(list));
+        if (getSelectedStore(list) != null)
+          signUp(getSelectedStore(list));
+        else
+          showMessage("Por favor seleccione un establecimiento",INCORRECT_DATA);
       }
     });
     getActionBar().setCustomView(actionBar);
@@ -66,17 +70,18 @@ public class StoreActivity extends ActivityBase {
   }
 
   private Store getSelectedStore(LinearLayout list) {
-    Store store = new Store();
+    Store store = null;
     for (int i = 0; i < list.getChildCount(); i++) {
       View row = list.getChildAt(i);
-      RadioButton radioButton = (RadioButton) row.findViewById(R.id.radioButton);
+      RadioButton radioButton = (RadioButton) row.findViewById(R.id
+              .radioButton);
       if (radioButton.isChecked())
         store = (Store) radioButton.getTag();
     }
     return store;
   }
 
-  private void cleanRadioButtons(LinearLayout list){
+  private void cleanRadioButtons(LinearLayout list) {
     for (int i = 0; i < list.getChildCount(); i++) {
       View row = list.getChildAt(i);
       RadioButton radioButton = (RadioButton) row.findViewById(R.id
@@ -107,7 +112,7 @@ public class StoreActivity extends ActivityBase {
         @Override
         public void onClick(View view) {
           cleanRadioButtons(list);
-          RadioButton radioButton1 = (RadioButton)view;
+          RadioButton radioButton1 = (RadioButton) view;
           radioButton1.setChecked(true);
         }
       });

@@ -11,6 +11,7 @@ import com.dinerico.pos.db.AccountDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Contributor;
+import com.dinerico.pos.model.RestError;
 import com.dinerico.pos.network.config.ActivityBase;
 import com.dinerico.pos.network.service.ContributorService;
 import com.dinerico.pos.viewmodel.AccountViewModel;
@@ -40,11 +41,11 @@ public class AccountActivity extends ActivityBase {
     setContentView(R.layout.activity_account);
     setUpActionBar();
     viewModel = new AccountViewModel(Account.getInstance(),
-            new ContributorService(getSpiceManager()),new AccountDB(this));
+            new ContributorService(getSpiceManager()), new AccountDB(this));
     viewHolder = new ViewHolder();
   }
 
-  private void setUpActionBar(){
+  private void setUpActionBar() {
     hideActionBarComponents();
     View actionBar = getLayoutInflater().inflate(R.layout.action_bar_sign_up,
             null);
@@ -60,25 +61,24 @@ public class AccountActivity extends ActivityBase {
 
   private void getContributorInfo() {
     showProgressDialog();
-    viewModel.getDetailInfoAccount(Account.getInstance().getStore().getRUC(),
-            new RequestListener<Contributor>() {
-              @Override
-              public void onRequestFailure(SpiceException spiceException) {
-                dismissProgressDialog();
-                showMessage(spiceException.getMessage(),MESSAJE_TITTLE);
-              }
+    viewModel.getDetailInfoAccount(new RequestListener<Contributor>() {
+      @Override
+      public void onRequestFailure(SpiceException spiceException) {
+        dismissProgressDialog();
+        showNetworkError(spiceException, MESSAJE_TITTLE, RestError.class);
+      }
 
-              @Override
-              public void onRequestSuccess(Contributor contributor) {
-                dismissProgressDialog();
-                Account.getInstance().getStore().setContribuidorEspecial
-                        (contributor.getClase());
-                Account.getInstance().getStore().setObligadoContabilidad(contributor
-                        .isObligadoContabilidad());
-                startContributorActivity(contributor);
-                Log.d(LOG_TAG, contributor.toString());
-              }
-            });
+      @Override
+      public void onRequestSuccess(Contributor contributor) {
+        dismissProgressDialog();
+        Account.getInstance().getStore().setContribuidorEspecial
+                (contributor.getClase());
+        Account.getInstance().getStore().setObligadoContabilidad(contributor
+                .isObligadoContabilidad());
+        startContributorActivity(contributor);
+        Log.d(LOG_TAG, contributor.toString());
+      }
+    });
   }
 
   private void startContributorActivity(Contributor contributor) {
@@ -109,6 +109,7 @@ public class AccountActivity extends ActivityBase {
     public EditText mobilePhone;
     public EditText email;
     public EditText password;
+    public EditText invoiceKey;
 
     public ViewHolder() {
       findViews();
@@ -120,6 +121,7 @@ public class AccountActivity extends ActivityBase {
       mobilePhone = (EditText) findViewById(R.id.mobilePhone);
       email = (EditText) findViewById(R.id.email);
       password = (EditText) findViewById(R.id.password);
+      invoiceKey = (EditText) findViewById(R.id.invoiceKey);
     }
 
     private void subscribeToViewComponents() {
@@ -149,6 +151,13 @@ public class AccountActivity extends ActivityBase {
         @Override
         public void call(String string) {
           viewModel.setPassword(string);
+        }
+      });
+
+      Events.text(invoiceKey).subscribe(new Action1<String>() {
+        @Override
+        public void call(String string) {
+          viewModel.setInvoiceKey(string);
         }
       });
 

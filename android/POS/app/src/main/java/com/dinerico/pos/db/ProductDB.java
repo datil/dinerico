@@ -23,6 +23,20 @@ public class ProductDB {
     dbHelperORMLite = new DataBaseHelper(activity);
   }
 
+  public Product getById(int id) {
+    try {
+      Product product = dbHelperORMLite.getDaoProduct().queryForId(id);
+      Log.d(LOG_TAG, "Get product: " + product);
+      if (product != null)
+        return product;
+      else return new Product();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      Log.e(LOG_TAG, "Error on get product by id");
+      return new Product();
+    }
+  }
+
   public Product create(Product product) {
     try {
       dbHelperORMLite.getDaoProduct().createOrUpdate(product);
@@ -60,11 +74,12 @@ public class ProductDB {
     }
   }
 
-  public void refresh(Product product){
+  public void refresh(Product product) {
     try {
       dbHelperORMLite.getDaoProduct().refresh(product);
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
+
 }

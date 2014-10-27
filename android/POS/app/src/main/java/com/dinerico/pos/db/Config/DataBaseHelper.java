@@ -32,7 +32,7 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 19;
+  private static final int DATABASE_VERSION = 20;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;
@@ -70,6 +70,17 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
       TableUtils.createTable(connectionSource, Customer.class);
       TableUtils.createTable(connectionSource, Tax.class);
       TableUtils.createTable(connectionSource, TaxProduct.class);
+
+      Tax tax1 = new Tax("iva", "6", "0%", 0, "No incluye I.V.A.");
+      Tax tax2 = new Tax("iva", "2", "12%", 12, "I.V.A. 12%");
+      Tax tax3 = new Tax("iva", "0", "0%", 0, "I.V.A. 0%");
+      Tax tax4 = new Tax("iva", "", "0%", 0, "Exento de I.V.A.");
+
+      getDaoTax().create(tax1);
+      getDaoTax().create(tax2);
+      getDaoTax().create(tax3);
+      getDaoTax().create(tax4);
+
     } catch (SQLException e) {
       Log.e(DataBaseHelper.class.getSimpleName(), "Can't create database", e);
       e.printStackTrace();

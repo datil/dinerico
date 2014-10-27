@@ -1,10 +1,16 @@
 package com.dinerico.pos.network.config;
 
 import com.dinerico.pos.model.Contributor;
+import com.dinerico.pos.model.EMResponse;
+import com.dinerico.pos.model.EMPayment;
 import com.dinerico.pos.model.Invoice;
+import com.dinerico.pos.model.MailingInvoice;
+import com.dinerico.pos.model.InvoiceResponse;
 
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Headers;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -14,8 +20,22 @@ import retrofit.http.Path;
 public interface Router {
 
   @Headers("Content-Type: application/json")
-  @GET("/contribuyentes/{RUC}")
+  @GET("/datum/contribuyentes/{RUC}")
   Contributor createAccount(@Path("RUC") String RUC);
 
-  Invoice createInvoice(Invoice invoice);
+  @Headers("Content-Type: application/json")
+  @POST("/dinerico-api/remit-pre")
+  EMResponse chargeElectronicMoney(@Body EMPayment emPayment);
+
+  @Headers("Content-Type: application/json")
+  @POST("/dinerico-api/remit-confirm")
+  EMResponse chargeElectronicMoneyConfirm(@Body EMPayment emPayment);
+
+  @Headers("Content-Type: application/json")
+  @POST("/facturar")
+  InvoiceResponse createInvoice(@Body Invoice invoice);
+
+  @Headers("Content-Type: application/json")
+  @POST("/enviocorreo")
+  InvoiceResponse mailInvoiceToCustomer(@Body MailingInvoice mailingInvoice);
 }

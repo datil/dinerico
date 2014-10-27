@@ -33,13 +33,13 @@ public class PaymentTypeActivity extends ActivityBase {
   }
 
   private void chargeWithElectronicMoney(){
-    Intent intent = new Intent(this, CustomerDataEMActivity.class);
+    Intent intent = new Intent(this, EMPaymentActivity.class);
     startActivity(intent);
   }
 
   private void chargeWithCash(){
-    Intent intent = new Intent(this, RecieveMoneyActivity.class);
-    startActivity(intent);
+//    Intent intent = new Intent(this, RecieveMoneyActivity.class);
+//    startActivity(intent);
   }
 
   private class ViewHolder implements View.OnClickListener {
@@ -49,7 +49,6 @@ public class PaymentTypeActivity extends ActivityBase {
     public ViewHolder() {
       findViews();
     }
-
     private void findViews() {
       electronicMoney = (TextView) findViewById(R.id.electronicMoney);
       cash = (TextView) findViewById(R.id.cash);

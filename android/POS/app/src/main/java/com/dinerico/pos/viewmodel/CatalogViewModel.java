@@ -32,6 +32,7 @@ public class CatalogViewModel {
         while (iterator.hasNext())
           list.add(iterator.next());
         iterator.close();
+        System.out.println(list);
         return list;
       } catch (SQLException e) {
         e.printStackTrace();

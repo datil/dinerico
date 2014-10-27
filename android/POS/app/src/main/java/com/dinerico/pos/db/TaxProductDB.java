@@ -67,7 +67,7 @@ public class TaxProductDB {
     try {
       Map<String, Object> arg = new HashMap<String, Object>();
       arg.put(TaxProduct.PRODUCT_ID_FIELD_NAME, product);
-      arg.put("tag", taxType);
+      arg.put("type", taxType);
       List<TaxProduct> list = dbHelperORMLite.getDaoTaxProduct()
               .queryForFieldValues(arg);
       Log.d(LOG_TAG, "TaxProduct list: \n" + list);

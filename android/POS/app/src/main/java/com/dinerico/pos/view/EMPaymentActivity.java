@@ -1,7 +1,7 @@
 package com.dinerico.pos.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,30 +12,31 @@ import com.dinerico.pos.R;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Order;
-import com.dinerico.pos.network.config.ElectronicMoneyActivity;
+import com.dinerico.pos.network.config.FragmentActivityBase;
 import com.dinerico.pos.network.service.EMService;
 import com.dinerico.pos.util.Utils;
-import com.dinerico.pos.viewmodel.CustomerViewModel;
+import com.dinerico.pos.viewmodel.EMPaymentViewModel;
 
 import java.util.HashMap;
 
 import rx.android.Events;
 import rx.functions.Action1;
 
-public class CustomerDataEMActivity extends ElectronicMoneyActivity {
+public class EMPaymentActivity extends FragmentActivityBase {
 
-  public CustomerViewModel viewModel;
+  public EMPaymentViewModel viewModel;
 
-  private final static String LOG_TAG = CustomerDataEMActivity.class
+  private final static String LOG_TAG = EMPaymentActivity.class
           .getSimpleName();
-  private final static String MESSAJE_TITTLE = "Datos del cliente";
+  public final static String MESSAJE_TITTLE = "Cobro por dinero eletrónico";
+  public static final String BCE_RESPONSE = "response";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_customer_data_em);
     setUpActionBar();
-    viewModel = new CustomerViewModel(new Customer(),
+    viewModel = new EMPaymentViewModel(new Customer(),
             new EMService(getSpiceManager()));
     ViewHolder view = new ViewHolder();
   }
@@ -51,13 +52,16 @@ public class CustomerDataEMActivity extends ElectronicMoneyActivity {
   }
 
   private void charge(){
-    try {
-      viewModel.validate();
-      DialogFragment newFragment = new CustomerPINFragment();
-      newFragment.show(getSupportFragmentManager(), "pickerFragment");
-    } catch (ValidationError e) {
-      showExceptionError(e);
-    }
+//    try {
+//      viewModel.validate();
+//      DialogFragment newFragment = new CustomerPINFragment();
+//      newFragment.show(getSupportFragmentManager(), "pinFragment");
+
+      Intent intent = new Intent(this, ReceiptActivity.class);
+      startActivity(intent);
+//    } catch (ValidationError e) {
+//      showExceptionError(e);
+//    }
 
   }
 

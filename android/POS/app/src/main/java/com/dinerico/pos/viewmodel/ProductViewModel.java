@@ -3,6 +3,7 @@ package com.dinerico.pos.viewmodel;
 import android.graphics.Bitmap;
 
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.db.TaxDB;
 import com.dinerico.pos.db.TaxProductDB;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Product;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 public class ProductViewModel {
 
   private Product product;
-  private TaxProduct taxProduct;
   private Tax iva;
+  private TaxProduct taxProduct;
 
   private String name;
   private String price;
@@ -29,29 +30,29 @@ public class ProductViewModel {
 
   private ProductDB productDB;
   private TaxProductDB taxProductDB;
+  private TaxDB taxDB;
 
-  public ProductViewModel(Product product, TaxProduct taxProduct,
+
+  public ProductViewModel(Product product,
                           ProductDB productDB,
-                          TaxProductDB taxProductDB) {
+                          TaxProductDB taxProductDB, TaxDB taxDB) {
     this.taxProductDB = taxProductDB;
-    this.taxProduct = taxProduct;
-    this.product = product;
     this.productDB = productDB;
-
-    this.taxProduct.setProduct(product);
+    this.product = productDB.getById(product.getId());
+    this.taxProduct = this.product.getTaxProduct("iva");
     this.product.setStore(Account.getInstance().getStore());
+    this.taxDB = taxDB;
   }
 
-  public Tax getTax(String tax) {
-    ArrayList<TaxProduct> list = (ArrayList) taxProductDB
-            .queryByProductAndTypeTax(product, tax);
-    return list.get(0).getTax();
-  }
 
   public Product saveProduct() {
     Product p = productDB.create(product);
     taxProductDB.create(taxProduct);
     return p;
+  }
+
+  public ArrayList<Tax> taxList() {
+    return (ArrayList<Tax>) taxDB.getAll();
   }
 
   public void deleteProduct() {
@@ -64,6 +65,7 @@ public class ProductViewModel {
 
   public void setIva(Tax iva) {
     taxProduct.setTax(iva);
+    taxProduct.setProduct(product);
     this.iva = iva;
   }
 

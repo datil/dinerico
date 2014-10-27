@@ -15,7 +15,7 @@
             android:name=".network.config.ApiService"
             android:exported="false" />
         <service
-            android:name=".network.config.BCEApiService"
+            android:name=".network.config.FactoraApiService"
             android:exported="false" />
 
         <activity
@@ -96,15 +96,11 @@
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
-            android:name=".view.HomeSplashActivity"
-            android:label="@string/appName" >
-        </activity>
-        <activity
             android:name=".view.PaymentTypeActivity"
             android:label="$0.00" >
         </activity>
         <activity
-            android:name=".view.CustomerDataEMActivity"
+            android:name=".view.EMPaymentActivity"
             android:label="$0.00"
             android:parentActivityName=".view.PaymentTypeActivity" >
             <meta-data
@@ -122,7 +118,7 @@
         <activity
             android:name=".view.SuccessfulSaleActivity"
             android:label="$0.00"
-            android:parentActivityName=".view.CustomerDataEMActivity" >
+            android:parentActivityName=".view.EMPaymentActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.view.CustomerDataEMActivity" />

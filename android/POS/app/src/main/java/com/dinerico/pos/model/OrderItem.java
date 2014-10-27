@@ -14,13 +14,13 @@ public class OrderItem implements Serializable {
   @DatabaseField
   private int amount;
   @DatabaseField
-  private float total;
+  private double total;
   @DatabaseField(foreign = true, foreignAutoRefresh = true)
   private Product product;
   @DatabaseField(foreign = true, foreignAutoRefresh = true)
   private Order order;
 
-  public OrderItem (){
+  public OrderItem() {
 
   }
 
@@ -28,7 +28,10 @@ public class OrderItem implements Serializable {
     if (products.size() > 0) {
       product = products.get(0);
       amount = products.size();
-      total = amount * product.getPrice();
+      double iva = 1 + product.getTaxProduct("iva").getTax()
+              .getAmountPercentage()/100.0;
+      total = amount * product.getPrice() * iva;
+      total = Math.round(total*100.0)/100.0;
       this.order = order;
     }
   }
@@ -65,11 +68,11 @@ public class OrderItem implements Serializable {
     this.amount = amount;
   }
 
-  public float getTotal() {
+  public double getTotal() {
     return total;
   }
 
-  public void setTotal(float total) {
+  public void setTotal(double total) {
     this.total = total;
   }
 
@@ -78,9 +81,9 @@ public class OrderItem implements Serializable {
   public String toString() {
     return "OrderItem{ \n" +
             "id=" + id + "\n" +
-            "amount=" + amount +"\n" +
-            "total=" + total +"\n" +
-            "product=" + product +"\n" +
+            "amount=" + amount + "\n" +
+            "total=" + total + "\n" +
+            "product=" + product + "\n" +
             '}';
   }
 }

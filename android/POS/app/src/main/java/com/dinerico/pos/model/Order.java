@@ -24,7 +24,7 @@ public class Order implements Serializable{
   @DatabaseField(foreign = true, foreignAutoRefresh = true)
   private Payment payment;
   @DatabaseField
-  private float total;
+  private double total;
   @DatabaseField
   private Date created;
   @ForeignCollectionField
@@ -80,11 +80,11 @@ public class Order implements Serializable{
     this.customer = customer;
   }
 
-  public float getTotal() {
+  public double getTotal() {
     return total;
   }
 
-  public void setTotal(float total) {
+  public void setTotal(double total) {
     this.total = total;
   }
 

@@ -40,15 +40,12 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Tax> {
                               ViewGroup parent) {
     View row = inflater.inflate(R.layout.item_spinner, parent, false);
     row.setPadding(16, 16, 16, 16);
-    if (position != data.size()-1) {
-      Tax tax = data.get(position + 1);
+      Tax tax = data.get(position);
       TextView description = (TextView) row.findViewById(R.id.description);
       TextView percentage = (TextView) row.findViewById(R.id.percentage);
 
-      // Set values for spinner each row
       description.setText(tax.getDescription());
       percentage.setText(tax.getPercentage());
-    }
     return row;
 
   }
@@ -62,7 +59,6 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Tax> {
     TextView description = (TextView) row.findViewById(R.id.description);
     TextView percentage = (TextView) row.findViewById(R.id.percentage);
 
-    // Set values for spinner each row
     description.setText(tax.getDescription());
     percentage.setText(tax.getPercentage());
 

@@ -16,12 +16,12 @@ import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 
 /**
- * Created by josephleon on 10/11/14.
+ * Created by josephleon on 10/25/14.
  */
 
-public class BCEApiService extends RetrofitGsonSpiceService {
+public class FactoraApiService extends RetrofitGsonSpiceService {
 
-  public static final String BASE_URL = "http://www.datil.ec/datum";
+  public static final String BASE_URL = "http://dev.factora.ec/api";
   public static final int CACHE_TIME = 5000;
 
   @Override

@@ -17,11 +17,10 @@ import android.widget.Toast;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.db.ProductDB;
+import com.dinerico.pos.db.TaxDB;
 import com.dinerico.pos.db.TaxProductDB;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Product;
-import com.dinerico.pos.model.Tax;
-import com.dinerico.pos.model.TaxProduct;
 import com.dinerico.pos.network.config.FragmentActivityBase;
 import com.dinerico.pos.util.CustomSpinnerAdapter;
 import com.dinerico.pos.util.ImageHelper;
@@ -29,7 +28,6 @@ import com.dinerico.pos.viewmodel.ProductViewModel;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import rx.android.Events;
@@ -47,22 +45,25 @@ public class ProductActivity extends FragmentActivityBase {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_product);
     setUpActionBar();
-    viewModel = new ProductViewModel(new Product(), new TaxProduct(),
-            new ProductDB(this), new TaxProductDB(this));
-    view = new ViewHolder();
 
     Product product = (Product) getIntent().getSerializableExtra(CatalogActivity
             .EDIT_PRODUCT);
-    if (product != null) {
+
+    if (product == null)
+      product = new Product();
+    product.refresh(this);
+
+    viewModel = new ProductViewModel(product, new ProductDB(this),
+            new TaxProductDB(this), new TaxDB(this));
+    view = new ViewHolder();
+    if (product.getId() != 0)
       showProduct(product);
-    }
   }
 
   private void setUpActionBar() {
     hideActionBarComponents();
     View actionBar = getLayoutInflater().inflate(R.layout
-                    .action_bar_simple_button,
-            null);
+            .action_bar_simple_button, null);
     View actionContainer = actionBar.findViewById(R.id.actionContainer);
     actionContainer.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -121,6 +122,7 @@ public class ProductActivity extends FragmentActivityBase {
     view.price.setText(String.format(Locale.US, "%.02f",
             product.getPrice()));
     view.name.setText(product.getName());
+    view.iva.setSelection(product.getTaxProduct("iva").getTax().getId()-1);
     if (product.getImageByte() != null) {
       view.initials.setVisibility(View.INVISIBLE);
       view.image.setVisibility(View.VISIBLE);
@@ -136,7 +138,6 @@ public class ProductActivity extends FragmentActivityBase {
       }
     }
     view.delete.setVisibility(View.VISIBLE);
-    viewModel.setProduct(product);
   }
 
   private void saveProduct() {
@@ -150,21 +151,6 @@ public class ProductActivity extends FragmentActivityBase {
     }
   }
 
-  private ArrayList<Tax> taxList() {
-    Tax tax0 = new Tax("iva", "", "", 0, "% I.V.A.");
-    Tax tax1 = new Tax("iva", "", "0%", 0, "No incluye iva");
-    Tax tax2 = new Tax("iva", "", "12%", 12, "I.V.A. 12%");
-    Tax tax3 = new Tax("iva", "", "0%", 0, "I.V.A. 0%");
-    Tax tax4 = new Tax("iva", "", "0%", 0, "Excepto de iva");
-
-    ArrayList<Tax> list = new ArrayList<Tax>();
-    list.add(tax0);
-    list.add(tax1);
-    list.add(tax2);
-    list.add(tax3);
-    list.add(tax4);
-    return list;
-  }
 
   private class ViewHolder implements View.OnClickListener {
     public EditText name;
@@ -203,19 +189,12 @@ public class ProductActivity extends FragmentActivityBase {
               new CustomSpinnerAdapter(
                       ProductActivity.this,
                       R.layout.item_spinner,
-                      taxList()));
+                      viewModel.taxList()));
       iva.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view,
                                    int position, long l) {
-//          TextView description = (TextView) view.findViewById(R.id.description);
-//          TextView percentage = (TextView) view.findViewById(R.id.percentage);
-//          if (position == 0){
-//            description.setText("No incluye I.V.A.");
-//            percentage.setText("0%");
-//          }
-
-          viewModel.setIva(taxList().get(position));
+          viewModel.setIva(viewModel.taxList().get(position));
         }
 
         @Override
