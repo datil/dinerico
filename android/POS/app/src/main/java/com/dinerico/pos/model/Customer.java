@@ -13,8 +13,9 @@ import java.util.HashMap;
  */
 public class Customer implements Serializable {
 
-  private static final String CEDULA = "CEDULA";
-  private static final String RUC = "RUC";
+  public static final String CEDULA = "CEDULA";
+  public static final String RUC = "RUC";
+  public static final String CONSUMIDOR_FINAL = "CONSUMIDORFINAL";
 
   @DatabaseField(generatedId = true)
   private int id;

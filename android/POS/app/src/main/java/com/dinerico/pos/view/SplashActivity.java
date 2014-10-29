@@ -7,23 +7,27 @@ import android.os.Handler;
 import com.dinerico.pos.R;
 import com.dinerico.pos.network.config.ActivityBase;
 
+/**
+ * Created by josephleon on 10/28/14.
+ */
 
-public class WelcomeActivity extends ActivityBase {
+public class SplashActivity extends ActivityBase {
+
+  public static final int SPLASH_DISPLAY_LENGTH = 1000;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_welcome);
-
+    setContentView(R.layout.activity_splash);
+    getActionBar().hide();
     new Handler().postDelayed(new Runnable() {
       @Override
       public void run() {
-        Intent mainIntent = new Intent(WelcomeActivity.this,
-                ShopActivity.class);
+        Intent mainIntent = new Intent(SplashActivity.this, ShopActivity.class);
         startActivity(mainIntent);
         finish();
       }
-    }, SplashActivity.SPLASH_DISPLAY_LENGTH);
+    }, SPLASH_DISPLAY_LENGTH);
   }
 
 }

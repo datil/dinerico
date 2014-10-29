@@ -42,6 +42,8 @@ public class Store implements Serializable {
   private String claveFacturacionElectronica;
   @ForeignCollectionField
   private ForeignCollection<Product> products;
+  @ForeignCollectionField
+  private ForeignCollection<Invoice> invoices;
 
   public static final String COD_PUNTO_VENTA ="001";
 
@@ -194,6 +196,14 @@ public class Store implements Serializable {
     this.obligadoContabilidad = obligadoContabilidad;
   }
 
+  public ForeignCollection<Invoice> getInvoices() {
+    return invoices;
+  }
+
+  public void setInvoices(ForeignCollection<Invoice> invoices) {
+    this.invoices = invoices;
+  }
+
   @Override
   public String toString() {
     return "Store{ \n" +
@@ -208,6 +218,7 @@ public class Store implements Serializable {
             "contribuidorEspecial='" + contribuidorEspecial + "'\n" +
             "obligadoContabilidad=" + obligadoContabilidad + "'\n" +
             "products=" + products + "'\n" +
+            "invoices=" + invoices + "'\n" +
             '}';
   }
 }

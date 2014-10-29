@@ -77,16 +77,24 @@ public class ShopViewModel {
     Order.reset();
     order = Order.getInstance();
     Iterator it = cartMap.entrySet().iterator();
-    float total = 0;
+    double subTotal = 0;
+    double iva = 0;
     order.setCreated(new Date());
     while (it.hasNext()) {
       Map.Entry pair = (Map.Entry) it.next();
       ArrayList<Product> sameProductList = (ArrayList<Product>) pair.getValue();
+
+      for (Product product : sameProductList)
+        productDB.refresh(product);
+
       OrderItem orderItem = new OrderItem(sameProductList, order);
       order.getItems().add(orderItem);
-      total += orderItem.getTotal();
+      subTotal += orderItem.getTotal();
+      iva += orderItem.getIva();
     }
-    order.setTotal(total);
+
+    order.setTotal(subTotal+iva);
+    order.setIvaTax(iva);
     return order;
 
   }

@@ -42,7 +42,7 @@ public class Product implements Serializable {
 
 
   public boolean validate() throws ValidationError {
-    if (isValidName() && isValidPrice()) ;
+    if (isValidName()) ;
     return true;
   }
 

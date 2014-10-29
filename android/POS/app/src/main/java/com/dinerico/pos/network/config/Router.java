@@ -4,7 +4,7 @@ import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.model.EMResponse;
 import com.dinerico.pos.model.EMPayment;
 import com.dinerico.pos.model.Invoice;
-import com.dinerico.pos.model.MailingInvoice;
+import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.InvoiceResponse;
 
 import retrofit.http.Body;
@@ -36,6 +36,6 @@ public interface Router {
   InvoiceResponse createInvoice(@Body Invoice invoice);
 
   @Headers("Content-Type: application/json")
-  @POST("/enviocorreo")
-  InvoiceResponse mailInvoiceToCustomer(@Body MailingInvoice mailingInvoice);
+  @POST("/firmar")
+  InvoiceResponse signInvoice(@Body SigningInvoice signingInvoice);
 }

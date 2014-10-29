@@ -38,7 +38,51 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/itemList">
+
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/taxes">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/labelTax"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tax"/>
+                <TextView
+
+                    android:layout_below="@id/labelTax"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tax12"/>
+
+                <TextView
+                    android:layout_alignTop="@id/labelTax"
+                    android:id="@+id/ivaTax"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSize"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00"/>
+
+            </RelativeLayout>
 
 
             <View
@@ -55,6 +99,7 @@
                 android:id="@+id/total">
 
                 <TextView
+                    android:textStyle="bold"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/textSize"
                     android:layout_width="wrap_content"

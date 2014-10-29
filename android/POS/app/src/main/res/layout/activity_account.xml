@@ -24,7 +24,7 @@
             style="@style/HeaderTittle"/>
 
         <EditText
-            android:text="0992712554001"
+            android:text=""
             android:background="@drawable/underline_gray_back_white"
             android:layout_marginTop="55dp"
             android:id="@+id/ruc"
@@ -57,7 +57,7 @@
             style="@style/EditTextForm"/>
 
         <EditText
-            android:text="497eacaa70f34afb86e343d568540cc5"
+            android:text=""
             android:background="@drawable/underline_gray_back_white"
             android:id="@+id/invoiceKey"
             android:hint="@string/claveFacturacionElectronica"

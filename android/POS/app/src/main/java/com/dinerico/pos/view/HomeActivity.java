@@ -24,7 +24,7 @@ public class HomeActivity extends ActivityBase implements View.OnClickListener{
     findViews();
     viewModel = new HomeViewModel(new SessionDB(this),new AccountDB(this));
     if(hasSession()){
-      startActivity(new Intent(this, WelcomeActivity.class));
+      startActivity(new Intent(this, SplashActivity.class));
       finish();
     }
   }

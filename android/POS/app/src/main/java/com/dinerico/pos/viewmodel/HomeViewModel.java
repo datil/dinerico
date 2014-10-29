@@ -22,6 +22,7 @@ public class HomeViewModel {
 
   public Session getCurrentSession() {
     List<Session> list = sessionDB.getAll();
+    accountDB.getAll();
     if (list.size() > 0) {
       Session session = list.get(0);
       Account.setInstance(session.getAccount());

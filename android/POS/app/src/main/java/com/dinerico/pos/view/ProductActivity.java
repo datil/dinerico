@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Selection;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -152,7 +153,8 @@ public class ProductActivity extends FragmentActivityBase {
   }
 
 
-  private class ViewHolder implements View.OnClickListener {
+  private class ViewHolder implements View.OnClickListener,
+          TextView.OnEditorActionListener {
     public EditText name;
     public EditText price;
     public TextView initials;
@@ -294,6 +296,13 @@ public class ProductActivity extends FragmentActivityBase {
 
     }
 
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//      if (actionId == EditorInfo.IME_ACTION_DONE) {
+//        // do your stuff here
+//      }
+      return false;
+    }
   }
 
 }

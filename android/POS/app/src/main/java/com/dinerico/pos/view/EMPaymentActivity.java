@@ -1,7 +1,7 @@
 package com.dinerico.pos.view;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,16 +52,16 @@ public class EMPaymentActivity extends FragmentActivityBase {
   }
 
   private void charge(){
-//    try {
-//      viewModel.validate();
-//      DialogFragment newFragment = new CustomerPINFragment();
-//      newFragment.show(getSupportFragmentManager(), "pinFragment");
+    try {
+      viewModel.validate();
+      DialogFragment newFragment = new CustomerPINFragment();
+      newFragment.show(getSupportFragmentManager(), "pinFragment");
 
-      Intent intent = new Intent(this, ReceiptActivity.class);
-      startActivity(intent);
-//    } catch (ValidationError e) {
-//      showExceptionError(e);
-//    }
+//      Intent intent = new Intent(this, ReceiptActivity.class);
+//      startActivity(intent);
+    } catch (ValidationError e) {
+      showExceptionError(e);
+    }
 
   }
 

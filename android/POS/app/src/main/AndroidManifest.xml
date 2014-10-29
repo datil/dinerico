@@ -137,6 +137,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dinerico.pos.ReceiptActivity" />
         </activity>
+
+        <activity
+            android:theme="@style/NoActionBar"
+            android:name=".view.SplashActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -16,7 +16,8 @@ import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.model.InvoiceResponse;
-import com.dinerico.pos.model.MailingInvoice;
+import com.dinerico.pos.model.RestErrorFactora;
+import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.Store;
 import com.dinerico.pos.network.config.FactoraActivityBase;
@@ -82,6 +83,8 @@ public class ReceiptActivity extends FactoraActivityBase {
     view.address.setVisibility(View.INVISIBLE);
     view.customerId.setText(getString(R.string.finalConsumerRUC));
     view.names.setText(getString(R.string.finalConsumer));
+    viewModel.setIdType(Customer.CONSUMIDOR_FINAL);
+
   }
 
   private void finalConsumerOff() {
@@ -98,10 +101,17 @@ public class ReceiptActivity extends FactoraActivityBase {
 
       Store store = Account.getInstance().getStore();
       String keyInvoice = store.getClaveFacturacionElectronica();
-      String seqInvoice = viewModel.sequentialInvoice();
+
+      String seqInvoice = "";
+      if (Account.getInstance().getStore().getRazonSocial().equals
+              ("Datilmedia S.A.") && Account.getInstance().getStore()
+              .getInvoices().size() == 0)
+        seqInvoice = "143";
+      else
+        seqInvoice = viewModel.sequentialInvoice();
 
       showProgressDialog();
-      viewModel.createInvoice(keyInvoice, store.getCodigo(), seqInvoice,
+      viewModel.createInvoiceOnSRI(keyInvoice, store.getCodigo(), seqInvoice,
               Order.getInstance(), new CreateInvoiceListener());
 
     } catch (ValidationError e) {
@@ -116,45 +126,40 @@ public class ReceiptActivity extends FactoraActivityBase {
     @Override
     public void onRequestFailure(SpiceException e) {
       dismissProgressDialog();
-      showMessage(getString(R.string.sorrySomethingWasWrong), MESSAGE_TITTLE);
+      showNetworkError(e, MESSAGE_TITTLE, RestErrorFactora.class);
     }
 
     @Override
     public void onRequestSuccess(InvoiceResponse invoiceResponse) {
-      if (invoiceResponse.getResult().equals("ok")) {
-        String keyInvoice = Account.getInstance().getStore()
-                .getClaveFacturacionElectronica();
-        viewModel.mailInvoice(new MailingInvoice(
-                        keyInvoice, invoiceResponse.getWeburl()),
-                new MailingInvoiceListener());
-      } else {
-        dismissProgressDialog();
-        showMessage(invoiceResponse.getError(), MESSAGE_TITTLE);
-      }
+      String keyInvoice = Account.getInstance().getStore()
+              .getClaveFacturacionElectronica();
 
+      viewModel.signInvoice(
+              new SigningInvoice(
+                      keyInvoice,
+                      invoiceResponse.getWeburl(),
+                      SigningInvoice.PASSWORD,
+                      SigningInvoice.DO_COMPLETE_INVOICE_PROCESS),
+              new SigningInvoiceListener());
     }
   }
 
-  private final class MailingInvoiceListener implements
+  private final class SigningInvoiceListener implements
           RequestListener<InvoiceResponse> {
 
     @Override
     public void onRequestFailure(SpiceException e) {
       dismissProgressDialog();
-      showMessage(getString(R.string.sorrySomethingWasWrong), MESSAGE_TITTLE);
+      showNetworkError(e, MESSAGE_TITTLE, RestErrorFactora.class);
     }
 
     @Override
     public void onRequestSuccess(InvoiceResponse invoiceResponse) {
       dismissProgressDialog();
-      if (invoiceResponse.getResult().equals("ok")) {
-        Intent intent = new Intent(ReceiptActivity.this,
-                ReceiptSentActivity.class);
-        startActivity(intent);
-      } else {
-        showMessage(invoiceResponse.getError(), MESSAGE_TITTLE);
-      }
-
+      viewModel.createInvoiceOnDB();
+      Intent intent = new Intent(ReceiptActivity.this,
+              ReceiptSentActivity.class);
+      startActivity(intent);
     }
   }
 

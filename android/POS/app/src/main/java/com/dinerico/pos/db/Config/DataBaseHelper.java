@@ -32,7 +32,7 @@ import java.sql.SQLException;
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "database.db";
-  private static final int DATABASE_VERSION = 20;
+  private static final int DATABASE_VERSION = 22;
 
   private Dao<Session, Integer> sessionDAO = null;
   private Dao<Account, Integer> accountDAO = null;

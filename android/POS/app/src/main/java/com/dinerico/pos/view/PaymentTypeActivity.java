@@ -38,13 +38,16 @@ public class PaymentTypeActivity extends ActivityBase {
   }
 
   private void chargeWithCash(){
-//    Intent intent = new Intent(this, RecieveMoneyActivity.class);
-//    startActivity(intent);
+
+  }
+
+  private void chargeWithCreditCard(){
   }
 
   private class ViewHolder implements View.OnClickListener {
     public TextView electronicMoney;
     public TextView cash;
+    public TextView creditCard;
 
     public ViewHolder() {
       findViews();
@@ -52,10 +55,11 @@ public class PaymentTypeActivity extends ActivityBase {
     private void findViews() {
       electronicMoney = (TextView) findViewById(R.id.electronicMoney);
       cash = (TextView) findViewById(R.id.cash);
+      creditCard = (TextView) findViewById(R.id.creditCard);
 
       electronicMoney.setOnClickListener(this);
       cash.setOnClickListener(this);
-
+      creditCard.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +70,9 @@ public class PaymentTypeActivity extends ActivityBase {
           break;
         case R.id.cash:
           chargeWithCash();
+          break;
+        case R.id.creditCard:
+          chargeWithCreditCard();
           break;
       }
     }

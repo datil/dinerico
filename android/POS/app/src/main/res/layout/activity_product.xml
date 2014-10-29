@@ -77,7 +77,8 @@
             style="@style/EditTextForm"
             android:layout_below="@+id/name"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:imeOptions="actionDone"/>
 
         <Spinner
             android:spinnerMode="dialog"

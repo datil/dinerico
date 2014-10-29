@@ -1,6 +1,6 @@
 package com.dinerico.pos.network.request;
 
-import com.dinerico.pos.model.MailingInvoice;
+import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.InvoiceResponse;
 import com.dinerico.pos.network.config.Router;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
@@ -11,22 +11,22 @@ import roboguice.util.temp.Ln;
  * Created by josephleon on 10/25/14.
  */
 
-public class MailInvoiceRequest extends RetrofitSpiceRequest<InvoiceResponse, Router> {
+public class SigningInvoiceRequest extends RetrofitSpiceRequest<InvoiceResponse, Router> {
 
-  private MailingInvoice mailingInvoice;
+  private SigningInvoice signingInvoice;
 
-  public MailInvoiceRequest(MailingInvoice mailingInvoice) {
+  public SigningInvoiceRequest(SigningInvoice signingInvoice) {
     super(InvoiceResponse.class, Router.class);
-    this.mailingInvoice = mailingInvoice;
+    this.signingInvoice = signingInvoice;
   }
 
   @Override
   public InvoiceResponse loadDataFromNetwork() {
     Ln.d("Call web service ");
-    return getService().mailInvoiceToCustomer(mailingInvoice);
+    return getService().signInvoice(signingInvoice);
   }
 
   public String createCacheKey() {
-    return "mail.invoice" + mailingInvoice.hashCode();
+    return "signing.invoice" + signingInvoice.hashCode();
   }
 }

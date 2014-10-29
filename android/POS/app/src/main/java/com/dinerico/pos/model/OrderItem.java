@@ -19,6 +19,7 @@ public class OrderItem implements Serializable {
   private Product product;
   @DatabaseField(foreign = true, foreignAutoRefresh = true)
   private Order order;
+  private double iva;
 
   public OrderItem() {
 
@@ -28,10 +29,10 @@ public class OrderItem implements Serializable {
     if (products.size() > 0) {
       product = products.get(0);
       amount = products.size();
-      double iva = 1 + product.getTaxProduct("iva").getTax()
-              .getAmountPercentage()/100.0;
-      total = amount * product.getPrice() * iva;
+      total = amount * product.getPrice();
       total = Math.round(total*100.0)/100.0;
+      iva = amount*product.getTaxProduct("iva").getTax()
+              .getAmountPercentage()/100.0 * product.getPrice();
       this.order = order;
     }
   }
@@ -76,6 +77,13 @@ public class OrderItem implements Serializable {
     this.total = total;
   }
 
+  public double getIva() {
+    return iva;
+  }
+
+  public void setIva(double iva) {
+    this.iva = iva;
+  }
 
   @Override
   public String toString() {

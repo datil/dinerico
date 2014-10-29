@@ -35,7 +35,8 @@ public class CartActivity extends ActivityBase {
     viewModel = new CartViewModel(Order.getInstance(), new ProductDB(this));
     view = new ViewHolder();
     showListItems(viewModel.getOrder(), (LinearLayout) view.itemList);
-    showTotals(view.charge, view.totalBill, viewModel.getOrder().getTotal());
+    showTotals(view.charge, view.totalBill, viewModel.getOrder().getTotal(),
+            view.ivaTax, viewModel.getOrder().getIvaTax());
 
   }
 
@@ -66,16 +67,19 @@ public class CartActivity extends ActivityBase {
     finish();
   }
 
-  private void showTotals(Button charge, TextView totalBill, double total) {
-    String value = Utils.currencyFormatter(total);
-    totalBill.setText(value);
-    String chargeAmount = String.format(getString(R.string.chargeAmount),
-            value);
+  private void showTotals(Button charge, TextView totalBill, double total,
+                          TextView totalTax, double tax) {
+    String valueTotal = Utils.currencyFormatter(total);
+    totalBill.setText(valueTotal);
+    String taxTotal = Utils.currencyFormatter(tax);
+    totalTax.setText(taxTotal);
+    String chargeAmount = String.format(getString(R.string.chargeAmount), valueTotal);
     charge.setText(chargeAmount);
+
   }
 
   private void charge() {
-    if(Order.getInstance().getTotal()!=0) {
+    if (Order.getInstance().getTotal() != 0) {
       Intent intent = new Intent(this, PaymentTypeActivity.class);
       startActivity(intent);
     }
@@ -86,7 +90,7 @@ public class CartActivity extends ActivityBase {
 
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context
             .LAYOUT_INFLATER_SERVICE);
-        ArrayList<OrderItem> items = cart.getItems();
+    ArrayList<OrderItem> items = cart.getItems();
     if (items != null) {
       Iterator<OrderItem> iterator = items.iterator();
       while (iterator.hasNext()) {
@@ -107,6 +111,7 @@ public class CartActivity extends ActivityBase {
   private class ViewHolder implements View.OnClickListener {
     public Button charge;
     public TextView totalBill;
+    public TextView ivaTax;
     public View itemList;
 
     public ViewHolder() {
@@ -118,6 +123,7 @@ public class CartActivity extends ActivityBase {
       charge.setOnClickListener(this);
       totalBill = (TextView) findViewById(R.id.totalBill);
       itemList = findViewById(R.id.itemList);
+      ivaTax = (TextView) findViewById(R.id.ivaTax);
     }
 
     @Override

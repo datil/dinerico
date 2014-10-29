@@ -25,6 +25,7 @@ public class Order implements Serializable{
   private Payment payment;
   @DatabaseField
   private double total;
+  private double ivaTax;
   @DatabaseField
   private Date created;
   @ForeignCollectionField
@@ -120,6 +121,13 @@ public class Order implements Serializable{
     this.invoice = invoice;
   }
 
+  public double getIvaTax() {
+    return ivaTax;
+  }
+
+  public void setIvaTax(double ivaTax) {
+    this.ivaTax = ivaTax;
+  }
 
   @Override
   public String toString() {

@@ -6,6 +6,7 @@
               android:layout_height="wrap_content">
 
     <EditText
+        android:imeOptions=""
         android:id="@+id/pin"
         android:inputType="numberPassword"
         android:layout_width="match_parent"

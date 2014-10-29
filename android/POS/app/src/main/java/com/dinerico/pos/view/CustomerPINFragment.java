@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.dinerico.pos.R;
@@ -29,17 +31,24 @@ public class CustomerPINFragment extends DialogFragment {
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     act = (EMPaymentActivity) getActivity();
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-    LayoutInflater inflater = getActivity().getLayoutInflater();
+    LayoutInflater inflater = act.getLayoutInflater();
     View view = inflater.inflate(R.layout.fragment_customer_pin, null);
     pin = (EditText) view.findViewById(R.id.pin);
-//    Utils.visibleSoftKeyboard(true,pin,act);
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     builder.setTitle(getString(R.string.enterPin));
     builder.setView(view).setPositiveButton(R.string.accept, new ConfirmClick())
             .setNegativeButton(R.string.cancel, new CancelClick());
     return builder.create();
+  }
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+    //Show keyboard
+    pin.requestFocus();
+    getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
   final private class EMPaymentListener implements RequestListener<EMResponse> {
