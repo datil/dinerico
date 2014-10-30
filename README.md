@@ -10,6 +10,9 @@ Dinérico permite a un comerciante gestionar su negocio desde su teléfono Andro
 
 ## Arquitectura de la Aplicación
 
+<img src="https://raw.github.com/datil/dinerico/master/documentacion/diagrama-dinerico.png"
+width="250px" />
+
 ### Servicios Web
 
 Todos los servicios web se acceden mediante una conexión segura, siguen el estándar REST, y para el intercambio de información se utiliza el formato JSON.
