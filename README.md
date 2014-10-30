@@ -10,8 +10,7 @@ Dinérico permite a un comerciante gestionar su negocio desde su teléfono Andro
 
 ## Arquitectura de la Aplicación
 
-<img src="https://raw.github.com/datil/dinerico/master/documentacion/diagrama-dinerico.png"
-width="250px" />
+<img src="https://dl.dropboxusercontent.com/u/2203164/diagrama-dinerico.png"/>
 
 ### Servicios Web
 
