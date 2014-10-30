@@ -57,6 +57,7 @@
             style="@style/EditTextForm"/>
 
         <EditText
+            android:visibility="invisible"
             android:text=""
             android:background="@drawable/underline_gray_back_white"
             android:id="@+id/invoiceKey"

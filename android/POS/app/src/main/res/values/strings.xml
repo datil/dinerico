@@ -149,4 +149,8 @@
     <string name="receiptSent">¡Comprobante enviado!</string>
     <string name="receiptMessageTittle">Facturación electrónica</string>
 
+    <!--Cash-->
+    <string name="cashDes">Cantidad en efectivo</string>
+    <string name="change">Vuelto:</string>
+
 </resources>

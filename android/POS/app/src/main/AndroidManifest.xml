@@ -142,6 +142,9 @@
             android:theme="@style/NoActionBar"
             android:name=".view.SplashActivity">
         </activity>
+        <activity
+            android:name=".view.SuccessfulCashSaleActivity">
+        </activity>
     </application>
 
 </manifest>

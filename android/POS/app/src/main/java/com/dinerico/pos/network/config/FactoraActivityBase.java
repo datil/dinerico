@@ -11,6 +11,7 @@ import android.view.Window;
 import com.dinerico.pos.R;
 import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.RestError;
+import com.dinerico.pos.model.RestErrorEmail;
 import com.dinerico.pos.model.RestErrorFactora;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -128,6 +129,9 @@ public abstract class FactoraActivityBase extends Activity {
       } else if (object != null && object instanceof RestErrorFactora) {
         RestErrorFactora restError = (RestErrorFactora) object;
         errorMessage = restError.getError();
+      }else if (object != null && object instanceof RestErrorEmail) {
+        RestErrorEmail restError = (RestErrorEmail) object;
+        errorMessage = restError.getMessage();
       }
     }
 

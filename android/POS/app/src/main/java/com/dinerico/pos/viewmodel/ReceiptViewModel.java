@@ -5,6 +5,10 @@ import com.dinerico.pos.exception.ValidationError;
 import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Address;
 import com.dinerico.pos.model.Customer;
+import com.dinerico.pos.model.EmailAccount;
+import com.dinerico.pos.model.EmailBody;
+import com.dinerico.pos.model.EmailMessage;
+import com.dinerico.pos.model.EmailResponse;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.model.InvoiceItem;
 import com.dinerico.pos.model.InvoiceResponse;
@@ -13,6 +17,8 @@ import com.dinerico.pos.model.OrderItem;
 import com.dinerico.pos.model.Product;
 import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.Store;
+import com.dinerico.pos.model.Tag;
+import com.dinerico.pos.network.service.EmailService;
 import com.dinerico.pos.network.service.InvoiceService;
 import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.ForeignCollection;
@@ -38,6 +44,7 @@ public class ReceiptViewModel {
   private Customer customer;
 
   private InvoiceService invoiceService;
+  private EmailService emailService;
 
   private InvoiceDB invoiceDB;
 
@@ -46,13 +53,16 @@ public class ReceiptViewModel {
   private static final String COD_AUXILIAR_ITEM = "";
   private static final String DESCUENTO = "0.00";
   private static final String COD_ICE = "";
+  private static String key = "497eacaa70f34afb86e343d568540cc5";
 
   public ReceiptViewModel(Invoice invoice, Customer customer,
-                          InvoiceService invoiceService, InvoiceDB invoiceDB) {
+                          InvoiceService invoiceService,
+                          EmailService emailService, InvoiceDB invoiceDB) {
     this.invoiceDB = invoiceDB;
     this.invoice = invoice;
     this.customer = customer;
     this.invoiceService = invoiceService;
+    this.emailService = emailService;
   }
 
   public boolean createInvoiceOnDB() {
@@ -62,13 +72,41 @@ public class ReceiptViewModel {
   public boolean validate() throws ValidationError {
     if (finalConsumer)
       return customer.isValidEmail() && customer.isValidIdentificacion() &&
-              customer
-                      .isValidName();
+              customer.isValidName();
     else
       return customer.isValidEmail() && customer.isValidIdentificacion() &&
-              customer
-                      .isValidName() && customer.isValidAddress() && customer
+              customer.isValidName() && customer.isValidAddress() && customer
               .isValidTelephone();
+  }
+
+  public void sendEmail(RequestListener<EmailResponse> listener){
+    EmailBody email = new EmailBody();
+    email.setKey(EmailBody.KEY);
+    email.setTemplateName(EmailBody.TEMPLATE_NAME);
+
+    Tag tag = new Tag("example name","example content");
+    email.getTemplateContent().add(tag);
+
+    EmailMessage emailMessage = new EmailMessage();
+    EmailAccount emailAccount = new EmailAccount(this.email,names,
+            EmailAccount.TYPE);
+    emailMessage.setSubject("Recibo: *|RECIBO|* de Datilmedia");
+    emailMessage.getTo().add(emailAccount);
+    emailMessage.setBccAddress("juanantonioplaza@datilmedia.com");
+    emailMessage.setMerge(true);
+    emailMessage.setMergeLanguage("mailchimp");
+    Tag tag1 = new Tag("name", Account.getInstance().getStore()
+            .getNombreComercial());
+    Tag tag2 = new Tag("id", this.customerId);
+    Tag tag3 = new Tag("direccion", address);
+    Tag tag4 = new Tag("recibo", "001-0234");
+    emailMessage.getGlobalMergeVars().add(tag1);
+    emailMessage.getGlobalMergeVars().add(tag2);
+    emailMessage.getGlobalMergeVars().add(tag3);
+    emailMessage.getGlobalMergeVars().add(tag4);
+    email.setEmailMessage(emailMessage);
+    emailService.send(email, listener);
+
   }
 
   public void createInvoiceOnSRI(String claveFacturacionEletronica,

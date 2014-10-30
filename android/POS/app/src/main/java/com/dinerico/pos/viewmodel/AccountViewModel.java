@@ -36,7 +36,7 @@ public class AccountViewModel {
   public boolean validate() throws ValidationError {
     return account.getStore().isValidRUC() && account.isValidEmail() &&
             !existsAccountWithSameEmail() && account.isValidPassword() &&
-            account.getStore().isValidMobilePhone()&&account.getStore().isValidInvoiceKey();
+            account.getStore().isValidMobilePhone();
   }
 
   public void getDetailInfoAccount(RequestListener<Contributor>

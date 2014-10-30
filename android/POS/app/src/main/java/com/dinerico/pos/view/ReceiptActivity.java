@@ -21,6 +21,7 @@ import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.Store;
 import com.dinerico.pos.network.config.FactoraActivityBase;
+import com.dinerico.pos.network.service.EmailService;
 import com.dinerico.pos.network.service.InvoiceService;
 import com.dinerico.pos.viewmodel.ReceiptViewModel;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -41,6 +42,7 @@ public class ReceiptActivity extends FactoraActivityBase {
   private static String MESSAGE_TITTLE;
 
 
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class ReceiptActivity extends FactoraActivityBase {
     MESSAGE_TITTLE = getString(R.string.receiptMessageTittle);
     viewModel = new ReceiptViewModel(new Invoice(),
             new Customer(), new InvoiceService(getSpiceManager()),
+            new EmailService(getSpiceManager()),
             new InvoiceDB(this));
     view = new ViewHolder();
 
@@ -99,14 +102,17 @@ public class ReceiptActivity extends FactoraActivityBase {
     try {
       viewModel.validate();
 
+
+
       Store store = Account.getInstance().getStore();
-      String keyInvoice = store.getClaveFacturacionElectronica();
+//      String keyInvoice = store.getClaveFacturacionElectronica();
+      String keyInvoice = "497eacaa70f34afb86e343d568540cc5";
 
       String seqInvoice = "";
       if (Account.getInstance().getStore().getRazonSocial().equals
               ("Datilmedia S.A.") && Account.getInstance().getStore()
               .getInvoices().size() == 0)
-        seqInvoice = "143";
+        seqInvoice = "146";
       else
         seqInvoice = viewModel.sequentialInvoice();
 
@@ -131,8 +137,9 @@ public class ReceiptActivity extends FactoraActivityBase {
 
     @Override
     public void onRequestSuccess(InvoiceResponse invoiceResponse) {
-      String keyInvoice = Account.getInstance().getStore()
-              .getClaveFacturacionElectronica();
+//      String keyInvoice = Account.getInstance().getStore()
+//              .getClaveFacturacionElectronica();
+      String keyInvoice = "497eacaa70f34afb86e343d568540cc5";
 
       viewModel.signInvoice(
               new SigningInvoice(

@@ -2,15 +2,16 @@ package com.dinerico.pos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dinerico.pos.R;
 import com.dinerico.pos.model.Order;
-import com.dinerico.pos.network.config.ActivityBase;
+import com.dinerico.pos.network.config.FragmentActivityBase;
 import com.dinerico.pos.util.Utils;
 
-public class PaymentTypeActivity extends ActivityBase {
+public class PaymentTypeActivity extends FragmentActivityBase {
 
   ViewHolder view;
 
@@ -38,7 +39,8 @@ public class PaymentTypeActivity extends ActivityBase {
   }
 
   private void chargeWithCash(){
-
+    DialogFragment newFragment = new CashFragment();
+    newFragment.show(getSupportFragmentManager(), "cashFragment");
   }
 
   private void chargeWithCreditCard(){
