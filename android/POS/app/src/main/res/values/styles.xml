@@ -7,7 +7,7 @@
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/greenApp</item>
+        <item name="android:background">@color/redApp</item>
         <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
     </style>
 
@@ -86,7 +86,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">@dimen/headertextSize</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/greenApp</item>
+        <item name="android:textColor">@color/blueApp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 

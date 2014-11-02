@@ -14,20 +14,17 @@
 
         <TextView
             android:fontFamily="sans-serif-thin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/welcome"
-            android:textColor="@color/greenApp"
             android:textSize="34sp"
             android:id="@+id/razonsocial"
-            android:gravity="center"/>
+            style="@style/HeaderTittle"/>
 
         <ImageView
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/welcome"/>
+            android:src="@drawable/datil_flow"/>
 
     </LinearLayout>
 

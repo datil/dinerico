@@ -3,8 +3,6 @@ package com.dinerico.pos.network.config;
 import com.dinerico.pos.model.Contributor;
 import com.dinerico.pos.model.EMResponse;
 import com.dinerico.pos.model.EMPayment;
-import com.dinerico.pos.model.EmailBody;
-import com.dinerico.pos.model.EmailResponse;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.model.SigningInvoice;
 import com.dinerico.pos.model.InvoiceResponse;
@@ -41,7 +39,4 @@ public interface Router {
   @POST("/firmar")
   InvoiceResponse signInvoice(@Body SigningInvoice signingInvoice);
 
-  @Headers("Content-Type: application/json")
-  @POST("/firmar")
-  EmailResponse sendEmail(@Body EmailBody email);
 }

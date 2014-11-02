@@ -15,8 +15,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_big"
-        android:layout_marginTop="20dp"
+        android:src="@drawable/datil_logo_name"
+        android:layout_marginTop="35dp"
         android:id="@+id/imageView"/>
 
     <View
@@ -76,7 +76,7 @@
         android:layout_below="@+id/textView4"
         android:layout_alignParentEnd="true"
         android:textStyle="bold"
-        android:textColor="@color/greenApp"
+        android:textColor="@color/blueApp"
         style="@style/TextViewHome"/>
 
     <Button
@@ -101,7 +101,7 @@
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:text="@string/signUpyou"
-        android:background="@color/greenApp"
+        android:background="@color/blueApp"
         android:layout_marginBottom="32dp"
         android:id="@+id/signUp"
         android:layout_alignParentBottom="true"

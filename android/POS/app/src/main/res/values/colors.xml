@@ -24,13 +24,16 @@
     <!-- Customs Colors -->
     <!-- Blue -->
     <color name="blueButton">#00AEEF</color>
+    <color name="blueApp">#20D5E2</color>
 
     <!--Gray-->
     <color name="grayBackgroud">#F1F2F2</color>
     <color name="grayHint">#D1D3D4</color>
 
     <!--Green-->
-    <color name="greenApp">#20D3A0</color>
     <color name="greenButton">#91E070</color>
+
+    <!--Red-->
+    <color name="redApp">#FF7461</color>
 
 </resources>

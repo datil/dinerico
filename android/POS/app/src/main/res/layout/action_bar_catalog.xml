@@ -5,7 +5,7 @@
                 android:layout_height="48dp"
                 android:paddingRight="@dimen/margin"
                 android:paddingLeft="@dimen/margin"
-                android:background="@color/greenApp"
+                android:background="@color/redApp"
                 android:gravity="center_vertical">
 
     <TextView
