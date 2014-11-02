@@ -12,6 +12,9 @@ import java.util.Date;
  */
 public class Invoice implements Serializable{
 
+  public static final String KEY = "497eacaa70f34afb86e343d568540cc5";
+  public static final String DATILMEDIA_SA = "Datilmedia S.A.";
+
   @DatabaseField (generatedId = true)
   private int id;
   @DatabaseField(foreign = true, foreignAutoRefresh = true)

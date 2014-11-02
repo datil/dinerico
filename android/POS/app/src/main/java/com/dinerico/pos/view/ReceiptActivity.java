@@ -16,12 +16,11 @@ import com.dinerico.pos.model.Account;
 import com.dinerico.pos.model.Customer;
 import com.dinerico.pos.model.Invoice;
 import com.dinerico.pos.model.InvoiceResponse;
+import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.RestErrorFactora;
 import com.dinerico.pos.model.SigningInvoice;
-import com.dinerico.pos.model.Order;
 import com.dinerico.pos.model.Store;
 import com.dinerico.pos.network.config.FactoraActivityBase;
-import com.dinerico.pos.network.service.EmailService;
 import com.dinerico.pos.network.service.InvoiceService;
 import com.dinerico.pos.viewmodel.ReceiptViewModel;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -41,8 +40,6 @@ public class ReceiptActivity extends FactoraActivityBase {
 
   private static String MESSAGE_TITTLE;
 
-
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -51,7 +48,6 @@ public class ReceiptActivity extends FactoraActivityBase {
     MESSAGE_TITTLE = getString(R.string.receiptMessageTittle);
     viewModel = new ReceiptViewModel(new Invoice(),
             new Customer(), new InvoiceService(getSpiceManager()),
-            new EmailService(getSpiceManager()),
             new InvoiceDB(this));
     view = new ViewHolder();
 
@@ -101,23 +97,18 @@ public class ReceiptActivity extends FactoraActivityBase {
   private void generateInvoice() {
     try {
       viewModel.validate();
-
-
-
       Store store = Account.getInstance().getStore();
-//      String keyInvoice = store.getClaveFacturacionElectronica();
-      String keyInvoice = "497eacaa70f34afb86e343d568540cc5";
 
       String seqInvoice = "";
       if (Account.getInstance().getStore().getRazonSocial().equals
-              ("Datilmedia S.A.") && Account.getInstance().getStore()
+              (Invoice.DATILMEDIA_SA) && Account.getInstance().getStore()
               .getInvoices().size() == 0)
         seqInvoice = "146";
       else
         seqInvoice = viewModel.sequentialInvoice();
 
       showProgressDialog();
-      viewModel.createInvoiceOnSRI(keyInvoice, store.getCodigo(), seqInvoice,
+      viewModel.createInvoice(Invoice.KEY, store.getCodigo(), seqInvoice,
               Order.getInstance(), new CreateInvoiceListener());
 
     } catch (ValidationError e) {
@@ -137,13 +128,9 @@ public class ReceiptActivity extends FactoraActivityBase {
 
     @Override
     public void onRequestSuccess(InvoiceResponse invoiceResponse) {
-//      String keyInvoice = Account.getInstance().getStore()
-//              .getClaveFacturacionElectronica();
-      String keyInvoice = "497eacaa70f34afb86e343d568540cc5";
-
       viewModel.signInvoice(
               new SigningInvoice(
-                      keyInvoice,
+                      Invoice.KEY,
                       invoiceResponse.getWeburl(),
                       SigningInvoice.PASSWORD,
                       SigningInvoice.DO_COMPLETE_INVOICE_PROCESS),
