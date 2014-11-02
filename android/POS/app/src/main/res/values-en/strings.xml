@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Global -->
+    <string name="appName">Dinérico</string>
+    <string name="continues">Next</string>
+    <string name="accept">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="sorrySomethingWasWrong">Sorry, something went wrong, that is all we know</string>
+
+    <!-- Home -->
+    <string name="createAccount">Sign up</string>
+    <string name="login">Login</string>
+    <string name="appDes1">Manage </string>
+    <string name="appDes2">your business from </string>
+    <string name="appDes3">the palm of your hand </string>
+    <string name="appDes4">and start accepting</string>
+    <string name="appDes5">Dinero Electrónico</string>
+    <string name="signUpyou">Sign up</string>
+
+    <!-- Login -->
+    <string name="loginDes">Login</string>
+    <string name="emailAddress">Email address</string>
+    <string name="logout">Sign out</string>
+    <string name="autenticationFailed">Email or password is not correct</string>
+
+    <!-- Sign up -->
+    <string name="signUp">Sign Up</string>
+    <string name="signUpDe">Sign up</string>
+    <string name="signUpDes">Sign up to start</string>
+    <string name="signUpDes2">benefiting from Dátil today</string>
+    <string name="ruc">ID</string>
+    <string name="numeroCelular">Mobile phone number</string>
+    <string name="claveFacturacionElectronica">Clave para facturación electrónica</string>
+    <string name="email">Email</string>
+    <string name="initials">Password</string>
+    <string name="noValidRUC">The ID is not valid</string>
+    <string name="noValidEmail">Email address is not valid</string>
+    <string name="noValidMobilePhone">Mobile phone number not valid</string>
+    <string name="noValidPassword">Invalid password</string>
+    <string name="passwordSevenChar">Password should have at least 7 characters.</string>
+    <string name="welcome">Welcome!</string>
+    <string name="accountWithSameEmail">Existe una cuenta con el mismo correo
+        electrónico</string>
+    <string name="noValidInvoiceKey">La clave de facturación ingresada no
+        es válida</string>
+
+    <!-- Shop -->
+    <string name="search">Search</string>
+    <string name="actualSale">Cart</string>
+    <string name="addDess">Tap on \'Edit\' to add products</string>
+    <string name="edit">Edit</string>
+    <string name="myProducts">My Products</string>
+
+    <!-- Contributor -->
+    <string name="confirm">Confirm</string>
+    <string name="contributorDes">Confirm your business</string>
+    <string name="contributorDes2">information</string>
+    <string name="razonSocial">Business Name:</string>
+    <string name="commercialName">Doing Business As:</string>
+    <string name="economicActivity">Main Activity:</string>
+    <string name="noValidCommercialName">El nombre comercial ingresado
+        no es válido</string>
+
+    <!-- Store -->
+    <string name="storeDes1">Choose the store </string>
+    <string name="storeDes2">you want to manage</string>
+    <string name="storeList">YOUR REGISTERED STORES</string>
+    <string name="address">Address: </string>
+    <string name="localNumber">Store: </string>
+
+    <!-- Tittle -->
+    <string name="validationErrorTittle">Information is incorrect</string>
+
+    <!-- Product -->
+    <string name="noValidProductName">Please enter the product name</string>
+    <string name="noValidPrice">Product price should be greater than zero</string>
+    <string name="saveChanges">Save</string>
+    <string name="saved">Saved!</string>
+    <string name="delete">Delete Product</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
+    <string name="editImage">Edit Image</string>
+    <string name="setUpProduct">Product Configuration</string>
+    <string name="iva">VAT</string>
+
+    <!-- Product Image -->
+    <string name="options_to_image">Image options</string>
+
+    <string-array name="image_options">
+        <item>Choose an existing picture</item>
+        <item>Take a picture</item>
+    </string-array>
+
+    <!-- Cart -->
+    <string name="theBillIs">Current Sale</string>
+    <string name="deleteSale">Clear Sale</string>
+    <string name="chargeAmount">CHARGE %1$s</string>
+    <string name="tax">Tax</string>
+    <string name="tax12">%12</string>
+    <string name="total">TOTAL</string>
+    <string name="actualSales">Current Sale</string>
+
+    <!-- Payment -->
+    <string name="paymentTypeDes1">¿Qué forma de pago</string>
+    <string name="paymentTypeDes2">vas a recibir?</string>
+    <string name="cash">Efectivo</string>
+    <string name="electronicMoney">Dinero electrónico</string>
+    <string name="creditCard">Tarjeta de crédito</string>
+
+    <!-- Customer Data -->
+    <string name="customerDataDes1">Introduce los datos</string>
+    <string name="customerDataDes2">del cliente</string>
+    <string name="charge">Cobrar</string>
+    <string name="identificacion">ID</string>
+    <string name="noValidCustomerId">La cédula ingresada no es válida</string>
+    <string name="noValidCustomerIdRUC">La cédula o RUC ingresado no es
+        válida</string>
+    <string name="noValidCustomerName">El nombre ingresado no es válido</string>
+    <string name="noValidAddress">La dirección ingresada no es válida</string>
+    <string name="noValidTelephone">El teléfono ingresado no es válido</string>
+    <string name="pin">PIN</string>
+    <string name="enterPin">Enter your PIN</string>
+    <string name="noValidPin">El PIN ingresado no es válido</string>
+
+    <!-- Successfull Sale -->
+    <string name="sucessfullSale">Success!</string>
+    <string name="noThanks">No, thanks</string>
+    <string name="sendReceipt">Send receipt</string>
+
+    <!-- Receipt -->
+    <string name="newSale">New sale</string>
+    <string name="receiptDes1">Receipt information</string>
+    <string name="finalConsumer">NO NAME</string>
+    <string name="finalConsumerRUC">9999999999999</string>
+    <string name="nameAndLastName">Name and last name</string>
+    <string name="telephoneNumber">Phone</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="rucOrpersonalId">ID</string>
+    <string name="send">Send</string>
+    <string name="receiptSent">Sent!</string>
+    <string name="receiptMessageTittle">Receipt</string>
+
+    <!--Cash-->
+    <string name="cashDes">Cash</string>
+    <string name="change">Change:</string>
+
+</resources>
